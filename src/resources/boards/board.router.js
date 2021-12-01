@@ -12,6 +12,7 @@ module.exports = function (app, opts, done) {
   app.get('/:boardId', async (req, res) => {
     try {
       const id = req.params.boardId;
+      console.log(req.params);
       const board = await boardsService.getById(id);
       res.send(board);
     } catch (error) {

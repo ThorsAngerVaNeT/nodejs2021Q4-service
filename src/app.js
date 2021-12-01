@@ -17,5 +17,9 @@ app.register(require('fastify-swagger'), {
 
 app.register(require('./resources/users/user.router'), { prefix: '/users' });
 app.register(require('./resources/boards/board.router'), { prefix: '/boards' });
+app.register(require('./resources/columns/column.router'), {
+  prefix: '/columns',
+});
+app.register(require('./resources/tasks/task.router'));
 
 module.exports = app;

@@ -1,3 +1,5 @@
+const tasksService = require('../tasks/task.memory.repository');
+
 const boards = [];
 
 const getAll = async () => boards;
@@ -34,6 +36,7 @@ const remove = async (id) => {
     return false;
   }
   boards.splice(boardIndex, 1);
+  await tasksService.removeByBoardId(id);
   return true;
 };
 
