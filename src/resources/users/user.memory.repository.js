@@ -1,13 +1,15 @@
+const tasksService = require('../tasks/task.memory.repository');
+
 const users = [];
 
 const getAll = async () => users;
 
 const getById = async (id) => {
   const userFound = users.find((user) => user.id === id);
-  if (userFound) {
-    return userFound;
+  if (!userFound) {
+    throw new Error(id);
   }
-  return false;
+  return userFound;
 };
 
 const create = async (user) => {
@@ -30,13 +32,14 @@ const update = async (id, userData) => {
   return users[userIndex];
 };
 
-const deleteUser = async (id) => {
+const remove = async (id) => {
   const userIndex = users.findIndex((user) => user.id === id);
   if (userIndex < 0) {
     return false;
   }
   users.splice(userIndex, 1);
+  await tasksService.unassignUser(id);
   return true;
 };
 
-module.exports = { getAll, create, getById, update, deleteUser };
+module.exports = { getAll, create, getById, update, remove };

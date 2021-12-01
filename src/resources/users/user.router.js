@@ -11,19 +11,19 @@ module.exports = function (app, opts, done) {
   });
 
   app.get('/:userId', async (req, res) => {
-    const id = req.params.userId;
-    const user = await usersService.getById(id);
-    if (user) {
+    try {
+      const id = req.params.userId;
+      const user = await usersService.getById(id);
       res.send(user);
-    } else {
+    } catch (error) {
       res.code(httpConstants.HTTP_STATUS_NOT_FOUND);
-      res.send(STATUS_CODES[httpConstants.HTTP_STATUS_NOT_FOUND]);
+      res.send(error.message);
     }
   });
 
   app.post('/', async (req, res) => {
     const user = new User(req.body);
-    usersService.create(user);
+    await usersService.create(user);
     res.code(httpConstants.HTTP_STATUS_CREATED);
     res.send(user);
   });
@@ -41,7 +41,7 @@ module.exports = function (app, opts, done) {
 
   app.delete('/:userId', async (req, res) => {
     const id = req.params.userId;
-    const user = await usersService.deleteUser(id);
+    const user = await usersService.remove(id);
     if (user) {
       res.code(httpConstants.HTTP_STATUS_NO_CONTENT);
       res.send();
