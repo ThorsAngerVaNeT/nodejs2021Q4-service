@@ -4,7 +4,7 @@ const fastify = require('fastify');
 const path = require('path');
 // const userRouter = require('./resources/users/user.router');
 
-const app = fastify({ logger: true });
+const app = fastify({ logger: { prettyPrint: true } });
 
 app.register(require('fastify-swagger'), {
   mode: 'static',

@@ -3,17 +3,17 @@ const httpConstants = require('http2').constants;
 const Task = require('./task.model');
 const tasksService = require('./task.service');
 
-module.exports = function (app, opts, done) {
+module.exports = function tasksRouter(app, opts, done) {
   app.get('/boards/:boardId/tasks', async (req, res) => {
-    const {boardId} = req.params;
+    const { boardId } = req.params;
     const tasks = await tasksService.getAll(boardId);
     res.send(tasks);
   });
 
   app.get('/boards/:boardId/tasks/:taskId', async (req, res) => {
     try {
-      const {taskId} = req.params;
-      const {boardId} = req.params;
+      const { taskId } = req.params;
+      const { boardId } = req.params;
       const task = await tasksService.getById(boardId, taskId);
       res.send(task);
     } catch (error) {

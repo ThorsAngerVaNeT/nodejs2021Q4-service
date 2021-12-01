@@ -3,7 +3,7 @@ const httpConstants = require('http2').constants;
 const Column = require('./column.model');
 const columnsService = require('./column.service');
 
-module.exports = function (app, opts, done) {
+module.exports = function columnsRouter(app, opts, done) {
   app.get('/', async (_, res) => {
     const columns = await columnsService.getAll();
     res.send(columns);

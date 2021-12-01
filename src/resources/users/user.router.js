@@ -3,7 +3,7 @@ const httpConstants = require('http2').constants;
 const User = require('./user.model');
 const usersService = require('./user.service');
 
-module.exports = function (app, opts, done) {
+module.exports = function usersRouter(app, opts, done) {
   app.get('/', async (_, res) => {
     const users = await usersService.getAll();
     // map user fields to exclude secret fields like "password"
@@ -14,7 +14,11 @@ module.exports = function (app, opts, done) {
     try {
       const id = req.params.userId;
       const user = await usersService.getById(id);
-      res.send(user);
+      if (user) {
+        res.send(user);
+      } else {
+        res.code(404).send();
+      }
     } catch (error) {
       res.code(httpConstants.HTTP_STATUS_NOT_FOUND);
       res.send(error.message);

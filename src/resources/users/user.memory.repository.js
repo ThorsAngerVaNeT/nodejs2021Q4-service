@@ -5,11 +5,12 @@ const users = [];
 const getAll = async () => users;
 
 const getById = async (id) => {
-  const userFound = users.find((user) => user.id === id);
-  if (!userFound) {
-    throw new Error(id);
+  const userIndex = users.findIndex((user) => user.id === id);
+  console.log(userIndex);
+  if (userIndex < 0) {
+    throw new Error(`User with id=${id} not found!`);
   }
-  return userFound;
+  return users[userIndex];
 };
 
 const create = async (user) => {
