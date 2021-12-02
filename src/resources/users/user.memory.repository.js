@@ -6,9 +6,8 @@ const getAll = async () => users;
 
 const getById = async (id) => {
   const userIndex = users.findIndex((user) => user.id === id);
-  console.log(userIndex);
   if (userIndex < 0) {
-    throw new Error(`User with id=${id} not found!`);
+    return false;
   }
   return users[userIndex];
 };
@@ -16,7 +15,8 @@ const getById = async (id) => {
 const create = async (user) => {
   users.push(user);
   const res = user;
-  return delete res.password;
+  delete res.password;
+  return res;
 };
 
 const update = async (id, userData) => {
@@ -30,7 +30,9 @@ const update = async (id, userData) => {
     login: userData.login,
     password: userData.password,
   };
-  return users[userIndex];
+  const res = users[userIndex];
+  delete res.password;
+  return res;
 };
 
 const remove = async (id) => {

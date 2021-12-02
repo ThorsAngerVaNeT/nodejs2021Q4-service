@@ -10,13 +10,13 @@ module.exports = function boardsRouter(app, opts, done) {
   });
 
   app.get('/:boardId', async (req, res) => {
-    try {
-      const id = req.params.boardId;
-      const board = await boardsService.getById(id);
+    const { boardId } = req.params;
+    const board = await boardsService.getById(boardId);
+    if (board) {
       res.send(board);
-    } catch (error) {
+    } else {
       res.code(httpConstants.HTTP_STATUS_NOT_FOUND);
-      res.send(error.message);
+      res.send(STATUS_CODES[httpConstants.HTTP_STATUS_NOT_FOUND]);
     }
   });
 
@@ -28,8 +28,8 @@ module.exports = function boardsRouter(app, opts, done) {
   });
 
   app.put('/:boardId', async (req, res) => {
-    const id = req.params.boardId;
-    const board = await boardsService.update(id, req.body);
+    const { boardId } = req.params;
+    const board = await boardsService.update(boardId, req.body);
     if (board) {
       res.send(board);
     } else {
@@ -39,8 +39,8 @@ module.exports = function boardsRouter(app, opts, done) {
   });
 
   app.delete('/:boardId', async (req, res) => {
-    const id = req.params.boardId;
-    const board = await boardsService.remove(id);
+    const { boardId } = req.params;
+    const board = await boardsService.remove(boardId);
     if (board) {
       res.code(httpConstants.HTTP_STATUS_NO_CONTENT);
       res.send();
@@ -52,16 +52,3 @@ module.exports = function boardsRouter(app, opts, done) {
 
   done();
 };
-
-/* const router = require('express').Router();
-const board = require('./board.model');
-const boardsService = require('./board.service');
-
-router.route('/').get(async (req, res) => {
-  const boards = await boardsService.getAll();
-  // map board fields to exclude secret fields like "password"
-  res.json(boards.map(board.toResponse));
-});
-
-module.exports = router;
- */

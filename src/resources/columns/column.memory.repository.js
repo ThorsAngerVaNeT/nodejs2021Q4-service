@@ -5,7 +5,7 @@ const getAll = async () => columns;
 const getById = async (id) => {
   const columnFound = columns.find((column) => column.id === id);
   if (!columnFound) {
-    throw new Error(id);
+    return false;
   }
   return columnFound;
 };

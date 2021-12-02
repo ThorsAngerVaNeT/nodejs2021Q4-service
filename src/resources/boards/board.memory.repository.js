@@ -7,7 +7,7 @@ const getAll = async () => boards;
 const getById = async (id) => {
   const boardFound = boards.find((board) => board.id === id);
   if (!boardFound) {
-    throw new Error(id);
+    return false;
   }
   return boardFound;
 };

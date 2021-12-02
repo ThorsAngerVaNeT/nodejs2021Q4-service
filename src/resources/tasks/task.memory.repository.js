@@ -3,7 +3,7 @@ let tasks = [];
 const getAll = async (boardId) => {
   const tasksFound = tasks.filter((task) => task.boardId === boardId);
   if (!tasksFound) {
-    throw new Error(boardId);
+    return false;
   }
   return tasksFound;
 };
@@ -13,7 +13,7 @@ const getById = async (boardId, taskId) => {
     (task) => task.id === taskId && task.boardId === boardId
   );
   if (!taskFound) {
-    throw new Error(taskId);
+    return false;
   }
   return taskFound;
 };

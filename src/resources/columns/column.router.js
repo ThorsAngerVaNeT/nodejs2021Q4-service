@@ -10,13 +10,13 @@ module.exports = function columnsRouter(app, opts, done) {
   });
 
   app.get('/:columnId', async (req, res) => {
-    try {
-      const id = req.params.columnId;
-      const column = await columnsService.getById(id);
+    const { columnId } = req.params;
+    const column = await columnsService.getById(columnId);
+    if (column) {
       res.send(column);
-    } catch (error) {
+    } else {
       res.code(httpConstants.HTTP_STATUS_NOT_FOUND);
-      res.send(error.message);
+      res.send(STATUS_CODES[httpConstants.HTTP_STATUS_NOT_FOUND]);
     }
   });
 
@@ -28,8 +28,8 @@ module.exports = function columnsRouter(app, opts, done) {
   });
 
   app.put('/:columnId', async (req, res) => {
-    const id = req.params.columnId;
-    const column = await columnsService.update(id, req.body);
+    const { columnId } = req.params;
+    const column = await columnsService.update(columnId, req.body);
     if (column) {
       res.send(column);
     } else {
@@ -39,8 +39,8 @@ module.exports = function columnsRouter(app, opts, done) {
   });
 
   app.delete('/:columnId', async (req, res) => {
-    const id = req.params.columnId;
-    const column = await columnsService.remove(id);
+    const { columnId } = req.params;
+    const column = await columnsService.remove(columnId);
     if (column) {
       res.code(httpConstants.HTTP_STATUS_NO_CONTENT);
       res.send();
@@ -52,16 +52,3 @@ module.exports = function columnsRouter(app, opts, done) {
 
   done();
 };
-
-/* const router = require('express').Router();
-const column = require('./column.model');
-const columnsService = require('./column.service');
-
-router.route('/').get(async (req, res) => {
-  const columns = await columnsService.getAll();
-  // map column fields to exclude secret fields like "password"
-  res.json(columns.map(column.toResponse));
-});
-
-module.exports = router;
- */

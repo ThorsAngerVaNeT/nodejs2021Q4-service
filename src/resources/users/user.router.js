@@ -11,17 +11,13 @@ module.exports = function usersRouter(app, opts, done) {
   });
 
   app.get('/:userId', async (req, res) => {
-    try {
-      const id = req.params.userId;
-      const user = await usersService.getById(id);
-      if (user) {
-        res.send(user);
-      } else {
-        res.code(404).send();
-      }
-    } catch (error) {
+    const { userId } = req.params;
+    const user = await usersService.getById(userId);
+    if (user) {
+      res.send(user);
+    } else {
       res.code(httpConstants.HTTP_STATUS_NOT_FOUND);
-      res.send(error.message);
+      res.send(STATUS_CODES[httpConstants.HTTP_STATUS_NOT_FOUND]);
     }
   });
 
@@ -33,8 +29,8 @@ module.exports = function usersRouter(app, opts, done) {
   });
 
   app.put('/:userId', async (req, res) => {
-    const id = req.params.userId;
-    const user = await usersService.update(id, req.body);
+    const { userId } = req.params;
+    const user = await usersService.update(userId, req.body);
     if (user) {
       res.send(user);
     } else {
@@ -44,8 +40,8 @@ module.exports = function usersRouter(app, opts, done) {
   });
 
   app.delete('/:userId', async (req, res) => {
-    const id = req.params.userId;
-    const user = await usersService.remove(id);
+    const { userId } = req.params;
+    const user = await usersService.remove(userId);
     if (user) {
       res.code(httpConstants.HTTP_STATUS_NO_CONTENT);
       res.send();
@@ -57,16 +53,3 @@ module.exports = function usersRouter(app, opts, done) {
 
   done();
 };
-
-/* const router = require('express').Router();
-const User = require('./user.model');
-const usersService = require('./user.service');
-
-router.route('/').get(async (req, res) => {
-  const users = await usersService.getAll();
-  // map user fields to exclude secret fields like "password"
-  res.json(users.map(User.toResponse));
-});
-
-module.exports = router;
- */
