@@ -8,7 +8,7 @@
 ## Downloading
 
 ```
-git clone {repository URL}
+git clone https://github.com/ThorsAngerVaNeT/nodejs2021Q4-service
 ```
 
 ## Installing NPM modules
