@@ -1,4 +1,5 @@
 const tasksService = require('../tasks/task.memory.repository');
+const Column = require('../columns/column.model');
 
 const boards = [];
 
@@ -25,7 +26,7 @@ const update = async (id, boardData) => {
   boards[boardIndex] = {
     id,
     title: boardData.title,
-    columns: boardData.columns,
+    columns: boardData.columns.map((el) => new Column(el)),
   };
   return boards[boardIndex];
 };
