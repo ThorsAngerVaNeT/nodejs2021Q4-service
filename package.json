@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsc -w",
     "start": "nodemon dist/server.js",
-    "lint": "eslint --ext .js,.ts --fix src/",
+    "lint": "eslint --ext .ts --fix src/",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
     "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace"
   },
@@ -63,6 +63,7 @@
     "dirty-chai": "2.0.1",
     "eslint": "8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.25.3",
     "eslint-plugin-node": "11.1.0",
