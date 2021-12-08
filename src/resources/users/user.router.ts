@@ -1,20 +1,25 @@
-import { 
-  FastifyInstance, 
-  FastifyPluginOptions, 
-  FastifyPluginAsync 
-} from 'fastify';
-import fp from 'fastify-plugin';
-
-const { STATUS_CODES } = require('http');
-const httpConstants = require('http2').constants;
-const User = require('./user.model');
-const usersService = require('./user.service');
+import { STATUS_CODES } from 'http';
+import { constants as httpConstants } from 'http2';
+import { FastifyInstance, FastifyPluginAsync, FastifyRequest } from 'fastify';
+import { User } from './user.model';
+import usersService from './user.service';
 
 interface userParams {
   userId: string;
 }
 
-const usersRouter: FastifyPluginAsync = async(app: FastifyInstance, opts:FastifyPluginOptions) => {
+type UserRequest = FastifyRequest<{
+  Body: User;
+}>;
+
+type PutUserRequest = FastifyRequest<{
+  Body: User;
+  Params: userParams;
+}>;
+
+const usersRouter: FastifyPluginAsync = async (
+  app: FastifyInstance
+): Promise<void> => {
   app.get('/', async (_, res) => {
     const users = await usersService.getAll();
     // map user fields to exclude secret fields like "password"
@@ -32,14 +37,39 @@ const usersRouter: FastifyPluginAsync = async(app: FastifyInstance, opts:Fastify
     }
   });
 
-  app.post('/', async (req, res) => {
-    const user = new User(req.body);
-    await usersService.create(user);
-    res.code(httpConstants.HTTP_STATUS_CREATED);
-    res.send(user);
-  });
+  /* remove password by schema or by create */
+  app.post(
+    '/',
+    {
+      schema: {
+        response: {
+          201: {
+            type: 'object',
+            properties: {
+              id: {
+                type: 'string',
+                formta: 'uuid',
+              },
+              name: {
+                type: 'string',
+              },
+              login: {
+                type: 'string',
+              },
+            },
+          },
+        },
+      },
+    },
+    async (req: UserRequest, res) => {
+      const user = new User(req.body);
+      await usersService.create(user);
+      res.code(httpConstants.HTTP_STATUS_CREATED);
+      res.send(user);
+    }
+  );
 
-  app.put<{ Params: userParams }>('/:userId', async (req, res) => {
+  app.put('/:userId', async (req: PutUserRequest, res) => {
     const { userId } = req.params;
     const user = await usersService.update(userId, req.body);
     if (user) {
@@ -61,6 +91,6 @@ const usersRouter: FastifyPluginAsync = async(app: FastifyInstance, opts:Fastify
       res.send(STATUS_CODES[httpConstants.HTTP_STATUS_NOT_FOUND]);
     }
   });
-
 };
-module.exports = fp(usersRouter);
+
+export default usersRouter;

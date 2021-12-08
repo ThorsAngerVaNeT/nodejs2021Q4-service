@@ -1,10 +1,10 @@
-const tasksService = require('../tasks/task.memory.repository');
+import { User } from './user.model';
 
-const users = [];
+const users: User[] = [];
 
 const getAll = async () => users;
 
-const getById = async (id) => {
+const getById = async (id: string) => {
   const userIndex = users.findIndex((user) => user.id === id);
   if (userIndex < 0) {
     return false;
@@ -12,37 +12,38 @@ const getById = async (id) => {
   return users[userIndex];
 };
 
-const create = async (user) => {
+const create = async (user: User) => {
   users.push(user);
-  const res = user;
-  delete res.password;
+  const res = { id: user.id, name: user.name, user: user.login };
   return res;
 };
 
-const update = async (id, userData) => {
+const update = async (id: string, userData: User) => {
   const userIndex = users.findIndex((user) => user.id === id);
   if (userIndex < 0) {
     return false;
   }
   users[userIndex] = {
+    ...users[userIndex],
+    ...userData,
     id,
-    name: userData.name,
-    login: userData.login,
-    password: userData.password,
   };
-  const res = users[userIndex];
-  delete res.password;
+
+  const res = {
+    id: users[userIndex].id,
+    name: users[userIndex].name,
+    user: users[userIndex].login,
+  };
   return res;
 };
 
-const remove = async (id) => {
+const remove = async (id: string) => {
   const userIndex = users.findIndex((user) => user.id === id);
   if (userIndex < 0) {
     return false;
   }
   users.splice(userIndex, 1);
-  await tasksService.unassignUser(id);
   return true;
 };
 
-module.exports = { getAll, create, getById, update, remove };
+export default { getAll, create, getById, update, remove };
