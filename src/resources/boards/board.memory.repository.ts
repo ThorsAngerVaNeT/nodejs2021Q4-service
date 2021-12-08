@@ -1,11 +1,11 @@
-const tasksService = require('../tasks/task.memory.repository');
-const Column = require('../columns/column.model');
+import { Board } from './board.model';
+import { Column } from '../columns/column.model';
 
-const boards = [];
+const boards: Board[] = [];
 
 const getAll = async () => boards;
 
-const getById = async (id) => {
+const getById = async (id: string) => {
   const boardFound = boards.find((board) => board.id === id);
   if (!boardFound) {
     return false;
@@ -13,12 +13,12 @@ const getById = async (id) => {
   return boardFound;
 };
 
-const create = async (board) => {
+const create = async (board: Board) => {
   boards.push(board);
   return board;
 };
 
-const update = async (id, boardData) => {
+const update = async (id: string, boardData: Board) => {
   const boardIndex = boards.findIndex((board) => board.id === id);
   if (boardIndex < 0) {
     return false;
@@ -26,19 +26,18 @@ const update = async (id, boardData) => {
   boards[boardIndex] = {
     id,
     title: boardData.title,
-    columns: boardData.columns.map((el) => new Column(el)),
+    columns: boardData.columns.map((el: Column) => new Column(el)),
   };
   return boards[boardIndex];
 };
 
-const remove = async (id) => {
+const remove = async (id: string) => {
   const boardIndex = boards.findIndex((board) => board.id === id);
   if (boardIndex < 0) {
     return false;
   }
   boards.splice(boardIndex, 1);
-  await tasksService.removeByBoardId(id);
   return true;
 };
 
-module.exports = { getAll, create, getById, update, remove };
+export default { getAll, create, getById, update, remove };
