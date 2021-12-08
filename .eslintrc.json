@@ -18,7 +18,16 @@
     }
   },
   "settings": {
-    "noInlineConfig": true
+    "noInlineConfig": true,
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      }
+    },
+    "node": {
+      "resolvePaths": ["./"],
+      "tryExtensions": [".js", ".ts"]
+    }
   },
   "plugins": ["@typescript-eslint", "eslint-plugin-tsdoc"],
   "extends": [
