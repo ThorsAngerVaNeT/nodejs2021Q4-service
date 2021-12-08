@@ -78,6 +78,7 @@
     "prettier": "2.4.1",
     "supertest": "6.1.6",
     "tslint": "^6.1.3",
+    "tsoc": "^0.5.15",
     "typescript": "^4.5.2",
     "typescript-eslint": "^0.0.1-alpha.0"
   }
