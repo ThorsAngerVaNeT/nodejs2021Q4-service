@@ -1,6 +1,6 @@
 import { STATUS_CODES } from 'http';
 import { constants as httpConstants } from 'http2';
-import { FastifyInstance, FastifyPluginAsync, FastifyRequest } from 'fastify';
+import { FastifyInstance, FastifyRequest } from 'fastify';
 import { Task, TaskInterface } from './task.model';
 import tasksService from './task.service';
 
@@ -21,9 +21,7 @@ type PutTaskRequest = FastifyRequest<{
   Params: taskParams;
 }>;
 
-const tasksRouter: FastifyPluginAsync = async (
-  app: FastifyInstance
-): Promise<void> => {
+const tasksRouter = async (app: FastifyInstance): Promise<void> => {
   app.get<{ Params: taskParams }>(
     '/boards/:boardId/tasks',
     async (req, res) => {
@@ -49,7 +47,17 @@ const tasksRouter: FastifyPluginAsync = async (
 
   app.post('/boards/:boardId/tasks', async (req: PostTaskRequest, res) => {
     req.body.boardId = req.params.boardId;
-    const task = new Task(req.body);
+    const { id, title, order, description, userId, boardId, columnId } =
+      req.body;
+    const task = new Task(
+      id,
+      title,
+      order,
+      description,
+      userId,
+      boardId,
+      columnId
+    );
     await tasksService.create(task);
     res.code(httpConstants.HTTP_STATUS_CREATED);
     res.send(task);
@@ -73,8 +81,8 @@ const tasksRouter: FastifyPluginAsync = async (
     '/boards/:boardId/tasks/:taskId',
     async (req, res) => {
       const { taskId } = req.params;
-      const task = await tasksService.remove(taskId);
-      if (task) {
+      const result = await tasksService.remove(taskId);
+      if (result) {
         res.code(httpConstants.HTTP_STATUS_NO_CONTENT);
         res.send();
       } else {
