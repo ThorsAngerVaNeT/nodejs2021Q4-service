@@ -17,14 +17,14 @@ const getAll = (): Promise<User[]> => usersRepo.getAll();
 const getById = (id: string): Promise<User | false> => usersRepo.getById(id);
 
 /**
- * Create user
+ * Creates user
  * @param user - object with name, login, password fields
  * @returns object of new user
  */
 const create = (user: User): Promise<User> => usersRepo.create(user);
 
 /**
- * Update user by id.
+ * Updates user by id.
  * @param id - uuid of user
  * @param user - object with name, login, password fields
  * @returns object of updated user
@@ -32,7 +32,7 @@ const create = (user: User): Promise<User> => usersRepo.create(user);
 const update = (id: string, user: User) => usersRepo.update(id, user);
 
 /**
- * Remove user by id and unassign user's tasks.
+ * Removes user by id and unassign user's tasks.
  * @param id - uuid of user
  * @returns true if user was found or false if not
  */
