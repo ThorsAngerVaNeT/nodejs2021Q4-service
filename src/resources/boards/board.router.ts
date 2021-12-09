@@ -11,6 +11,7 @@ interface boardParams {
 type BoardRequest = FastifyRequest<{
   Body: BoardInterface;
 }>;
+
 type PutBoardRequest = FastifyRequest<{
   Body: BoardInterface;
   Params: boardParams;
@@ -55,8 +56,8 @@ const boardsRouter: FastifyPluginAsync = async (
 
   app.delete<{ Params: boardParams }>('/:boardId', async (req, res) => {
     const { boardId } = req.params;
-    const board = await boardsService.remove(boardId);
-    if (board) {
+    const result = await boardsService.remove(boardId);
+    if (result) {
       res.code(httpConstants.HTTP_STATUS_NO_CONTENT);
       res.send();
     } else {

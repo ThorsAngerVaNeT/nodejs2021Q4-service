@@ -3,9 +3,19 @@ import { Column } from '../columns/column.model';
 
 const boards: Board[] = [];
 
-const getAll = async () => boards;
+/**
+ * Returns all boards.
+ *
+ * @returns array of all boards
+ */
+const getAll = async (): Promise<Board[]> => boards;
 
-const getById = async (id: string) => {
+/**
+ * Returns board by id.
+ * @param id - uuid of board
+ * @returns object of board or false if not found
+ */
+const getById = async (id: string): Promise<Board | false> => {
   const boardFound = boards.find((board) => board.id === id);
   if (!boardFound) {
     return false;
@@ -13,12 +23,23 @@ const getById = async (id: string) => {
   return boardFound;
 };
 
-const create = async (board: Board) => {
+/**
+ * Creates board
+ * @param board - object with title and array of columns of title and order
+ * @returns object of new board
+ */
+const create = async (board: Board): Promise<Board> => {
   boards.push(board);
   return board;
 };
 
-const update = async (id: string, boardData: Board) => {
+/**
+ * Updates board by id.
+ * @param id - uuid of board
+ * @param board - object with title and array of columns of title and order
+ * @returns object of updated board
+ */
+const update = async (id: string, boardData: Board): Promise<Board | false> => {
   const boardIndex = boards.findIndex((board) => board.id === id);
   if (boardIndex < 0) {
     return false;
@@ -31,7 +52,12 @@ const update = async (id: string, boardData: Board) => {
   return boards[boardIndex];
 };
 
-const remove = async (id: string) => {
+/**
+ * Removes board by id
+ * @param id - uuid of board
+ * @returns true if board was found or false if not
+ */
+const remove = async (id: string): Promise<boolean> => {
   const boardIndex = boards.findIndex((board) => board.id === id);
   if (boardIndex < 0) {
     return false;
