@@ -34,7 +34,7 @@ const update = (id: string, user: User) => usersRepo.update(id, user);
 /**
  * Removes user by id and unassign user's tasks.
  * @param id - uuid of user
- * @returns true if user was found or false if not
+ * @returns true if user was found and deleted or false if not
  */
 const remove = (id: string) => {
   tasksService.unassignUser(id);

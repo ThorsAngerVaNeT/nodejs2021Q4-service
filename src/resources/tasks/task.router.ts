@@ -21,7 +21,7 @@ type PutTaskRequest = FastifyRequest<{
   Params: taskParams;
 }>;
 
-const tasksRouter = async (app: FastifyInstance): Promise<void> => {
+const tasksRouter = async (app: FastifyInstance) => {
   app.get<{ Params: taskParams }>(
     '/boards/:boardId/tasks',
     async (req, res) => {
