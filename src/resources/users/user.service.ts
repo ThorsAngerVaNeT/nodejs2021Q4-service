@@ -7,21 +7,21 @@ import tasksService from '../tasks/task.service';
  *
  * @returns array of all users
  */
-const getAll = () => usersRepo.getAll();
+const getAll = (): Promise<User[]> => usersRepo.getAll();
 
 /**
  * Returns user by id.
  * @param id - uuid of user
  * @returns object of user or false if not found
  */
-const getById = (id: string) => usersRepo.getById(id);
+const getById = (id: string): Promise<User | false> => usersRepo.getById(id);
 
 /**
  * Create user
  * @param user - object with name, login, password fields
  * @returns object of new user
  */
-const create = (user: User) => usersRepo.create(user);
+const create = (user: User): Promise<User> => usersRepo.create(user);
 
 /**
  * Update user by id.

@@ -22,7 +22,6 @@ const usersRouter: FastifyPluginAsync = async (
 ): Promise<void> => {
   app.get('/', async (_, res) => {
     const users = await usersService.getAll();
-    // map user fields to exclude secret fields like "password"
     res.send(users.map(User.toResponse));
   });
 
@@ -37,43 +36,18 @@ const usersRouter: FastifyPluginAsync = async (
     }
   });
 
-  /* remove password by schema or by create */
-  app.post(
-    '/',
-    {
-      schema: {
-        response: {
-          201: {
-            type: 'object',
-            properties: {
-              id: {
-                type: 'string',
-                formta: 'uuid',
-              },
-              name: {
-                type: 'string',
-              },
-              login: {
-                type: 'string',
-              },
-            },
-          },
-        },
-      },
-    },
-    async (req: UserRequest, res) => {
-      const user = new User(req.body);
-      await usersService.create(user);
-      res.code(httpConstants.HTTP_STATUS_CREATED);
-      res.send(user);
-    }
-  );
+  app.post('/', async (req: UserRequest, res) => {
+    const user = new User(req.body);
+    await usersService.create(user);
+    res.code(httpConstants.HTTP_STATUS_CREATED);
+    res.send(User.toResponse(user));
+  });
 
   app.put('/:userId', async (req: PutUserRequest, res) => {
     const { userId } = req.params;
     const user = await usersService.update(userId, req.body);
     if (user) {
-      res.send(user);
+      res.send(User.toResponse(user));
     } else {
       res.code(httpConstants.HTTP_STATUS_NOT_FOUND);
       res.send(STATUS_CODES[httpConstants.HTTP_STATUS_NOT_FOUND]);
@@ -82,8 +56,8 @@ const usersRouter: FastifyPluginAsync = async (
 
   app.delete<{ Params: userParams }>('/:userId', async (req, res) => {
     const { userId } = req.params;
-    const user = await usersService.remove(userId);
-    if (user) {
+    const result = await usersService.remove(userId);
+    if (result) {
       res.code(httpConstants.HTTP_STATUS_NO_CONTENT);
       res.send();
     } else {

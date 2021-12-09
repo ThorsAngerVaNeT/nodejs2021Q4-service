@@ -2,9 +2,19 @@ import { User } from './user.model';
 
 const users: User[] = [];
 
-const getAll = async () => users;
+/**
+ * Returns all users.
+ *
+ * @returns array of all users
+ */
+const getAll = async (): Promise<User[]> => users;
 
-const getById = async (id: string) => {
+/**
+ * Returns user by id.
+ * @param id - uuid of user
+ * @returns object of user or false if not found
+ */
+const getById = async (id: string): Promise<User | false> => {
   const userIndex = users.findIndex((user) => user.id === id);
   if (userIndex < 0) {
     return false;
@@ -12,13 +22,24 @@ const getById = async (id: string) => {
   return users[userIndex];
 };
 
-const create = async (user: User) => {
+/**
+ * Creates user
+ * @param user - object with name, login, password fields
+ * @returns object of new user
+ */
+const create = async (user: User): Promise<User> => {
   users.push(user);
-  const res = { id: user.id, name: user.name, user: user.login };
-  return res;
+  // const res = user;
+  return user;
 };
 
-const update = async (id: string, userData: User) => {
+/**
+ * Updates user by id.
+ * @param id - uuid of user
+ * @param user - object with name, login, password fields
+ * @returns object of updated user
+ */
+const update = async (id: string, userData: User): Promise<User | false> => {
   const userIndex = users.findIndex((user) => user.id === id);
   if (userIndex < 0) {
     return false;
@@ -29,15 +50,15 @@ const update = async (id: string, userData: User) => {
     id,
   };
 
-  const res = {
-    id: users[userIndex].id,
-    name: users[userIndex].name,
-    user: users[userIndex].login,
-  };
-  return res;
+  return users[userIndex];
 };
 
-const remove = async (id: string) => {
+/**
+ * Removes user by id
+ * @param id - uuid of user
+ * @returns true if user was found and deleted or false if not
+ */
+const remove = async (id: string): Promise<boolean> => {
   const userIndex = users.findIndex((user) => user.id === id);
   if (userIndex < 0) {
     return false;
