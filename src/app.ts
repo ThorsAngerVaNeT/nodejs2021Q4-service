@@ -3,9 +3,9 @@ import { constants as httpConstants } from 'http2';
 import fastify, { FastifyError, FastifyRequest, FastifyReply } from 'fastify';
 import inputValidation from 'openapi-validator-middleware';
 import fastswagger from 'fastify-swagger';
-// import usersRouter from './resources/users/user.router';
-// import boardsRouter from './resources/boards/board.router';
-// import tasksRouter from './resources/tasks/task.router';
+import usersRouter from './resources/users/user.router';
+import boardsRouter from './resources/boards/board.router';
+import tasksRouter from './resources/tasks/task.router';
 
 const app = fastify({ logger: { prettyPrint: true, level: 'debug' } });
 
@@ -39,11 +39,8 @@ app.register(fastswagger, {
   routePrefix: '/doc',
 });
 
-// app.register(usersRouter, { prefix: '/users' });
-// app.register(boardsRouter, { prefix: '/boards' });
-/* app.register(require('./resources/columns/column.router'), {
-  prefix: '/columns',
-}); */ // don't need for task4
-// app.register(tasksRouter);
+app.register(usersRouter, { prefix: '/users' });
+app.register(boardsRouter, { prefix: '/boards' });
+app.register(tasksRouter);
 
 export = app;
