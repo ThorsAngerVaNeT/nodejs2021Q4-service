@@ -379,18 +379,20 @@ paths:
                   type: string
                 userId:
                   type: string
+                  nullable: true
                   description: The task's Assignee
                 boardId:
                   type: string
+                  nullable: true
                   description: Board ID
                 columnId:
                   type: string
+                  nullable: true
                   description: Column ID
               required:
                 - title
                 - order
                 - boardId
-                - columnId
       responses:
         201:
           description: The task has been created.
@@ -442,6 +444,9 @@ paths:
               type: object
               title: example
               properties:
+                id:
+                  type: string
+                  description: The task's id
                 title:
                   type: string
                   description: The task's title
@@ -452,12 +457,15 @@ paths:
                   type: string
                 userId:
                   type: string
+                  nullable: true
                   description: The task's Assignee
                 boardId:
                   type: string
+                  nullable: true
                   description: Board ID
                 columnId:
                   type: string
+                  nullable: true
                   description: Column ID
               required:
                 - order

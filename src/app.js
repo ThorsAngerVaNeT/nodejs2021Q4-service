@@ -1,24 +1,42 @@
-const express = require('express');
-const swaggerUI = require('swagger-ui-express');
 const path = require('path');
-const YAML = require('yamljs');
-const userRouter = require('./resources/users/user.router');
+const httpConstants = require('http2').constants;
+const fastify = require('fastify');
+const inputValidation = require('openapi-validator-middleware');
 
-const app = express();
-const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
+const app = fastify({ logger: { prettyPrint: true } });
 
-app.use(express.json());
-
-app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
-
-app.use('/', (req, res, next) => {
-  if (req.originalUrl === '/') {
-    res.send('Service is running!');
-    return;
-  }
-  next();
+inputValidation.init(path.join(__dirname, '../doc/api.yaml'), {
+  framework: 'fastify',
 });
 
-app.use('/users', userRouter);
+app.register(inputValidation.validate());
+
+app.setErrorHandler(async (err, req, reply) => {
+  if (err instanceof inputValidation.InputValidationError) {
+    return reply
+      .status(httpConstants.HTTP_STATUS_BAD_REQUEST)
+      .send({ more_info: err.errors });
+  }
+
+  return reply
+    .status(httpConstants.HTTP_STATUS_INTERNAL_SERVER_ERROR)
+    .send(err.message);
+});
+
+app.register(require('fastify-swagger'), {
+  mode: 'static',
+  specification: {
+    path: path.join(__dirname, '../doc/api.yaml'),
+  },
+  exposeRoute: true,
+  routePrefix: '/doc',
+});
+
+app.register(require('./resources/users/user.router'), { prefix: '/users' });
+app.register(require('./resources/boards/board.router'), { prefix: '/boards' });
+/* app.register(require('./resources/columns/column.router'), {
+  prefix: '/columns',
+}); */ // don't need for task4
+app.register(require('./resources/tasks/task.router'));
 
 module.exports = app;
