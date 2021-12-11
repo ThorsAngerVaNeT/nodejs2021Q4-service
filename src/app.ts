@@ -2,12 +2,12 @@ import path from 'path';
 import { constants as httpConstants } from 'http2';
 import fastify, { FastifyError, FastifyRequest, FastifyReply } from 'fastify';
 import inputValidation from 'openapi-validator-middleware';
-import fastswagger from 'fastify-swagger';
+import swagger from 'fastify-swagger';
 import usersRouter from './resources/users/user.router';
 import boardsRouter from './resources/boards/board.router';
 import tasksRouter from './resources/tasks/task.router';
 
-const app = fastify({ logger: { prettyPrint: true, level: 'debug' } });
+const app = fastify({ logger: { prettyPrint: true, level: 'info' } });
 
 inputValidation.init(path.join(__dirname, '../doc/api.yaml'), {
   framework: 'fastify',
@@ -29,7 +29,7 @@ app.setErrorHandler(
   }
 );
 
-app.register(fastswagger, {
+app.register(swagger, {
   mode: 'static',
   specification: {
     path: path.join(__dirname, '../doc/api.yaml'),
