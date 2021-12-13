@@ -7,21 +7,21 @@ import { Board } from './board.model';
  *
  * @returns array of all boards
  */
-const getAll = () => boardsRepo.getAll();
+const getAll = (): Promise<Board[]> => boardsRepo.getAll();
 
 /**
  * Returns board by id.
  * @param id - uuid of board
  * @returns object of board or false if not found
  */
-const getById = (id: string) => boardsRepo.getById(id);
+const getById = (id: string): Promise<Board | false> => boardsRepo.getById(id);
 
 /**
  * Creates board
  * @param board - object with title and array of columns of title and order
  * @returns object of new board
  */
-const create = (board: Board) => boardsRepo.create(board);
+const create = (board: Board): Promise<Board> => boardsRepo.create(board);
 
 /**
  * Updates board by id.
@@ -29,14 +29,15 @@ const create = (board: Board) => boardsRepo.create(board);
  * @param board - object with title and array of columns of title and order
  * @returns object of updated board
  */
-const update = (id: string, board: Board) => boardsRepo.update(id, board);
+const update = (id: string, board: Board): Promise<Board | false> =>
+  boardsRepo.update(id, board);
 
 /**
  * Removes board by id and remove all tasks at this board.
  * @param id - uuid of board
  * @returns true if board was found or false if not
  */
-const remove = (id: string) => {
+const remove = (id: string): Promise<boolean> => {
   tasksService.removeByBoardId(id);
   return boardsRepo.remove(id);
 };

@@ -1,13 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import { Column } from '../columns/column.model';
 
-export interface BoardInterface {
-  readonly id: string;
-  title: string;
-  columns: Column[];
-}
-
-export class Board implements BoardInterface {
+export class Board {
   id: string;
 
   title: string;

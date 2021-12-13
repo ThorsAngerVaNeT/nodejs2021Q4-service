@@ -1,16 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-export interface TaskInterface {
-  readonly id: string;
-  title: string;
-  order: number;
-  description: string;
-  userId: string | null;
-  boardId: string | null;
-  columnId: string | null;
-}
-
-export class Task implements TaskInterface {
+export class Task {
   id: string;
 
   title: string;

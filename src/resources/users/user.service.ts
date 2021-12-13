@@ -29,14 +29,15 @@ const create = (user: User): Promise<User> => usersRepo.create(user);
  * @param user - object with name, login, password fields
  * @returns object of updated user
  */
-const update = (id: string, user: User) => usersRepo.update(id, user);
+const update = (id: string, user: User): Promise<User | false> =>
+  usersRepo.update(id, user);
 
 /**
  * Removes user by id and unassign user's tasks.
  * @param id - uuid of user
  * @returns true if user was found and deleted or false if not
  */
-const remove = (id: string) => {
+const remove = (id: string): Promise<boolean> => {
   tasksService.unassignUser(id);
   return usersRepo.remove(id);
 };

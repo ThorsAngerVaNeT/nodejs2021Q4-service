@@ -19,7 +19,8 @@ const getById = async (id: string): Promise<User | false> => {
   if (userIndex < 0) {
     return false;
   }
-  return users[userIndex];
+  const user = users[userIndex];
+  return user;
 };
 
 /**
@@ -50,7 +51,8 @@ const update = async (id: string, userData: User): Promise<User | false> => {
     id,
   };
 
-  return users[userIndex];
+  const user = users[userIndex];
+  return user;
 };
 
 /**
