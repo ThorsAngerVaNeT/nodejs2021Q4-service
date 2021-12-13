@@ -53,6 +53,7 @@ const tasksRouter: FastifyPluginAsync = async (app: FastifyInstance) => {
   app.post(
     '/boards/:boardId/tasks',
     async (req: PostTaskRequest, res: FastifyReply) => {
+      req.body.boardId = req.params.boardId;
       const { id, title, order, description, userId, boardId, columnId } =
         req.body;
       const task = new Task(
