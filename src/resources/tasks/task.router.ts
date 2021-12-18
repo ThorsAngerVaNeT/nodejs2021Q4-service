@@ -1,94 +1,16 @@
-import { STATUS_CODES } from 'http';
-import { constants as httpConstants } from 'http2';
-import {
-  FastifyInstance,
-  FastifyPluginAsync,
-  FastifyRequest,
-  FastifyReply,
-} from 'fastify';
-import { Task } from './task.model';
-import tasksService from './task.service';
-
-interface taskParams {
-  boardId: string;
-  taskId: string;
-}
-
-type PostTaskRequest = FastifyRequest<{
-  Body: Task;
-  Params: {
-    boardId: string;
-  };
-}>;
-
-type PutTaskRequest = FastifyRequest<{
-  Body: Task;
-  Params: taskParams;
-}>;
+import { FastifyInstance, FastifyPluginAsync } from 'fastify';
+import taskHandlers from './task.handlers';
 
 const tasksRouter: FastifyPluginAsync = async (app: FastifyInstance) => {
-  app.get(
-    '/boards/:boardId/tasks',
-    async (req: FastifyRequest<{ Params: taskParams }>, res: FastifyReply) => {
-      const { boardId } = req.params;
-      const tasks = await tasksService.getAll(boardId);
-      res.send(tasks);
-    }
-  );
+  app.get('/boards/:boardId/tasks', taskHandlers.taskGet);
 
-  app.get(
-    '/boards/:boardId/tasks/:taskId',
-    async (req: FastifyRequest<{ Params: taskParams }>, res: FastifyReply) => {
-      const { taskId, boardId } = req.params;
-      const task = await tasksService.getById(boardId, taskId);
-      if (task) {
-        res.send(task);
-      } else {
-        res.code(httpConstants.HTTP_STATUS_NOT_FOUND);
-        res.send(STATUS_CODES[httpConstants.HTTP_STATUS_NOT_FOUND]);
-      }
-    }
-  );
+  app.get('/boards/:boardId/tasks/:taskId', taskHandlers.taskGetById);
 
-  app.post(
-    '/boards/:boardId/tasks',
-    async (req: PostTaskRequest, res: FastifyReply) => {
-      req.body.boardId = req.params.boardId;
-      const task = new Task(req.body);
-      await tasksService.create(task);
-      res.code(httpConstants.HTTP_STATUS_CREATED);
-      res.send(task);
-    }
-  );
+  app.post('/boards/:boardId/tasks', taskHandlers.taskPost);
 
-  app.put(
-    '/boards/:boardId/tasks/:taskId',
-    async (req: PutTaskRequest, res: FastifyReply) => {
-      const { taskId } = req.params;
-      const task = await tasksService.update(taskId, req.body);
-      if (task) {
-        res.send(task);
-      } else {
-        res.code(httpConstants.HTTP_STATUS_NOT_FOUND);
-        res.send(STATUS_CODES[httpConstants.HTTP_STATUS_NOT_FOUND]);
-      }
-    }
-  );
+  app.put('/boards/:boardId/tasks/:taskId', taskHandlers.taskPut);
 
-  app.delete(
-    '/boards/:boardId/tasks/:taskId',
-    async (req: FastifyRequest<{ Params: taskParams }>, res: FastifyReply) => {
-      const { taskId } = req.params;
-      const result = await tasksService.remove(taskId);
-      if (result) {
-        res.code(httpConstants.HTTP_STATUS_NO_CONTENT);
-        res.send();
-      } else {
-        res.code(httpConstants.HTTP_STATUS_NOT_FOUND);
-        res.send(STATUS_CODES[httpConstants.HTTP_STATUS_NOT_FOUND]);
-      }
-    }
-  );
+  app.delete('/boards/:boardId/tasks/:taskId', taskHandlers.taskDelete);
 };
 
 export default tasksRouter;

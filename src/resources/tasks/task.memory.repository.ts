@@ -3,7 +3,7 @@ import { Task } from './task.model';
 let tasks: Task[] = [];
 
 /**
- * Returns all tasks at the board.
+ * Returns all tasks at the board from in-memory DB.
  * @param boardId - uuid of board
  * @returns array of all tasks at the board
  */
@@ -16,7 +16,7 @@ const getAll = async (boardId: string): Promise<Task[]> => {
 };
 
 /**
- * Returns task by id.
+ * Returns task by id from in-memory DB.
  * @param boardId - uuid of board
  * @param taskId - uuid of task
  * @returns object of task or false if not found
@@ -35,7 +35,7 @@ const getById = async (
 };
 
 /**
- * Creates task
+ * Creates task in in-memory DB
  * @param task - object with title, order, description, userId, boardId, columnId fields
  * @returns object of new task
  */
@@ -45,7 +45,7 @@ const create = async (task: Task): Promise<Task> => {
 };
 
 /**
- * Updates task by id.
+ * Updates task by id in in-memory DB.
  * @param id - uuid of task
  * @param task - object with title, order, description, userId, boardId, columnId fields
  * @returns object of updated task
@@ -63,7 +63,7 @@ const update = async (id: string, taskData: Task): Promise<Task | false> => {
 };
 
 /**
- * Removes task by id
+ * Removes task by id from in-memory DB
  * @param id - uuid of task
  * @returns true if task was found and deleted or false if not
  */
@@ -77,7 +77,7 @@ const remove = async (id: string): Promise<boolean> => {
 };
 
 /**
- * Removes all tasks at the board.
+ * Removes all tasks at the board from in-memory DB.
  * @param boardId - uuid of board
  * @returns true if tasks were found and deleted or false if not
  */
@@ -91,7 +91,7 @@ const removeByBoardId = async (boardId: string): Promise<boolean> => {
 };
 
 /**
- * Unassigns user's tasks.
+ * Unassigns user's tasks in in-memory DB.
  * @param id - uuid of user
  * @returns Nothing
  */
