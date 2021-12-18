@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 
 export class Task {
-  id: string;
+  readonly id: string;
 
   title: string;
 

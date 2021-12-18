@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { Column } from '../columns/column.model';
 
 export class Board {
-  id: string;
+  readonly id: string;
 
   title: string;
 
