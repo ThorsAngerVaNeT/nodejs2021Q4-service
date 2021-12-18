@@ -15,6 +15,10 @@ export class Task {
 
   columnId: string | null;
 
+  /**
+   * Creates an instance of task
+   * @param object - title, order, description, userId, boardId, columnId
+   */
   constructor({
     id = uuid(),
     title = 'TASK_TITLE',
