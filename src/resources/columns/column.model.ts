@@ -9,17 +9,9 @@ export class Column {
 
   /**
    * Creates an instance of column
-   * @param object - id, title, order
+   * @param object - title, order
    */
-  constructor({
-    id = uuid(),
-    title = 'COLUMN_TITLE',
-    order = 1,
-  }: {
-    id: string;
-    title: string;
-    order: number;
-  }) {
+  constructor({ id = uuid(), title = 'COLUMN_TITLE', order = 1 } = {}) {
     this.id = id;
     this.title = title;
     this.order = order;

@@ -24,7 +24,7 @@ const getById = async (id: string): Promise<User | false> => {
 };
 
 /**
- * Creates user in-memory DB
+ * Creates user in in-memory DB
  * @param user - object with name, login, password fields
  * @returns object of new user
  */
@@ -35,7 +35,7 @@ const create = async (user: User): Promise<User> => {
 };
 
 /**
- * Updates user by id in-memory DB
+ * Updates user by id in in-memory DB
  * @param id - uuid of user
  * @param user - object with name, login, password fields
  * @returns object of updated user

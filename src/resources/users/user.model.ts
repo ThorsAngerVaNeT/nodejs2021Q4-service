@@ -11,7 +11,7 @@ export class User {
 
   /**
    * Creates an instance of user
-   * @param object - id, name, login, password
+   * @param object - name, login, password
    */
   constructor({
     id = uuid(),

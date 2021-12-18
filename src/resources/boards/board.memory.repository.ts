@@ -4,14 +4,14 @@ import { Column } from '../columns/column.model';
 const boards: Board[] = [];
 
 /**
- * Returns all boards.
+ * Returns all boards from in-memory DB.
  *
  * @returns array of all boards
  */
 const getAll = async (): Promise<Board[]> => boards;
 
 /**
- * Returns board by id.
+ * Returns board by id from in-memory DB.
  * @param id - uuid of board
  * @returns object of board or false if not found
  */
@@ -24,7 +24,7 @@ const getById = async (id: string): Promise<Board | false> => {
 };
 
 /**
- * Creates board
+ * Creates board in in-memory DB
  * @param board - object with title and array of columns of title and order
  * @returns object of new board
  */
@@ -34,7 +34,7 @@ const create = async (board: Board): Promise<Board> => {
 };
 
 /**
- * Updates board by id.
+ * Updates board by id in in-memory DB
  * @param id - uuid of board
  * @param board - object with title and array of columns of title and order
  * @returns object of updated board
@@ -53,7 +53,7 @@ const update = async (id: string, boardData: Board): Promise<Board | false> => {
 };
 
 /**
- * Removes board by id
+ * Removes board by id from in-memory DB
  * @param id - uuid of board
  * @returns true if board was found or false if not
  */
