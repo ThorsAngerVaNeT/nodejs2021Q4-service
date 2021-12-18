@@ -18,7 +18,12 @@ export class User {
     name = 'USER',
     login = 'user',
     password = 'P@55w0rd',
-  } = {}) {
+  }: {
+    id: string;
+    name: string;
+    login: string;
+    password: string;
+  }) {
     this.id = id;
     this.name = name;
     this.login = login;
