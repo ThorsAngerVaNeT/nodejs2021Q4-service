@@ -35,15 +35,17 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:node/recommended",
     "airbnb-base",
-    "prettier"
+    "prettier",
+    "plugin:import/typescript"
   ],
   "rules": {
     "import/extensions": "off",
     "linebreak-style": "off",
+    "import/no-unresolved": [0],
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
     "tsdoc/syntax": "error",
-    "@typescript-eslint/no-explicit-any": ["error"]
+    "@typescript-eslint/no-explicit-any": "error"
   }
 }
