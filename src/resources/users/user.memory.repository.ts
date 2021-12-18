@@ -3,14 +3,14 @@ import { User } from './user.model';
 const users: User[] = [];
 
 /**
- * Returns all users.
+ * Returns all users from in-memory DB.
  *
  * @returns array of all users
  */
 const getAll = async (): Promise<User[]> => users;
 
 /**
- * Returns user by id.
+ * Returns user by id from in-memory DB.
  * @param id - uuid of user
  * @returns object of user or false if not found
  */
@@ -24,7 +24,7 @@ const getById = async (id: string): Promise<User | false> => {
 };
 
 /**
- * Creates user
+ * Creates user in-memory DB
  * @param user - object with name, login, password fields
  * @returns object of new user
  */
@@ -35,7 +35,7 @@ const create = async (user: User): Promise<User> => {
 };
 
 /**
- * Updates user by id.
+ * Updates user by id in-memory DB
  * @param id - uuid of user
  * @param user - object with name, login, password fields
  * @returns object of updated user
@@ -56,7 +56,7 @@ const update = async (id: string, userData: User): Promise<User | false> => {
 };
 
 /**
- * Removes user by id
+ * Removes user by id from in-memory DB
  * @param id - uuid of user
  * @returns true if user was found and deleted or false if not
  */
