@@ -20,7 +20,6 @@ export class Task {
    * @param object - title, order, description, userId, boardId, columnId
    */
   constructor({
-    id = uuid(),
     title = 'TASK_TITLE',
     order = 1,
     description = 'TASK_DESC',
@@ -28,7 +27,6 @@ export class Task {
     boardId = null,
     columnId = null,
   }: {
-    id: string;
     title: string;
     order: number;
     description: string;
@@ -36,7 +34,7 @@ export class Task {
     boardId: string | null;
     columnId: string | null;
   }) {
-    this.id = id;
+    this.id = uuid();
     this.title = title;
     this.order = order;
     this.description = description;

@@ -10,7 +10,7 @@ interface taskParams {
 }
 
 type PostTaskRequest = FastifyRequest<{
-  Body: Task;
+  Body: Omit<Task, 'id'>;
   Params: {
     boardId: string;
   };

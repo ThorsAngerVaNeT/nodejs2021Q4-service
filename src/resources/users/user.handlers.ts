@@ -8,8 +8,8 @@ interface userParams {
   userId: string;
 }
 
-type UserRequest = FastifyRequest<{
-  Body: User;
+type PostUserRequest = FastifyRequest<{
+  Body: Omit<User, 'id'>;
 }>;
 
 type PutUserRequest = FastifyRequest<{
@@ -51,7 +51,10 @@ const userGetById = async (
  * @param req - incoming request object
  * @param res - response object
  */
-const userPost = async (req: UserRequest, res: FastifyReply): Promise<void> => {
+const userPost = async (
+  req: PostUserRequest,
+  res: FastifyReply
+): Promise<void> => {
   const user = new User(req.body);
   await usersService.create(user);
   res.code(httpConstants.HTTP_STATUS_CREATED);

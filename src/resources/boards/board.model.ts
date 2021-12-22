@@ -13,15 +13,13 @@ export class Board {
    * @param object - title, order, columns
    */
   constructor({
-    id = uuid(),
     title = 'BOARD_TITLE',
     columns = [new Column()],
   }: {
-    id: string;
     title: string;
     columns: Column[];
   }) {
-    this.id = id;
+    this.id = uuid();
     this.title = title;
     this.columns = columns.map((el) => new Column(el));
   }

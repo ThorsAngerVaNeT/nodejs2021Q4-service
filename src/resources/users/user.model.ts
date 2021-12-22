@@ -14,17 +14,15 @@ export class User {
    * @param object - name, login, password
    */
   constructor({
-    id = uuid(),
     name = 'USER',
     login = 'user',
     password = 'P@55w0rd',
   }: {
-    id: string;
     name: string;
     login: string;
     password: string;
   }) {
-    this.id = id;
+    this.id = uuid();
     this.name = name;
     this.login = login;
     this.password = password;

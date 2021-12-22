@@ -9,7 +9,7 @@ interface boardParams {
 }
 
 type BoardRequest = FastifyRequest<{
-  Body: Board;
+  Body: Omit<Board, 'id'>;
 }>;
 
 type PutBoardRequest = FastifyRequest<{
