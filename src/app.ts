@@ -6,8 +6,11 @@ import fastswagger from 'fastify-swagger';
 import usersRouter from './resources/users/user.router';
 import boardsRouter from './resources/boards/board.router';
 import tasksRouter from './resources/tasks/task.router';
+import log from './logger';
 
-const app = fastify({ logger: { prettyPrint: true, level: 'debug' } });
+const app = fastify({
+  logger: log,
+});
 
 inputValidation.init(path.join(__dirname, '../doc/api.yaml'), {
   framework: 'fastify',
@@ -42,5 +45,8 @@ app.register(fastswagger, {
 app.register(usersRouter, { prefix: '/users' });
 app.register(boardsRouter, { prefix: '/boards' });
 app.register(tasksRouter);
+
+// throw Error('Oops!');
+// Promise.reject(Error('Oops!'));
 
 export default app;
