@@ -1,3 +1,4 @@
+import fs from 'fs';
 import pino from 'pino';
 import { LOG_LEVEL } from './common/config';
 
@@ -17,5 +18,25 @@ const transport = pino.transport({
 });
 
 const log = pino(transport);
+
+process.on('uncaughtException', (error, origin) => {
+  fs.writeFileSync(
+    './logs/error.log',
+    `captured error: ${error.message} from ${origin}\n`,
+    {
+      flag: 'a+',
+    }
+  );
+});
+
+process.on('unhandledRejection', (reason) => {
+  fs.writeFileSync(
+    './logs/error.log',
+    `Unhandled rejection detected: ${reason}\n`,
+    {
+      flag: 'a+',
+    }
+  );
+});
 
 export default log;
