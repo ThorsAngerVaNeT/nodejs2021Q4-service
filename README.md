@@ -14,7 +14,7 @@ git clone https://github.com/ThorsAngerVaNeT/nodejs2021Q4-service
 ## Switch branch
 
 ```
-git checkout -q task5-typescript-basics
+git checkout -q task6-logging
 ```
 
 ## Installing NPM modules
