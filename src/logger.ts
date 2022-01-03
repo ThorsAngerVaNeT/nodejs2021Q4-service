@@ -49,7 +49,6 @@ export const log = pino({
 
 process.on('uncaughtException', (error) => {
   log.error(error, 'captured uncaughtException');
-  process.exit(1);
 });
 
 process.on('unhandledRejection', (reason) => {
