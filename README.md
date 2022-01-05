@@ -14,8 +14,19 @@ git clone https://github.com/ThorsAngerVaNeT/nodejs2021Q4-service
 ## Switch branch
 
 ```
-git checkout -q task6-logging
+git checkout -q task7-docker
 ```
+
+## Running application in Docker
+
+Run command to build images for application and PostgreSQL, and to create and run containers. Docker composer also create two volumes ('logs' and 'database') at your system default folder for Docker's volume (``\\wsl$\docker-desktop-data\version-pack-data\community\docker\volumes`` on Windows, ``/var/lib/docker/volumes/`` on Linux).
+
+```
+docker-compose up
+```
+
+After that you can use the application as usual. You can edit files in the `src` folder while the container is running, after that the application will be automatically restarted inside the container.
+
 
 ## Installing NPM modules
 
