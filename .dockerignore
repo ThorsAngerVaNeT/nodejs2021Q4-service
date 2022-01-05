@@ -1,0 +1,7 @@
+logs
+dist
+node_modules
+database
+Dockerfile
+docker-compose.yml
+pgdata
