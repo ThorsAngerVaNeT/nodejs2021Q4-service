@@ -34,6 +34,13 @@ export const log = pino({
         },
         level: LOG_LEVEL,
       },
+      {
+        target: 'pino-pretty',
+        options: {
+          translateTime: 'HH:MM:ss.Z',
+        },
+        level: LOG_LEVEL,
+      },
     ],
   },
   serializers: {
