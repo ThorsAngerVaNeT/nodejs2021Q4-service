@@ -19,7 +19,7 @@ git checkout -q task7-docker
 
 ## Running application in Docker
 
-Run command to build images for application and PostgreSQL, and to create and run containers. Docker composer also create two volumes ('logs' and 'database') at your system default folder for Docker's volume (``\\wsl$\docker-desktop-data\version-pack-data\community\docker\volumes`` on Windows, ``/var/lib/docker/volumes/`` on Linux).
+Run command to build images for application and PostgreSQL, and to create and run containers. Docker composer also create two volumes ('logs' and 'database') at your system default folder for Docker's volume (``\\wsl$\docker-desktop-data\version-pack-data\community\docker\volumes`` on Windows, ``/var/lib/docker/volumes/`` on Linux), you also can see volumes at "Volumes" page in Docker Desktop app.
 
 ```
 docker-compose up
