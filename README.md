@@ -25,18 +25,36 @@ Run command to build images for application and PostgreSQL, and to create and ru
 docker-compose up
 ```
 
-Docker composer also create two volumes ('logs' and 'database') at your system default folder for Docker's volume (``\\wsl$\docker-desktop-data\version-pack-data\community\docker\volumes`` on Windows, ``/var/lib/docker/volumes/`` on Linux), you also can see volumes at "Volumes" page in Docker Desktop app.
+You can edit the `.env` file before running the command to set the environment settings you like.
 
-After that you can use the application as usual. You can edit files in the `src` folder while the container is running, after that the application will be automatically restarted inside the container.
+Docker composer also create two volumes ('logs' and 'database') at your Docker's volume default folder (``\\wsl$\docker-desktop-data\version-pack-data\community\docker\volumes`` on Windows, ``/var/lib/docker/volumes/`` on Linux), you also can see volumes at "Volumes" page in Docker Desktop app.
+
+You can edit files in the `src` folder while the container is running, after that the application will be automatically restarted inside the container.
+
+After containers are up you can use the application as usual.
+
+To check volumes you can use in terminal:
+
+```
+docker volume ls
+```
+
+To check networks you can use in terminal:
+
+```
+docker network ls
+```
 
 
-## Installing NPM modules
+
+## Running application without Docker
+### Installing NPM modules
 
 ```
 npm install
 ```
 
-## Running application
+### Running application
 
 ```
 npm start
@@ -46,7 +64,7 @@ After starting the app on port (4000 as default) you can open
 in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
 For more information about OpenAPI/Swagger please visit https://swagger.io/.
 
-## Testing
+### Testing
 
 After application running open new terminal and enter:
 
