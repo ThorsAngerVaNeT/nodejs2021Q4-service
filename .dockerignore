@@ -1,3 +1,7 @@
+.github
+.vscode
+.dockerignore
+.gitignore
 logs
 dist
 node_modules

@@ -2,7 +2,7 @@ version: '3.7'
 services:
   node:
     build: .
-    image: thorsangervanet/ts-rest
+    image: thorsangervanet/rsschool:ts-rest
     ports:
       - ${PORT}:${PORT}
     depends_on:
@@ -17,9 +17,10 @@ services:
         - back
   postgres:
     build: ./database/
-    image: thorsangervanet/postgres
+    image: thorsangervanet/rsschool:postgres
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    command: -p ${POSTGRES_PORT}
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
