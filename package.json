@@ -53,6 +53,8 @@
     "openapi-validator-middleware": "^3.2.4",
     "pino": "^7.6.0",
     "pino-pretty": "^7.3.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.41",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
