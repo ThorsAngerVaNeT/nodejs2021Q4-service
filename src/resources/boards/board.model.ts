@@ -19,8 +19,13 @@ export class Board {
    * Creates an instance of board
    * @param object - title, order, columns
    */
-  constructor({ id = uuid(), title = 'BOARD_TITLE' }: Partial<Board> = {}) {
+  constructor({
+    id = uuid(),
+    title = 'BOARD_TITLE',
+    // columns = [new Columns()],
+  }: Partial<Board> = {}) {
     this.id = id;
     this.title = title;
+    // this.columns = columns;
   }
 }

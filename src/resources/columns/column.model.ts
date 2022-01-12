@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Board } from '../boards/board.model';
 
-@Entity()
+@Entity({ name: 'Columns' })
 export class Columns {
   @PrimaryGeneratedColumn('uuid')
   readonly id: string;

@@ -10,14 +10,14 @@
   "main": "src/server.ts",
   "scripts": {
     "build": "tsc -w",
-    "start": "nodemon --exitcrash -L src/server.ts",
+    "start": "nodemon -L src/server.ts",
     "lint": "eslint --ext .ts --fix src/",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
     "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace",
     "typeorm:cli": "ts-node ./node_modules/typeorm/cli -f ./src/common/ormconfig.ts",
     "mig:gen": "ts-node ./node_modules/typeorm/cli -f ./src/common/ormconfig.ts \"migration:generate\" \"-n\"",
     "mig:up": "ts-node ./node_modules/typeorm/cli -f ./src/common/ormconfig.ts \"migration:run\"",
-    "mig:down": "ts-node ./node_modules/typeorm/cli -f ./src/common/ormconfig.ts\"migration:revert\""
+    "mig:down": "ts-node ./node_modules/typeorm/cli -f ./src/common/ormconfig.ts \"migration:revert\""
   },
   "keywords": [
     "rs",
