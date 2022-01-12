@@ -1,7 +1,7 @@
 // import usersRepo from './user.memory.repository';
 import usersRepo from './user.typeorm.repository';
 import { User } from './user.model';
-import tasksService from '../tasks/task.service';
+// import tasksService from '../tasks/task.service';
 
 /**
  * Returns all users.
@@ -39,9 +39,7 @@ const update = (id: string, user: User): Promise<User | false | undefined> =>
  * @param id - uuid of user
  * @returns true if user was found and deleted or false if not
  */
-const remove = (id: string): Promise<boolean> => {
-  tasksService.unassignUser(id);
-  return usersRepo.remove(id);
-};
-
+const remove = (id: string): Promise<boolean> =>
+  // tasksService.unassignUser(id);
+  usersRepo.remove(id);
 export default { getAll, create, getById, update, remove };

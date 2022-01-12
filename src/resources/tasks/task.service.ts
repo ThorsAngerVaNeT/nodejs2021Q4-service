@@ -1,4 +1,5 @@
-import tasksRepo from './task.memory.repository';
+import tasksRepo from './task.typeorm.repository';
+// import tasksRepo from './task.memory.repository';
 import { Task } from './task.model';
 
 /**
@@ -14,8 +15,10 @@ const getAll = (boardId: string): Promise<Task[]> => tasksRepo.getAll(boardId);
  * @param taskId - uuid of task
  * @returns object of task or false if not found
  */
-const getById = (boardId: string, taskId: string): Promise<Task | false> =>
-  tasksRepo.getById(boardId, taskId);
+const getById = (
+  boardId: string,
+  taskId: string
+): Promise<Task | false | undefined> => tasksRepo.getById(boardId, taskId);
 
 /**
  * Creates task
@@ -30,7 +33,7 @@ const create = (task: Task): Promise<Task> => tasksRepo.create(task);
  * @param task - object with title, order, description, userId, boardId, columnId fields
  * @returns object of updated task
  */
-const update = (id: string, task: Task): Promise<Task | false> =>
+const update = (id: string, task: Task): Promise<Task | false | undefined> =>
   tasksRepo.update(id, task);
 
 /**
@@ -45,6 +48,6 @@ const remove = (id: string): Promise<boolean> => tasksRepo.remove(id);
  * @param id - uuid of user
  * @returns Nothing
  */
-const unassignUser = (id: string): Promise<void> => tasksRepo.unassignUser(id);
+// const unassignUser = (id: string): Promise<void> => tasksRepo.unassignUser(id);
 
-export default { getAll, create, getById, update, remove, unassignUser };
+export default { getAll, create, getById, update, remove };
