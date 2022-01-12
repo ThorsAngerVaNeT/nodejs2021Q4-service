@@ -1,6 +1,7 @@
 import path from 'path';
 import fastify from 'fastify';
 import fastswagger from 'fastify-swagger';
+import 'reflect-metadata';
 import usersRouter from './resources/users/user.router';
 import boardsRouter from './resources/boards/board.router';
 import tasksRouter from './resources/tasks/task.router';
