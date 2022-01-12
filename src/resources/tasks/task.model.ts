@@ -1,5 +1,11 @@
 import { v4 as uuid } from 'uuid';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  Index,
+} from 'typeorm';
 import { User } from '../users/user.model';
 import { Board } from '../boards/board.model';
 import { Columns } from '../columns/column.model';
@@ -18,12 +24,14 @@ export class Task {
   @Column('text')
   description: string;
 
+  @Index()
   @Column('uuid', { nullable: true })
   userId: string | null;
 
   @ManyToOne(() => User, { onDelete: 'SET NULL' })
   user: User | undefined;
 
+  @Index()
   @Column('uuid', { nullable: true })
   boardId: string | null;
 
@@ -32,6 +40,7 @@ export class Task {
   })
   board: Board | undefined;
 
+  @Index()
   @Column('uuid', { nullable: true })
   columnId: string | null;
 
