@@ -45,7 +45,7 @@ export class Task {
   columnId: string | null;
 
   @ManyToOne(() => Columns, {
-    onDelete: 'CASCADE',
+    onDelete: 'SET NULL',
   })
   column: Columns | undefined;
 
