@@ -1,26 +1,26 @@
 import { v4 as uuid } from 'uuid';
-import { Column } from '../columns/column.model';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Columns } from '../columns/column.model';
 
+@Entity({ name: 'Boards' })
 export class Board {
+  @PrimaryGeneratedColumn('uuid')
   readonly id: string;
 
+  @Column('varchar')
   title: string;
 
-  columns: Column[];
+  @OneToMany(() => Columns, (column) => column.board, {
+    eager: true,
+  })
+  columns!: Columns[];
 
   /**
    * Creates an instance of board
    * @param object - title, order, columns
    */
-  constructor({
-    title = 'BOARD_TITLE',
-    columns = [new Column()],
-  }: {
-    title: string;
-    columns: Column[];
-  }) {
-    this.id = uuid();
+  constructor({ id = uuid(), title = 'BOARD_TITLE' }: Partial<Board> = {}) {
+    this.id = id;
     this.title = title;
-    this.columns = columns.map((el) => new Column(el));
   }
 }

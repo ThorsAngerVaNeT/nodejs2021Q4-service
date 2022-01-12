@@ -1,5 +1,5 @@
 import { Board } from './board.model';
-import { Column } from '../columns/column.model';
+import { Columns as Column } from '../columns/column.model';
 
 const boards: Board[] = [];
 

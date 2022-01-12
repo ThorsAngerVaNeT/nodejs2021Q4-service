@@ -1,12 +1,18 @@
 import { v4 as uuid } from 'uuid';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity({ name: 'Users' })
 export class User {
+  @PrimaryGeneratedColumn('uuid')
   readonly id: string;
 
+  @Column('varchar')
   name: string;
 
+  @Column('varchar')
   login: string;
 
+  @Column('varchar')
   password: string;
 
   /**
@@ -17,11 +23,7 @@ export class User {
     name = 'USER',
     login = 'user',
     password = 'P@55w0rd',
-  }: {
-    name: string;
-    login: string;
-    password: string;
-  }) {
+  }: Partial<User> = {}) {
     this.id = uuid();
     this.name = name;
     this.login = login;
