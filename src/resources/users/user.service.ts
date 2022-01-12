@@ -1,4 +1,5 @@
-import usersRepo from './user.memory.repository';
+// import usersRepo from './user.memory.repository';
+import usersRepo from './user.typeorm.repository';
 import { User } from './user.model';
 import tasksService from '../tasks/task.service';
 
@@ -14,7 +15,8 @@ const getAll = (): Promise<User[]> => usersRepo.getAll();
  * @param id - uuid of user
  * @returns object of user or false if not found
  */
-const getById = (id: string): Promise<User | false> => usersRepo.getById(id);
+const getById = (id: string): Promise<User | false | undefined> =>
+  usersRepo.getById(id);
 
 /**
  * Creates user
@@ -29,7 +31,7 @@ const create = (user: User): Promise<User> => usersRepo.create(user);
  * @param user - object with name, login, password fields
  * @returns object of updated user
  */
-const update = (id: string, user: User): Promise<User | false> =>
+const update = (id: string, user: User): Promise<User | false | undefined> =>
   usersRepo.update(id, user);
 
 /**
