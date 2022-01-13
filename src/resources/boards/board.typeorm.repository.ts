@@ -7,7 +7,13 @@ import { Columns as Column } from '../columns/column.model';
  *
  * @returns array of all boards
  */
-const getAll = async (): Promise<Board[]> => getRepository(Board).find();
+const getAll = async (): Promise<Board[]> => // getRepository(Board).find();
+  getRepository(Board)
+    .createQueryBuilder('Boards')
+    .leftJoinAndSelect('Boards.columns', 'Columns')
+    .where('Columns.boardId = Boards.id')
+    .orderBy('Columns.order', 'ASC')
+    .getMany();
 
 /**
  * Returns board by id from in-memory DB.
@@ -15,7 +21,13 @@ const getAll = async (): Promise<Board[]> => getRepository(Board).find();
  * @returns object of board or false if not found
  */
 const getById = async (id: string): Promise<Board | undefined> =>
-  getRepository(Board).findOne(id);
+  // getRepository(Board).findOne(id);
+  getRepository(Board)
+    .createQueryBuilder('Boards')
+    .leftJoinAndSelect('Boards.columns', 'Columns')
+    .where('Columns.boardId = Boards.id AND Boards.id = :id', { id })
+    .orderBy('Columns.order', 'ASC')
+    .getOne();
 
 /**
  * Creates board in in-memory DB
