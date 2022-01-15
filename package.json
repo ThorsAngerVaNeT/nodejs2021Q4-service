@@ -7,10 +7,11 @@
   },
   "type": "commonjs",
   "description": "REST service starter for RS School",
-  "main": "src/server.js",
+  "main": "src/server.ts",
   "scripts": {
-    "start": "nodemon src/server.js",
-    "lint": "eslint --ext .js,.ts --fix src/",
+    "build": "tsc -w",
+    "start": "tsc && nodemon dist/server.js",
+    "lint": "eslint --ext .ts --fix src/",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
     "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace"
   },
@@ -47,6 +48,7 @@
     "cross-env": "7.0.3",
     "dotenv": "10.0.0",
     "fastify": "^3.24.1",
+    "fastify-plugin": "^3.0.0",
     "fastify-swagger": "^4.12.6",
     "openapi-validator-middleware": "^3.2.4",
     "pino-pretty": "^7.2.0",
@@ -54,20 +56,30 @@
     "yamljs": "0.3.0"
   },
   "devDependencies": {
+    "@types/node": "^16.11.12",
+    "@types/uuid": "^8.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
     "chai": "4.3.4",
     "debug": "4.3.2",
     "dirty-chai": "2.0.1",
     "eslint": "8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.25.3",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-tsdoc": "^0.2.14",
     "husky": "^4.3.8",
     "jest": "27.3.1",
     "lint-staged": "12.0.3",
     "nodemon": "2.0.15",
     "prettier": "2.4.1",
-    "supertest": "6.1.6"
+    "supertest": "6.1.6",
+    "tslint": "^6.1.3",
+    "tsoc": "^0.5.15",
+    "typescript": "^4.5.2",
+    "typescript-eslint": "^0.0.1-alpha.0"
   }
 }
