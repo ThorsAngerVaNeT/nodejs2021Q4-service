@@ -34,6 +34,13 @@ export const log = pino({
         },
         level: LOG_LEVEL,
       },
+      {
+        target: 'pino-pretty',
+        options: {
+          translateTime: 'HH:MM:ss.Z',
+        },
+        level: LOG_LEVEL,
+      },
     ],
   },
   serializers: {
@@ -49,6 +56,9 @@ export const log = pino({
 
 process.on('uncaughtException', (error) => {
   log.error(error, 'captured uncaughtException');
+  setTimeout(() => {
+    process.exit(1);
+  }, 500);
 });
 
 process.on('unhandledRejection', (reason) => {
