@@ -4,6 +4,7 @@
 
 - Git - [Download & Install Git](https://git-scm.com/downloads).
 - Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+- Docker - [Download & Install Docker](https://docs.docker.com/get-docker/).
 
 ## Downloading
 
@@ -14,7 +15,7 @@ git clone https://github.com/ThorsAngerVaNeT/nodejs2021Q4-service
 ## Switch branch
 
 ```
-git checkout -q task7-docker
+git checkout -q task8-postgresql-typeorm
 ```
 
 ## Running application in Docker
