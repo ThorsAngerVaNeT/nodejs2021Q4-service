@@ -1,33 +1,17 @@
 import path from 'path';
-import { constants as httpConstants } from 'http2';
-import fastify, { FastifyError, FastifyRequest, FastifyReply } from 'fastify';
-import inputValidation from 'openapi-validator-middleware';
+import fastify from 'fastify';
 import fastswagger from 'fastify-swagger';
 import usersRouter from './resources/users/user.router';
 import boardsRouter from './resources/boards/board.router';
 import tasksRouter from './resources/tasks/task.router';
+import { bodyLogger, errorHandler, log } from './logger';
 
-const app = fastify({ logger: { prettyPrint: true, level: 'debug' } });
-
-inputValidation.init(path.join(__dirname, '../doc/api.yaml'), {
-  framework: 'fastify',
+const app = fastify({
+  logger: log,
 });
 
-app.register(inputValidation.validate({}));
-
-app.setErrorHandler(
-  async (err: FastifyError, _: FastifyRequest, reply: FastifyReply) => {
-    if (err instanceof inputValidation.InputValidationError) {
-      return reply
-        .status(httpConstants.HTTP_STATUS_BAD_REQUEST)
-        .send({ more_info: err.message });
-    }
-
-    return reply
-      .status(httpConstants.HTTP_STATUS_INTERNAL_SERVER_ERROR)
-      .send(err.message);
-  }
-);
+app.register(bodyLogger);
+app.register(errorHandler);
 
 app.register(fastswagger, {
   mode: 'static',
@@ -42,5 +26,8 @@ app.register(fastswagger, {
 app.register(usersRouter, { prefix: '/users' });
 app.register(boardsRouter, { prefix: '/boards' });
 app.register(tasksRouter);
+
+// throw Error('Oops!');
+// Promise.reject(Error('Oops!'));
 
 export default app;
