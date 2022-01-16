@@ -7,7 +7,7 @@ services:
       - ${PORT}:${PORT}
     depends_on:
       - postgres
-    entrypoint: ["./entrypoint.sh"]
+    # entrypoint: ["./entrypoint.sh"]
     environment:
       - PORT=${PORT}
     volumes:
