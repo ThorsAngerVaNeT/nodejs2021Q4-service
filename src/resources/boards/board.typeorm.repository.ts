@@ -59,8 +59,12 @@ const update = async (
   boardData: Board
 ): Promise<Board | undefined> => {
   const columns = await getRepository(Column).save(boardData.columns);
-  const board = await getRepository(Board).save({ id, title: boardData.title });
-  return { ...board, columns };
+  const board = await getRepository(Board).save({
+    id,
+    title: boardData.title,
+    columns,
+  });
+  return board;
 };
 
 /**
