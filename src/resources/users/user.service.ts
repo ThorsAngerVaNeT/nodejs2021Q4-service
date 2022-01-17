@@ -42,4 +42,13 @@ const update = (id: string, user: User): Promise<User | false | undefined> =>
 const remove = (id: string): Promise<boolean> =>
   // tasksService.unassignUser(id);
   usersRepo.remove(id);
-export default { getAll, create, getById, update, remove };
+
+/**
+ * Removes user by id and unassign user's tasks.
+ * @param id - uuid of user
+ * @returns true if user was found and deleted or false if not
+ */
+const auth = (login: string, password: string): Promise<User | undefined> =>
+  usersRepo.auth(login, password);
+
+export default { getAll, create, getById, update, remove, auth };

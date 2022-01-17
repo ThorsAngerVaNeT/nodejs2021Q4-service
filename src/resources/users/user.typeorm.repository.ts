@@ -1,4 +1,5 @@
 import { getRepository } from 'typeorm';
+import bcrypt from 'bcrypt';
 import { User } from './user.model';
 
 /**
@@ -40,4 +41,24 @@ const update = async (id: string, userData: User): Promise<User | undefined> =>
 const remove = async (id: string): Promise<boolean> =>
   !!(await getRepository(User).delete(id)).affected;
 
-export default { getAll, create, getById, update, remove };
+/**
+ *
+ * @param login - user's login
+ * @param password - user's hash password
+ * @returns
+ */
+const auth = async (
+  login: string,
+  password: string
+): Promise<User | undefined> => {
+  const user = await getRepository(User).findOne({ login });
+  if (!user) {
+    return user;
+  }
+  const isPwdCorrect = await bcrypt.compare(password, user.password);
+
+  if (isPwdCorrect) return user;
+  return undefined;
+};
+
+export default { getAll, create, getById, update, remove, auth };
