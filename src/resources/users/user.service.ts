@@ -48,7 +48,9 @@ const remove = (id: string): Promise<boolean> =>
  * @param id - uuid of user
  * @returns true if user was found and deleted or false if not
  */
-const auth = (login: string, password: string): Promise<User | undefined> =>
-  usersRepo.auth(login, password);
+const auth = (
+  login: string,
+  password: string
+): Promise<User | undefined | null> => usersRepo.auth(login, password);
 
 export default { getAll, create, getById, update, remove, auth };

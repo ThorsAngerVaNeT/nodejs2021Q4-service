@@ -50,10 +50,10 @@ const remove = async (id: string): Promise<boolean> =>
 const auth = async (
   login: string,
   password: string
-): Promise<User | undefined> => {
+): Promise<User | undefined | null> => {
   const user = await getRepository(User).findOne({ login });
   if (!user) {
-    return user;
+    return null;
   }
   const isPwdCorrect = await bcrypt.compare(password, user.password);
 

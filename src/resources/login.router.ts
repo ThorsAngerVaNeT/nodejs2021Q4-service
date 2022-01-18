@@ -1,4 +1,6 @@
 import { FastifyInstance, FastifyPluginAsync, FastifyRequest } from 'fastify';
+import jwt from 'jsonwebtoken';
+import { JWT_SECRET_KEY } from '../common/config';
 import usersService from './users/user.service';
 
 const loginSchema = {
@@ -24,10 +26,18 @@ const loginRouter: FastifyPluginAsync = async (
       res
     ) => {
       const { login, password } = req.body;
-      const auth = await usersService.auth(login, password);
-      if (auth === undefined)
+      const user = await usersService.auth(login, password);
+      if (user === undefined)
         res.code(401).send('Bad login/password combination!');
-      else res.send(auth); // TODO generate JWT
+      else if (user === null)
+        res.code(403).send('Bad login/password combination!');
+      else {
+        const payload = { userId: user.id, login };
+        const token = jwt.sign(payload, JWT_SECRET_KEY, {
+          expiresIn: '120',
+        });
+        res.send(token);
+      }
     }
   );
 };
