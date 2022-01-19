@@ -12,5 +12,6 @@ export const PORT = process.env.PORT || 4000;
 export const { NODE_ENV } = process.env;
 export const { MONGO_CONNECTION_STRING } = process.env;
 export const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || '';
+export const SALT_ROUNDS = Number(process.env.SALT_ROUNDS) || 10;
 export const AUTH_MODE = process.env.AUTH_MODE === 'true';
 export const LOG_LEVEL = LOG_LEVEL_ARRAY[Number(process.env.LOG_LEVEL) || 0];

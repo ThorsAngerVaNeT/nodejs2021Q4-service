@@ -1,0 +1,33 @@
+import { constants as httpConstants } from 'http2';
+import jwt from 'jsonwebtoken';
+import { FastifyInstance, FastifyPluginAsync } from 'fastify';
+import fp from 'fastify-plugin';
+import { JWT_SECRET_KEY } from './common/config';
+
+const allowedUrls = ['/login', '/doc', '/'];
+
+export const auth: FastifyPluginAsync = fp(
+  async (app: FastifyInstance): Promise<void> => {
+    app.addHook('preValidation', (req, res, done) => {
+      if (allowedUrls.includes(req.url)) {
+        done();
+      } else {
+        try {
+          if (req.headers.authorization) {
+            const [authType, token] = req.headers.authorization.split(' ');
+            if (authType === 'Bearer' && !!token) {
+              jwt.verify(token, JWT_SECRET_KEY);
+              done();
+            }
+          } else {
+            res
+              .status(httpConstants.HTTP_STATUS_UNAUTHORIZED)
+              .send('Authorization required');
+          }
+        } catch (error) {
+          res.status(httpConstants.HTTP_STATUS_UNAUTHORIZED).send(error);
+        }
+      }
+    });
+  }
+);

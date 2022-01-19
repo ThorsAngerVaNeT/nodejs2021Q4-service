@@ -1,11 +1,10 @@
 import bcrypt from 'bcrypt';
 import { MigrationInterface, QueryRunner } from 'typeorm';
-
-const saltRounds = 10;
+import { SALT_ROUNDS } from '../common/config';
 
 export class AddUser1642445688913 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    const hash = await bcrypt.hash('admin', saltRounds);
+    const hash = await bcrypt.hash('admin', SALT_ROUNDS);
     await queryRunner.query(
       `INSERT INTO "Users" (name, login, password) VALUES ('admin','admin','${hash}')`
     );

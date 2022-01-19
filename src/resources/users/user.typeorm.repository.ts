@@ -1,6 +1,7 @@
 import { getRepository } from 'typeorm';
 import bcrypt from 'bcrypt';
 import { User } from './user.model';
+import { SALT_ROUNDS } from '../../common/config';
 
 /**
  * Returns all users from Postgres DB.
@@ -21,8 +22,11 @@ const getById = async (id: string): Promise<User | undefined> =>
  * @param user - object with name, login, password fields
  * @returns object of new user
  */
-const create = async (user: User): Promise<User> =>
-  getRepository(User).save(user);
+const create = async (user: User): Promise<User> => {
+  const _user = user;
+  _user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
+  return getRepository(User).save(_user);
+};
 
 /**
  * Updates user by id in Postgres DB
@@ -30,8 +34,14 @@ const create = async (user: User): Promise<User> =>
  * @param user - object with name, login, password fields
  * @returns object of updated user
  */
-const update = async (id: string, userData: User): Promise<User | undefined> =>
-  getRepository(User).save({ ...userData, id });
+const update = async (
+  id: string,
+  userData: User
+): Promise<User | undefined> => {
+  const _user = userData;
+  _user.password = await bcrypt.hash(userData.password, SALT_ROUNDS);
+  return getRepository(User).save({ ...userData, id });
+};
 
 /**
  * Removes user by id from Postgres DB
