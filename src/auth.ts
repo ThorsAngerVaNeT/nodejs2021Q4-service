@@ -9,24 +9,23 @@ const allowedUrls = ['/login', '/doc', '/'];
 export const auth: FastifyPluginAsync = fp(
   async (app: FastifyInstance): Promise<void> => {
     app.addHook('preValidation', (req, res, done) => {
-      if (allowedUrls.includes(req.url)) {
-        done();
-      } else {
-        try {
-          if (req.headers.authorization) {
-            const [authType, token] = req.headers.authorization.split(' ');
-            if (authType === 'Bearer' && !!token) {
-              jwt.verify(token, JWT_SECRET_KEY);
-              done();
-            }
-          } else {
-            res
-              .status(httpConstants.HTTP_STATUS_UNAUTHORIZED)
-              .send('Authorization required');
+      if (allowedUrls.includes(req.url) || req.is404) return done();
+      try {
+        if (req.headers.authorization) {
+          const [authType, token] = req.headers.authorization.split(' ');
+          if (authType === 'Bearer' && !!token) {
+            jwt.verify(token, JWT_SECRET_KEY);
+            return done();
           }
-        } catch (error) {
-          res.status(httpConstants.HTTP_STATUS_UNAUTHORIZED).send(error);
+          return res
+            .status(httpConstants.HTTP_STATUS_UNAUTHORIZED)
+            .send('Invalid authorization type');
         }
+        return res
+          .status(httpConstants.HTTP_STATUS_UNAUTHORIZED)
+          .send('Authorization required');
+      } catch (error) {
+        return res.status(httpConstants.HTTP_STATUS_UNAUTHORIZED).send(error);
       }
     });
   }
