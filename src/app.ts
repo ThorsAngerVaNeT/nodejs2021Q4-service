@@ -31,6 +31,7 @@ app.register(usersRouter, { prefix: '/users' });
 app.register(boardsRouter, { prefix: '/boards' });
 app.register(tasksRouter);
 app.register(loginRouter);
+
 app.get('/', async (req, res) => {
   res.send('Hello, Student 1!');
 });

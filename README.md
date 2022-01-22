@@ -15,7 +15,7 @@ git clone https://github.com/ThorsAngerVaNeT/nodejs2021Q4-service
 ## Switch branch
 
 ```
-git checkout -q task8-postgresql-typeorm
+git checkout -q task9-auth-jwt
 ```
 
 ## Running application in Docker
@@ -51,7 +51,7 @@ docker network ls
 After containers running open new terminal and enter:
 
 ```
-docker exec -it vanet-trello_node_1 npm run test
+docker exec -it vanet-trello_node_1 npm run test:auth
 ```
 
 You could also run test from you localhost, but you need install NPM modules first and then run testing as described in [Testing](#testing)

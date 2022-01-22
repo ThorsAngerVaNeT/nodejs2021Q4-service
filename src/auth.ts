@@ -19,7 +19,7 @@ export const auth: FastifyPluginAsync = fp(
           }
           return res
             .status(httpConstants.HTTP_STATUS_UNAUTHORIZED)
-            .send('Invalid authorization type');
+            .send('Invalid authorization type or missing token');
         }
         return res
           .status(httpConstants.HTTP_STATUS_UNAUTHORIZED)
