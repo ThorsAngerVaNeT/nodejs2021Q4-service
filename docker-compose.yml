@@ -10,6 +10,7 @@ services:
     # entrypoint: ["./entrypoint.sh"]
     environment:
       - PORT=${PORT}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
     volumes:
       - logs:/usr/app/logs
       - ./src:/usr/app/src
