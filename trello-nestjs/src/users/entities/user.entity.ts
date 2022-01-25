@@ -11,6 +11,6 @@ export class User {
   @Column()
   login: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 }

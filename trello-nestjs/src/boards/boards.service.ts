@@ -4,22 +4,24 @@ import { Repository } from 'typeorm';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 import { Board } from './entities/board.entity';
+import { Columns } from 'src/columns/entities/column.entity';
 
 @Injectable()
 export class BoardsService {
   constructor(
     @InjectRepository(Board)
     private boardsRepository: Repository<Board>,
+    @InjectRepository(Columns)
+    private columnsRepository: Repository<Columns>,
   ) {}
 
-  async create(createBoardDto: CreateBoardDto) {
-    return 'create a new board';
-    /* const _board = createBoardDto;
-    _board.columns = await getRepository(Column).save(columns);
-    const newBoard = await getRepository(Board).save(_board); */
+  async create(createBoardDto: CreateBoardDto): Promise<Board> {
+    const board = createBoardDto;
+    board.columns = await this.columnsRepository.save(createBoardDto.columns);
+    return this.boardsRepository.save(createBoardDto);
   }
 
-  findAll() {
+  findAll(): Promise<Board[]> {
     return this.boardsRepository
       .createQueryBuilder('Boards')
       .leftJoinAndSelect('Boards.columns', 'Columns')
@@ -28,7 +30,7 @@ export class BoardsService {
       .getMany();
   }
 
-  findOne(id: string) {
+  findOne(id: string): Promise<Board> {
     return this.boardsRepository
       .createQueryBuilder('Boards')
       .leftJoinAndSelect('Boards.columns', 'Columns')
@@ -37,11 +39,19 @@ export class BoardsService {
       .getOne();
   }
 
-  update(id: string, updateBoardDto: UpdateBoardDto) {
-    return `This action updates a #${id} board`;
+  async update(id: string, updateBoardDto: UpdateBoardDto): Promise<Board> {
+    const isExist = await this.findOne(id);
+    if (undefined === isExist) return isExist;
+    const columns = await this.columnsRepository.save(updateBoardDto.columns);
+    const board = await this.boardsRepository.save({
+      id,
+      title: updateBoardDto.title,
+      columns,
+    });
+    return board;
   }
 
-  async remove(id: string) {
+  async remove(id: string): Promise<void> {
     await this.boardsRepository.delete(id);
   }
 }

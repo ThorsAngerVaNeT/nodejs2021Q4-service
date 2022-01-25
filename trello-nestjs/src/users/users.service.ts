@@ -17,14 +17,14 @@ export class UsersService {
     this.config = config;
   }
 
-  async create(createUserDto: CreateUserDto) {
-    const user = createUserDto;
-    console.log(this.config.get('SALT_ROUNDS'));
-    user.password = await bcrypt.hash(
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    createUserDto.password = await bcrypt.hash(
       createUserDto.password,
       +this.config.get('SALT_ROUNDS'),
     );
-    return this.usersRepository.save(user);
+    const user = await this.usersRepository.save(createUserDto);
+    delete user.password;
+    return user;
   }
 
   findAll(): Promise<User[]> {
@@ -35,13 +35,18 @@ export class UsersService {
     return this.usersRepository.findOne(id);
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto) {
-    const user = updateUserDto;
-    user.password = await bcrypt.hash(
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
+    const isExist = await this.findOne(id);
+    if (undefined === isExist) return isExist;
+    updateUserDto.password = await bcrypt.hash(
       updateUserDto.password,
       +this.config.get('SALT_ROUNDS'),
     );
-    return this.usersRepository.save({ ...user, id });
+    const user = await this.usersRepository.save({
+      ...updateUserDto,
+      id,
+    });
+    return user;
   }
 
   async remove(id: string): Promise<void> {
