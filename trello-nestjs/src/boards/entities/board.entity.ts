@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Columns } from 'src/columns/entities/column.entity';
+import { ColumnEntity } from 'src/columns/entities/column.entity';
 
 @Entity()
 export class Board {
@@ -9,8 +9,8 @@ export class Board {
   @Column()
   title: string;
 
-  @OneToMany(() => Columns, (column) => column.board, {
+  @OneToMany(() => ColumnEntity, (column) => column.board, {
     eager: true,
   })
-  columns!: Columns[];
+  columns!: ColumnEntity[];
 }

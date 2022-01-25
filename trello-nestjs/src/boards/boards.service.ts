@@ -4,15 +4,15 @@ import { Repository } from 'typeorm';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 import { Board } from './entities/board.entity';
-import { Columns } from 'src/columns/entities/column.entity';
+import { ColumnEntity } from 'src/columns/entities/column.entity';
 
 @Injectable()
 export class BoardsService {
   constructor(
     @InjectRepository(Board)
     private boardsRepository: Repository<Board>,
-    @InjectRepository(Columns)
-    private columnsRepository: Repository<Columns>,
+    @InjectRepository(ColumnEntity)
+    private columnsRepository: Repository<ColumnEntity>,
   ) {}
 
   async create(createBoardDto: CreateBoardDto): Promise<Board> {

@@ -7,8 +7,8 @@ import {
 } from 'typeorm';
 import { Board } from 'src/boards/entities/board.entity';
 
-@Entity()
-export class Columns {
+@Entity({ name: 'column' })
+export class ColumnEntity {
   @PrimaryGeneratedColumn('uuid')
   readonly id: string;
 

@@ -1,6 +1,6 @@
-import { Columns } from 'src/columns/entities/column.entity';
+import { ColumnEntity } from 'src/columns/entities/column.entity';
 
 export class CreateBoardDto {
   title: string;
-  columns: Columns[];
+  columns: ColumnEntity[];
 }

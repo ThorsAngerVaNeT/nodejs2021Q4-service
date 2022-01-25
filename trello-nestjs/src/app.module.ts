@@ -24,6 +24,7 @@ import config from './config/config';
       database: process.env.POSTGRES_DB,
       entities: [`${__dirname}/**/*.entity{.ts,.js}`],
       synchronize: true,
+      logging: true,
     }),
     UsersModule,
     BoardsModule,

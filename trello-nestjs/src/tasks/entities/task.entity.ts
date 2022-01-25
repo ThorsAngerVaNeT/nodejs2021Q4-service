@@ -5,7 +5,7 @@ import {
   Index,
   ManyToOne,
 } from 'typeorm';
-import { Columns } from 'src/columns/entities/column.entity';
+import { ColumnEntity } from 'src/columns/entities/column.entity';
 import { Board } from 'src/boards/entities/board.entity';
 import { User } from 'src/users/entities/user.entity';
 
@@ -24,18 +24,24 @@ export class Task {
   description: string;
 
   @Index()
+  @Column('uuid', { nullable: true })
+  userId: string | null;
   @ManyToOne(() => User, { onDelete: 'SET NULL' })
   user: User | undefined;
 
   @Index()
+  @Column('uuid', { nullable: true })
+  boardId: string | null;
   @ManyToOne(() => Board, {
     onDelete: 'CASCADE',
   })
   board: Board | undefined;
 
   @Index()
-  @ManyToOne(() => Columns, {
+  @Column('uuid', { nullable: true })
+  columnId: string | null;
+  @ManyToOne(() => ColumnEntity, {
     onDelete: 'SET NULL',
   })
-  column: Columns | undefined;
+  column: ColumnEntity | undefined;
 }
