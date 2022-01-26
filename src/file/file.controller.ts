@@ -1,21 +1,25 @@
 import {
   Controller,
-  Post,
   Get,
-  StreamableFile,
+  Post,
   Param,
   UploadedFile,
   UseInterceptors,
   NotFoundException,
+  StreamableFile,
 } from '@nestjs/common';
+import { FileService } from './file.service';
+import { CreateFileDto } from './dto/create-file.dto';
+import { UpdateFileDto } from './dto/update-file.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Express } from 'express';
-import { createReadStream, createWriteStream, stat } from 'fs';
 import { diskStorage } from 'multer';
-import { join, basename, extname } from 'path';
+import { join } from 'path';
+import { createReadStream, existsSync } from 'fs';
 
 @Controller('file')
 export class FileController {
+  constructor(private readonly fileService: FileService) {}
+
   @Post()
   @UseInterceptors(
     FileInterceptor('file', {
@@ -35,12 +39,13 @@ export class FileController {
   @Get(':fileName')
   getFile(@Param('fileName') fileName: string) {
     const path = join(__dirname, '../src/files', fileName);
+    if (!existsSync(path)) new NotFoundException();
     const file = createReadStream(path);
-    if (!file) new NotFoundException();
-    file.on('error', function (err) {
-      console.log(err);
-      return new NotFoundException();
-    });
     return new StreamableFile(file);
   }
+
+  /*   @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.fileService.findOne(+id);
+  } */
 }

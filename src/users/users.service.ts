@@ -12,7 +12,7 @@ export class UsersService {
   constructor(
     private config: ConfigService,
     @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    private usersRepository: Repository<User>
   ) {
     this.config = config;
   }
@@ -20,7 +20,7 @@ export class UsersService {
   async create(createUserDto: CreateUserDto): Promise<User> {
     createUserDto.password = await bcrypt.hash(
       createUserDto.password,
-      +this.config.get('SALT_ROUNDS'),
+      +this.config.get('SALT_ROUNDS')
     );
     const user = await this.usersRepository.save(createUserDto);
     delete user.password;
@@ -40,7 +40,7 @@ export class UsersService {
     if (undefined === isExist) return isExist;
     updateUserDto.password = await bcrypt.hash(
       updateUserDto.password,
-      +this.config.get('SALT_ROUNDS'),
+      +this.config.get('SALT_ROUNDS')
     );
     const user = await this.usersRepository.save({
       ...updateUserDto,

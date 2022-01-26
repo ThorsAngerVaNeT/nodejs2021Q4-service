@@ -14,7 +14,7 @@ export class CreateUserDto {
   name: string;
 
   @IsNotEmpty()
-  @IsAlphanumeric()
+  // @IsAlphanumeric()
   login: string;
 
   @IsNotEmpty()
