@@ -9,6 +9,7 @@ import { ColumnsModule } from './columns/columns.module';
 import { TasksModule } from './tasks/tasks.module';
 import { Connection } from 'typeorm';
 import config from './config/config';
+import ormconfig from './config/ormconfig';
 // import { FileController } from './file.controller';
 import { FileModule } from './file/file.module';
 
@@ -24,9 +25,14 @@ import { FileModule } from './file/file.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      entities: [`${__dirname}/**/*.entity{.ts,.js}`],
-      synchronize: true,
+      entities: [`${__dirname}/**/**/*.entity{.ts,.js}`],
+      migrations: [`${__dirname}/migrations/*.ts`],
+      synchronize: false,
       logging: true,
+      migrationsRun: true,
+      cli: {
+        migrationsDir: 'src/migrations',
+      },
     }),
     UsersModule,
     BoardsModule,

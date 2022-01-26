@@ -5,7 +5,7 @@ import {
   ManyToOne,
   Index,
 } from 'typeorm';
-import { Board } from 'src/boards/entities/board.entity';
+import { Board } from '../../boards/entities/board.entity';
 
 @Entity({ name: 'column' })
 export class ColumnEntity {

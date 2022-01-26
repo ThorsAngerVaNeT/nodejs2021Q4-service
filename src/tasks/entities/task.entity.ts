@@ -5,9 +5,9 @@ import {
   Index,
   ManyToOne,
 } from 'typeorm';
-import { ColumnEntity } from 'src/columns/entities/column.entity';
-import { Board } from 'src/boards/entities/board.entity';
-import { User } from 'src/users/entities/user.entity';
+import { ColumnEntity } from '../../columns/entities/column.entity';
+import { Board } from '../../boards/entities/board.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Entity()
 export class Task {
