@@ -9,7 +9,8 @@ import { ColumnsModule } from './columns/columns.module';
 import { TasksModule } from './tasks/tasks.module';
 import { Connection } from 'typeorm';
 import config from './config/config';
-import { FileController } from './file.controller';
+// import { FileController } from './file.controller';
+import { FileModule } from './file/file.module';
 
 @Module({
   imports: [
@@ -31,8 +32,9 @@ import { FileController } from './file.controller';
     BoardsModule,
     ColumnsModule,
     TasksModule,
+    FileModule,
   ],
-  controllers: [AppController, FileController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
