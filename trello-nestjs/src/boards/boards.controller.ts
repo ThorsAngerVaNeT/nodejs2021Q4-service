@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   NotFoundException,
+  HttpCode,
 } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { CreateBoardDto } from './dto/create-board.dto';
@@ -48,6 +49,7 @@ export class BoardsController {
   }
 
   @Delete(':id')
+  @HttpCode(204)
   remove(@Param('id') id: string) {
     return this.boardsService.remove(id);
   }

@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   NotFoundException,
+  HttpCode,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -52,6 +53,7 @@ export class TasksController {
   }
 
   @Delete(':id')
+  @HttpCode(204)
   remove(@Param('boardId') boardId: string, @Param('id') id: string) {
     return this.tasksService.remove(id);
   }
