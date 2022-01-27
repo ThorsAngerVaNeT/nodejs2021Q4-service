@@ -9,31 +9,13 @@ import { ColumnsModule } from './columns/columns.module';
 import { TasksModule } from './tasks/tasks.module';
 import { Connection } from 'typeorm';
 import config from './config/config';
-import ormconfig from './config/ormconfig';
-// import { FileController } from './file.controller';
+import * as ormconfig from './config/ormconfig';
 import { FileModule } from './file/file.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      load: [config],
-    }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.POSTGRES_HOST,
-      port: +process.env.POSTGRES_PORT,
-      username: process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_PASSWORD,
-      database: process.env.POSTGRES_DB,
-      entities: [`${__dirname}/**/**/*.entity{.ts,.js}`],
-      migrations: [`${__dirname}/migrations/*.ts`],
-      synchronize: false,
-      logging: true,
-      migrationsRun: true,
-      cli: {
-        migrationsDir: 'src/migrations',
-      },
-    }),
+    ConfigModule.forRoot({ load: [config] }),
+    TypeOrmModule.forRoot(ormconfig),
     UsersModule,
     BoardsModule,
     ColumnsModule,

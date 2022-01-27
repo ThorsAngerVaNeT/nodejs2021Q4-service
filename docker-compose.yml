@@ -2,7 +2,7 @@ version: '3.7'
 services:
   node:
     build: .
-    image: thorsangervanet/rsschool:ts-rest
+    image: trello:ts-rest
     ports:
       - ${PORT}:${PORT}
     depends_on:
@@ -11,16 +11,17 @@ services:
     environment:
       - PORT=${PORT}
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    env_file:
+      - .env
     volumes:
       - logs:/usr/app/logs
       - ./src:/usr/app/src
-      - ./trello-nestjs/src:/usr/app/trello-nestjs/src
     restart: always
     networks:
         - back
   postgres:
     build: ./database/
-    image: thorsangervanet/rsschool:postgres
+    image: trello:postgres
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
     # command: -p ${POSTGRES_PORT}

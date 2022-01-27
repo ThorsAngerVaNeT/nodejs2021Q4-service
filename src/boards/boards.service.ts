@@ -12,7 +12,7 @@ export class BoardsService {
     @InjectRepository(Board)
     private boardsRepository: Repository<Board>,
     @InjectRepository(ColumnEntity)
-    private columnsRepository: Repository<ColumnEntity>,
+    private columnsRepository: Repository<ColumnEntity>
   ) {}
 
   async create(createBoardDto: CreateBoardDto): Promise<Board> {

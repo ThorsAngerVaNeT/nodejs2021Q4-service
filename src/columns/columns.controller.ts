@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  /* Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete, */
+} from '@nestjs/common';
 import { ColumnsService } from './columns.service';
 import { CreateColumnDto } from './dto/create-column.dto';
 import { UpdateColumnDto } from './dto/update-column.dto';
@@ -6,7 +14,7 @@ import { UpdateColumnDto } from './dto/update-column.dto';
 @Controller('columns')
 export class ColumnsController {
   constructor(private readonly columnsService: ColumnsService) {}
-
+  /* 
   @Post()
   create(@Body() createColumnDto: CreateColumnDto) {
     return this.columnsService.create(createColumnDto);
@@ -30,5 +38,5 @@ export class ColumnsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.columnsService.remove(+id);
-  }
+  } */
 }
