@@ -12,11 +12,22 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import {
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @ApiCreatedResponse({
+    description: 'The record has been successfully created.',
+    type: CreateUserDto,
+  })
+  @ApiForbiddenResponse({ description: 'Forbidden.' })
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);

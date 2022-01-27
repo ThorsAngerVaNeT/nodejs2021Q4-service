@@ -14,7 +14,7 @@ import { FileModule } from './file/file.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ load: [config] }),
+    ConfigModule.forRoot({ load: [config], isGlobal: true }),
     TypeOrmModule.forRoot(ormconfig),
     UsersModule,
     BoardsModule,

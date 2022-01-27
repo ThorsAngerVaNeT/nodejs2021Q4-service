@@ -12,4 +12,5 @@ export default () => ({
   POSTGRES_USER: process.env.POSTGRES_USER || 'user',
   POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD || 'user',
   POSTGRES_DB: process.env.POSTGRES_DB || 'trello',
+  USE_FASTIFY: process.env.USE_FASTIFY || false,
 });

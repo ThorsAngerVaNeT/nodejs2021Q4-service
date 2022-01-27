@@ -9,13 +9,16 @@ import {
   StreamableFile,
 } from '@nestjs/common';
 import { FileService } from './file.service';
+import { FileUploadDto } from './dto/file-upload.dto';
 import { CreateFileDto } from './dto/create-file.dto';
 import { UpdateFileDto } from './dto/update-file.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { join } from 'path';
 import { createReadStream, existsSync } from 'fs';
+import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('file')
 @Controller('file')
 export class FileController {
   constructor(private readonly fileService: FileService) {}
@@ -31,6 +34,11 @@ export class FileController {
       }),
     })
   )
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'File to upload',
+    type: FileUploadDto,
+  })
   uploadFile(@UploadedFile() file: Express.Multer.File) {
     // createWriteStream(join(__dirname, '../src/files', file));
     return 'File was uploaded';
