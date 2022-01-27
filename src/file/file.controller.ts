@@ -29,23 +29,18 @@ export class FileController {
           cb(null, file.originalname);
         },
       }),
-    }),
+    })
   )
   uploadFile(@UploadedFile() file: Express.Multer.File) {
     // createWriteStream(join(__dirname, '../src/files', file));
-    console.log(file);
+    return 'File was uploaded';
   }
 
   @Get(':fileName')
-  getFile(@Param('fileName') fileName: string) {
-    const path = join(__dirname, '../src/files', fileName);
-    if (!existsSync(path)) new NotFoundException();
+  async getFile(@Param('fileName') fileName: string) {
+    const path = join(__dirname, '../../src/files', fileName);
+    if (!existsSync(path)) throw new NotFoundException('File is not found!');
     const file = createReadStream(path);
     return new StreamableFile(file);
   }
-
-  /*   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.fileService.findOne(+id);
-  } */
 }
