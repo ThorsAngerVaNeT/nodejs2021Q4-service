@@ -15,7 +15,7 @@ import { UpdateFileDto } from './dto/update-file.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { join } from 'path';
-import { createReadStream, existsSync } from 'fs';
+import fs from 'fs';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('file')
@@ -45,10 +45,13 @@ export class FileController {
   }
 
   @Get(':fileName')
-  async getFile(@Param('fileName') fileName: string) {
-    const path = join(__dirname, '../../src/files', fileName);
-    if (!existsSync(path)) throw new NotFoundException('File is not found!');
-    const file = createReadStream(path);
-    return new StreamableFile(file);
+  getFile(@Param('fileName') fileName: string) {
+    try {
+      const path = join(__dirname, '../../src/files', fileName);
+      const file = fs.createReadStream(path);
+      return new StreamableFile(file);
+    } catch {
+      throw new NotFoundException('File is not found!');
+    }
   }
 }
