@@ -11,6 +11,7 @@ import { Connection } from 'typeorm';
 import config from './config/config';
 import * as ormconfig from './config/ormconfig';
 import { FileModule } from './file/file.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { FileModule } from './file/file.module';
     ColumnsModule,
     TasksModule,
     FileModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

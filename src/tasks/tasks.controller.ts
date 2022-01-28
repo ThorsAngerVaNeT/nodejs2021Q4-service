@@ -8,11 +8,14 @@ import {
   Delete,
   NotFoundException,
   HttpCode,
+  UseGuards,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('/boards/:boardId/tasks')
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
@@ -20,7 +23,7 @@ export class TasksController {
   @Post()
   create(
     @Param('boardId') boardId: string,
-    @Body() createTaskDto: CreateTaskDto,
+    @Body() createTaskDto: CreateTaskDto
   ) {
     return this.tasksService.create({ ...createTaskDto, boardId });
   }
@@ -43,7 +46,7 @@ export class TasksController {
   async update(
     @Param('boardId') boardId: string,
     @Param('id') id: string,
-    @Body() updateTaskDto: UpdateTaskDto,
+    @Body() updateTaskDto: UpdateTaskDto
   ) {
     const task = await this.tasksService.update(id, updateTaskDto);
     if (task === undefined) {
