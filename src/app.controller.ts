@@ -7,11 +7,7 @@ import {
   Body,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import {
-  ApiOkResponse,
-  ApiTags,
-  ApiUnauthorizedResponse,
-} from '@nestjs/swagger';
+import { ApiForbiddenResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { Public } from './auth/public.decorator';
@@ -37,7 +33,7 @@ export class AppController {
   @Post('login')
   @ApiTags('Login')
   @ApiOkResponse({ description: 'Successful login.' })
-  @ApiUnauthorizedResponse({ description: 'Incorrect login or password.' })
+  @ApiForbiddenResponse({ description: 'Incorrect login or password.' })
   async login(
     @Request() req: { user: User },
     @Body() LoginUserDto: LoginUserDto
