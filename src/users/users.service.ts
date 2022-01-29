@@ -17,7 +17,9 @@ export class UsersService {
     this.config = config;
   }
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto): Promise<User | boolean> {
+    const isExist = !!this.findOneByLogin(createUserDto.login);
+    if (isExist) return;
     createUserDto.password = await bcrypt.hash(
       createUserDto.password,
       +this.config.get('SALT_ROUNDS')
@@ -46,8 +48,8 @@ export class UsersService {
     id: string,
     updateUserDto: UpdateUserDto
   ): Promise<User | undefined> {
-    const isExist = await this.findOne(id);
-    if (undefined === isExist) return isExist;
+    const isExist = !!this.findOne(id);
+    if (!isExist) return;
     updateUserDto.password = await bcrypt.hash(
       updateUserDto.password,
       +this.config.get('SALT_ROUNDS')

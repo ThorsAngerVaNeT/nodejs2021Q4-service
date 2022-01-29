@@ -8,10 +8,13 @@ import {
   Put,
   HttpCode,
   NotFoundException,
+  ConflictException,
 } from '@nestjs/common';
 import {
+  ApiConflictResponse,
   ApiCreatedResponse,
   ApiForbiddenResponse,
+  ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { UsersService } from './users.service';
@@ -19,6 +22,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @ApiTags('users')
+@ApiOkResponse({ description: 'Successful operation.' })
+@ApiForbiddenResponse({ description: 'Access token is missing or invalid.' })
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -27,31 +32,32 @@ export class UsersController {
     description: 'The record has been successfully created.',
     type: CreateUserDto,
   })
-  @ApiForbiddenResponse({ description: 'Forbidden.' })
+  @ApiConflictResponse({ description: 'Login already exists.' })
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    const user = await this.usersService.create(createUserDto);
+    if (!user) throw new ConflictException('Login already exists.');
+    return user;
   }
 
   @Get()
   findAll() {
-    console.log('object');
     return this.usersService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    const user = this.usersService.findOne(id);
-    if (user === undefined) {
+  async findOne(@Param('id') id: string) {
+    const user = await this.usersService.findOne(id);
+    if (!user) {
       throw new NotFoundException();
     }
     return user;
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    const user = this.usersService.update(id, updateUserDto);
-    if (user === undefined) {
+  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    const user = await this.usersService.update(id, updateUserDto);
+    if (!user) {
       throw new NotFoundException();
     }
     return user;
