@@ -5,20 +5,27 @@ import { CreateUserDto } from './create-user.dto';
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsUUID(4)
-  @ApiProperty()
+  @ApiProperty({
+    example: 'fec629cb-b440-419a-b479-b374127f477a',
+  })
   @IsOptional()
   id: string;
 
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({
+    example: 'TEST_USER',
+  })
   name: string;
 
   @IsNotEmpty()
-  @ApiProperty()
-  // @IsAlphanumeric()
+  @ApiProperty({
+    example: 'test_user',
+  })
   login: string;
 
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    example: 'T35t_P@55w0rd',
+  })
   password: string;
 }

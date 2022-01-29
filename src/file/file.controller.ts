@@ -10,15 +10,16 @@ import {
 } from '@nestjs/common';
 import { FileService } from './file.service';
 import { FileUploadDto } from './dto/file-upload.dto';
-import { CreateFileDto } from './dto/create-file.dto';
-import { UpdateFileDto } from './dto/update-file.dto';
+// import { CreateFileDto } from './dto/create-file.dto';
+// import { UpdateFileDto } from './dto/update-file.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { join } from 'path';
 import fs from 'fs';
-import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('file')
+@ApiTags('File')
+@ApiBearerAuth('token')
 @Controller('file')
 export class FileController {
   constructor(private readonly fileService: FileService) {}

@@ -7,10 +7,20 @@ import {
   Param,
   Delete, */
 } from '@nestjs/common';
+import {
+  ApiTags,
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiForbiddenResponse,
+} from '@nestjs/swagger';
 import { ColumnsService } from './columns.service';
-import { CreateColumnDto } from './dto/create-column.dto';
-import { UpdateColumnDto } from './dto/update-column.dto';
+// import { CreateColumnDto } from './dto/create-column.dto';
+// import { UpdateColumnDto } from './dto/update-column.dto';
 
+@ApiTags('Columns')
+@ApiBearerAuth('token')
+@ApiOkResponse({ description: 'Successful operation.' })
+@ApiForbiddenResponse({ description: 'Access token is missing or invalid.' })
 @Controller('columns')
 export class ColumnsController {
   constructor(private readonly columnsService: ColumnsService) {}

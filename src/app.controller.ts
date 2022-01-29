@@ -1,8 +1,21 @@
-import { Controller, Request, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Request,
+  Get,
+  Post,
+  UseGuards,
+  Body,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import {
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { Public } from './auth/public.decorator';
+import { LoginUserDto } from './users/dto/login-user.dto';
 import { User } from './users/entities/user.entity';
 
 @Controller()
@@ -13,6 +26,7 @@ export class AppController {
   ) {}
 
   @Public()
+  @ApiTags('')
   @Get()
   getHello(): string {
     return this.appService.getHello();
@@ -21,7 +35,13 @@ export class AppController {
   @Public()
   @UseGuards(AuthGuard('local'))
   @Post('login')
-  async login(@Request() req: { user: User }) {
+  @ApiTags('Login')
+  @ApiOkResponse({ description: 'Successful login.' })
+  @ApiUnauthorizedResponse({ description: 'Incorrect login or password.' })
+  async login(
+    @Request() req: { user: User },
+    @Body() LoginUserDto: LoginUserDto
+  ) {
     return this.authService.login(req.user);
   }
 }

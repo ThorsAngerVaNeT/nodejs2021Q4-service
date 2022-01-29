@@ -25,12 +25,12 @@ export class TasksService {
   }
 
   async update(id: string, updateTaskDto: UpdateTaskDto) {
-    const isExist = await this.findOne(updateTaskDto.boardId, id);
-    if (!isExist) return isExist;
+    const isExist = !!(await this.findOne(updateTaskDto.boardId, id));
+    if (!isExist) return;
     return this.tasksRepository.save({ ...updateTaskDto, id });
   }
 
-  async remove(id: string): Promise<void> {
-    await this.tasksRepository.delete(id);
+  async remove(id: string): Promise<boolean> {
+    return !!(await this.tasksRepository.delete(id)).affected;
   }
 }

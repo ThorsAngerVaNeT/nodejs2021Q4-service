@@ -34,7 +34,17 @@ async function bootstrap() {
     .setDescription('Trello API description')
     .setVersion('1.0')
     .addTag('trello')
-    .addBearerAuth()
+    .addBearerAuth(
+      {
+        in: 'header',
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        description: 'Enter JWT token',
+      },
+      'token'
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, document);

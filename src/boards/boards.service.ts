@@ -40,8 +40,8 @@ export class BoardsService {
   }
 
   async update(id: string, updateBoardDto: UpdateBoardDto): Promise<Board> {
-    const isExist = await this.findOne(id);
-    if (undefined === isExist) return isExist;
+    const isExist = !!(await this.findOne(id));
+    if (!isExist) return;
     const columns = await this.columnsRepository.save(updateBoardDto.columns);
     const board = await this.boardsRepository.save({
       id,
@@ -51,7 +51,7 @@ export class BoardsService {
     return board;
   }
 
-  async remove(id: string): Promise<void> {
-    await this.boardsRepository.delete(id);
+  async remove(id: string): Promise<boolean> {
+    return !!(await this.boardsRepository.delete(id)).affected;
   }
 }
