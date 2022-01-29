@@ -50,6 +50,8 @@ export class UsersService {
   ): Promise<User | undefined> {
     const isExist = !!(await this.findOne(id));
     if (!isExist) return;
+    const userByLogin = await this.findOneByLogin(updateUserDto.login);
+    if (userByLogin.id !== id) return;
     updateUserDto.password = await bcrypt.hash(
       updateUserDto.password,
       +this.config.get('SALT_ROUNDS')

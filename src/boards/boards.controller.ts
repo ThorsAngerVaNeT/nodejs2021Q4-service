@@ -42,13 +42,16 @@ export class BoardsController {
   }
 
   @Get()
-  @ApiOkResponse({ description: 'Successful operation.' })
+  @ApiOkResponse({
+    description: 'Successful operation.',
+    type: [UpdateBoardDto],
+  })
   findAll() {
     return this.boardsService.findAll();
   }
 
   @Get(':id')
-  @ApiOkResponse({ description: 'Successful operation.' })
+  @ApiOkResponse({ description: 'Successful operation.', type: UpdateBoardDto })
   @ApiNotFoundResponse({ description: 'Board not found.' })
   async findOne(@Param('id') id: string) {
     const board = await this.boardsService.findOne(id);
@@ -59,7 +62,10 @@ export class BoardsController {
   }
 
   @Put(':id')
-  @ApiOkResponse({ description: 'The board has been updated.' })
+  @ApiOkResponse({
+    description: 'The board has been updated.',
+    type: UpdateBoardDto,
+  })
   @ApiBadRequestResponse({ description: 'Bad request.' })
   @ApiNotFoundResponse({ description: 'Board not found.' })
   async update(
@@ -68,7 +74,7 @@ export class BoardsController {
   ) {
     const board = await this.boardsService.update(id, updateBoardDto);
     if (!board) {
-      throw new NotFoundException();
+      throw new NotFoundException('Board not found.');
     }
     return board;
   }

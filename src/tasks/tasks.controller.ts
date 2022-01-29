@@ -44,23 +44,32 @@ export class TasksController {
   }
 
   @Get()
-  @ApiOkResponse({ description: 'Successful operation.' })
+  @ApiOkResponse({
+    description: 'Successful operation.',
+    type: [UpdateTaskDto],
+  })
   findAll(@Param('boardId') boardId: string) {
     return this.tasksService.findAll(boardId);
   }
 
   @Get(':id')
-  @ApiOkResponse({ description: 'Successful operation.' })
+  @ApiOkResponse({
+    description: 'Successful operation.',
+    type: [UpdateTaskDto],
+  })
   async findOne(@Param('boardId') boardId: string, @Param('id') id: string) {
     const task = await this.tasksService.findOne(boardId, id);
-    if (task === undefined) {
-      throw new NotFoundException();
+    if (!task) {
+      throw new NotFoundException('Task not found.');
     }
     return task;
   }
 
   @Put(':id')
-  @ApiOkResponse({ description: 'The task has been updated.' })
+  @ApiOkResponse({
+    description: 'The task has been updated.',
+    type: [UpdateTaskDto],
+  })
   @ApiBadRequestResponse({ description: 'Bad request.' })
   @ApiNotFoundResponse({ description: 'Task not found.' })
   async update(
@@ -70,7 +79,7 @@ export class TasksController {
   ) {
     const task = await this.tasksService.update(id, updateTaskDto);
     if (!task) {
-      throw new NotFoundException();
+      throw new NotFoundException('Task not found.');
     }
     return task;
   }
@@ -79,7 +88,11 @@ export class TasksController {
   @HttpCode(204)
   @ApiNoContentResponse({ description: 'The task has been deleted' })
   @ApiNotFoundResponse({ description: 'Task not found.' })
-  remove(@Param('boardId') boardId: string, @Param('id') id: string) {
-    return this.tasksService.remove(id);
+  async remove(@Param('boardId') boardId: string, @Param('id') id: string) {
+    const remove = await this.tasksService.remove(id);
+    if (!remove) {
+      throw new NotFoundException('Task not found.');
+    }
+    return remove;
   }
 }

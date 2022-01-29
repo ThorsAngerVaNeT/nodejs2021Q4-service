@@ -47,13 +47,13 @@ export class UsersController {
   }
 
   @Get()
-  @ApiOkResponse({ description: 'Successful operation.' })
+  @ApiOkResponse({ description: 'Successful operation.', type: [UserDto] })
   findAll() {
     return this.usersService.findAll();
   }
 
   @Get(':id')
-  @ApiOkResponse({ description: 'Successful operation.' })
+  @ApiOkResponse({ description: 'Successful operation.', type: UserDto })
   @ApiNotFoundResponse({ description: 'User not found.' })
   async findOne(@Param('id') id: string) {
     const user = await this.usersService.findOne(id);
@@ -64,7 +64,7 @@ export class UsersController {
   }
 
   @Put(':id')
-  @ApiOkResponse({ description: 'The user has been updated.' })
+  @ApiOkResponse({ description: 'The user has been updated.', type: UserDto })
   @ApiBadRequestResponse({ description: 'Bad request.' })
   @ApiNotFoundResponse({ description: 'User not found.' })
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
