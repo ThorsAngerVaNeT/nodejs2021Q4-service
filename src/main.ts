@@ -7,7 +7,6 @@ import {
 } from '@nestjs/platform-fastify';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { contentParser } from 'fastify-multer';
-import fastifySwagger from 'fastify-swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
