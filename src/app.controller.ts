@@ -7,7 +7,12 @@ import {
   Body,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiForbiddenResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiForbiddenResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { Public } from './auth/public.decorator';
@@ -31,6 +36,10 @@ export class AppController {
   @Public()
   @UseGuards(AuthGuard('local'))
   @Post('login')
+  @ApiOperation({
+    summary: 'Login',
+    description: 'Logins a user and returns a JWT-token.',
+  })
   @ApiTags('Login')
   @ApiOkResponse({ description: 'Successful login.' })
   @ApiForbiddenResponse({ description: 'Incorrect login or password.' })
