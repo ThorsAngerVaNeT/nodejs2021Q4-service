@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -14,6 +14,7 @@ import { UsersModule } from './users/users.module';
 import config from './config/config';
 import * as ormconfig from './config/ormconfig';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { AppLoggerMiddleware } from './logger';
 
 @Module({
   imports: [
@@ -37,4 +38,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
 })
 export class AppModule {
   constructor(private connection: Connection) {}
+  // configure(consumer: MiddlewareConsumer): void {
+  //   consumer.apply(AppLoggerMiddleware).forRoutes('*');
+  // }
 }

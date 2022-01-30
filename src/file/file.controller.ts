@@ -16,7 +16,13 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { join } from 'path';
 import fs from 'fs';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('File')
 @ApiBearerAuth('token')
@@ -40,11 +46,12 @@ export class FileController {
     description: 'File to upload',
     type: FileUploadDto,
   })
+  @ApiOkResponse({ description: 'File :fileName was uploaded' })
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
     // console.log(file);
     // return file;
     // createWriteStream(join(__dirname, '../src/files', file));
-    return 'File was uploaded';
+    return `File ${file.originalname} was uploaded`;
   }
 
   @Get(':fileName')
