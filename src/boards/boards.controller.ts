@@ -6,7 +6,6 @@ import {
   Put,
   Param,
   Delete,
-  NotFoundException,
   HttpCode,
   ParseUUIDPipe,
 } from '@nestjs/common';
@@ -69,11 +68,7 @@ export class BoardsController {
   @ApiOkResponse({ description: 'Successful operation.', type: UpdateBoardDto })
   @ApiNotFoundResponse({ description: 'Board not found.' })
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    const board = await this.boardsService.findOne(id);
-    if (!board) {
-      throw new NotFoundException('Board not found.');
-    }
-    return board;
+    return await this.boardsService.findOne(id);
   }
 
   @Put(':id')
@@ -91,11 +86,7 @@ export class BoardsController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateBoardDto: UpdateBoardDto
   ) {
-    const board = await this.boardsService.update(id, updateBoardDto);
-    if (!board) {
-      throw new NotFoundException('Board not found.');
-    }
-    return board;
+    return await this.boardsService.update(id, updateBoardDto);
   }
 
   @Delete(':id')
@@ -107,10 +98,6 @@ export class BoardsController {
   @ApiNoContentResponse({ description: 'The board has been deleted' })
   @ApiNotFoundResponse({ description: 'Board not found.' })
   async remove(@Param('id', ParseUUIDPipe) id: string) {
-    const remove = await this.boardsService.remove(id);
-    if (!remove) {
-      throw new NotFoundException('Board not found.');
-    }
-    return remove;
+    return await this.boardsService.remove(id);
   }
 }

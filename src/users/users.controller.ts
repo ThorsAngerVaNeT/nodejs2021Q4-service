@@ -7,8 +7,6 @@ import {
   Delete,
   Put,
   HttpCode,
-  NotFoundException,
-  ConflictException,
   ParseUUIDPipe,
   ClassSerializerInterceptor,
   UseInterceptors,
@@ -50,9 +48,7 @@ export class UsersController {
   async create(
     @Body(new ValidationPipe({ transform: true })) createUserDto: CreateUserDto
   ) {
-    const user = await this.usersService.create(createUserDto);
-    if (!user) throw new ConflictException('Login already exists.');
-    return user;
+    return await this.usersService.create(createUserDto);
   }
 
   @Get()
@@ -71,11 +67,7 @@ export class UsersController {
   @ApiOkResponse({ description: 'Successful operation.', type: UserDto })
   @ApiNotFoundResponse({ description: 'User not found.' })
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    const user = await this.usersService.findOne(id);
-    if (!user) {
-      throw new NotFoundException('User not found.');
-    }
-    return user;
+    return await this.usersService.findOne(id);
   }
 
   @Put(':id')
@@ -90,11 +82,7 @@ export class UsersController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateUserDto: UpdateUserDto
   ) {
-    const user = await this.usersService.update(id, updateUserDto);
-    if (!user) {
-      throw new NotFoundException('User not found.');
-    }
-    return user;
+    return await this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
@@ -106,10 +94,6 @@ export class UsersController {
   @ApiNoContentResponse({ description: 'The user has been deleted' })
   @ApiNotFoundResponse({ description: 'User not found.' })
   async remove(@Param('id', ParseUUIDPipe) id: string) {
-    const remove = await this.usersService.remove(id);
-    if (!remove) {
-      throw new NotFoundException('User not found.');
-    }
-    return remove;
+    return await this.usersService.remove(id);
   }
 }

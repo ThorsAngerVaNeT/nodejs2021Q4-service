@@ -12,5 +12,6 @@ import { ColumnEntity } from 'src/columns/entities/column.entity';
   ],
   controllers: [BoardsController],
   providers: [BoardsService],
+  exports: [BoardsService],
 })
 export class BoardsModule {}

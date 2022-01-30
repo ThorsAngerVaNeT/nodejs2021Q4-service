@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateBoardDto } from './dto/create-board.dto';
@@ -30,18 +30,20 @@ export class BoardsService {
       .getMany();
   }
 
-  findOne(id: string): Promise<Board> {
-    return this.boardsRepository
+  async findOne(id: string): Promise<Board> {
+    const board = await this.boardsRepository
       .createQueryBuilder('Boards')
       .leftJoinAndSelect('Boards.columns', 'Columns')
       .where('Columns.boardId = Boards.id AND Boards.id = :id', { id })
       .orderBy('Columns.order', 'ASC')
       .getOne();
+    if (!board) throw new NotFoundException('Board not found.');
+    return board;
   }
 
   async update(id: string, updateBoardDto: UpdateBoardDto): Promise<Board> {
     const isExist = !!(await this.findOne(id));
-    if (!isExist) return;
+    if (!isExist) throw new NotFoundException('Board not found.');
     const columns = await this.columnsRepository.save(updateBoardDto.columns);
     const board = await this.boardsRepository.save({
       id,
@@ -51,7 +53,9 @@ export class BoardsService {
     return board;
   }
 
-  async remove(id: string): Promise<boolean> {
-    return !!(await this.boardsRepository.delete(id)).affected;
+  async remove(id: string): Promise<void> {
+    const isExist = !!(await this.findOne(id));
+    if (!isExist) throw new NotFoundException('Board not found.');
+    await this.boardsRepository.delete(id);
   }
 }

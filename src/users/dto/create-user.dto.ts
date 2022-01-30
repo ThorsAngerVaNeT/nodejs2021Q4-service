@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 import { IsNotEmpty, IsUUID, IsOptional } from 'class-validator';
 
 export class CreateUserDto {
@@ -22,5 +23,6 @@ export class CreateUserDto {
   @ApiProperty({
     example: 'T35t_P@55w0rd',
   })
+  @Exclude({ toPlainOnly: true })
   password: string;
 }

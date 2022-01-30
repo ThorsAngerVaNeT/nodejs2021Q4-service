@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {MigrationInterface, QueryRunner} from "typeorm";
 
 export class InitialCreateTables1643227728404 implements MigrationInterface {

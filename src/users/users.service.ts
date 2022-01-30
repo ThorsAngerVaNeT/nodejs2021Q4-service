@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { Repository } from 'typeorm';
@@ -19,26 +23,28 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<User | boolean> {
     const isExist = !!(await this.findOneByLogin(createUserDto.login));
-    if (isExist) return;
+    if (isExist) throw new ConflictException('Login already exists.');
     createUserDto.password = await bcrypt.hash(
       createUserDto.password,
       +this.config.get('SALT_ROUNDS')
     );
     const user = await this.usersRepository.save(createUserDto);
-    delete user.password;
+    // delete user.password;
     return user;
   }
 
-  findAll(): Promise<User[]> {
+  async findAll(): Promise<User[]> {
     return this.usersRepository.find();
   }
 
-  findOne(id: string): Promise<User | undefined> {
-    return this.usersRepository.findOne(id);
+  async findOne(id: string): Promise<User | undefined> {
+    const user = await this.usersRepository.findOne(id);
+    if (!user) throw new NotFoundException('User not found.');
+    return user;
   }
 
-  findOneByLogin(login: string): Promise<User | undefined> {
-    return this.usersRepository.findOne({
+  async findOneByLogin(login: string): Promise<User | undefined> {
+    return await this.usersRepository.findOne({
       where: { login },
       select: ['id', 'name', 'login', 'password'],
     });
@@ -49,7 +55,7 @@ export class UsersService {
     updateUserDto: UpdateUserDto
   ): Promise<User | undefined> {
     const isExist = !!(await this.findOne(id));
-    if (!isExist) return;
+    if (!isExist) throw new NotFoundException('User not found.');
     const userByLogin = await this.findOneByLogin(updateUserDto.login);
     if (userByLogin.id !== id) return;
     updateUserDto.password = await bcrypt.hash(
@@ -63,8 +69,10 @@ export class UsersService {
     return user;
   }
 
-  async remove(id: string): Promise<boolean> {
-    return !!(await this.usersRepository.delete(id)).affected;
+  async remove(id: string): Promise<void> {
+    const isExist = !!(await this.findOne(id));
+    if (!isExist) throw new NotFoundException('User not found.');
+    await this.usersRepository.delete(id);
   }
 
   /* async auth(

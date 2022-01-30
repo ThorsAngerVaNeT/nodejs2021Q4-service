@@ -6,7 +6,6 @@ import {
   Put,
   Param,
   Delete,
-  NotFoundException,
   HttpCode,
   ParseUUIDPipe,
 } from '@nestjs/common';
@@ -60,7 +59,7 @@ export class TasksController {
     type: [UpdateTaskDto],
   })
   async findAll(@Param('boardId', ParseUUIDPipe) boardId: string) {
-    return this.tasksService.findAll(boardId);
+    return await this.tasksService.findAll(boardId);
   }
 
   @Get(':id')
@@ -77,11 +76,7 @@ export class TasksController {
     @Param('boardId', ParseUUIDPipe) boardId: string,
     @Param('id', ParseUUIDPipe) id: string
   ) {
-    const task = await this.tasksService.findOne(boardId, id);
-    if (!task) {
-      throw new NotFoundException('Task not found.');
-    }
-    return task;
+    return await this.tasksService.findOne(boardId, id);
   }
 
   @Put(':id')
@@ -100,11 +95,7 @@ export class TasksController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateTaskDto: UpdateTaskDto
   ) {
-    const task = await this.tasksService.update(id, updateTaskDto);
-    if (!task) {
-      throw new NotFoundException('Task not found.');
-    }
-    return task;
+    return await this.tasksService.update(id, updateTaskDto);
   }
 
   @Delete(':id')
@@ -119,10 +110,6 @@ export class TasksController {
     @Param('boardId', ParseUUIDPipe) boardId: string,
     @Param('id', ParseUUIDPipe) id: string
   ) {
-    const remove = await this.tasksService.remove(id);
-    if (!remove) {
-      throw new NotFoundException('Task not found.');
-    }
-    return remove;
+    return await this.tasksService.remove(id);
   }
 }
