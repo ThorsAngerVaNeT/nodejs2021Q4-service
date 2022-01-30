@@ -1,15 +1,15 @@
 import { ConnectionOptions } from 'typeorm';
-// import config from './config';
+import config from './config';
 // console.log(config());
-// const configObj = config();
+const configObj = config();
 
 const ormconfig: ConnectionOptions = {
   type: 'postgres',
-  host: process.env.POSTGRES_HOST,
-  port: +process.env.POSTGRES_PORT,
-  username: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  database: process.env.POSTGRES_DB,
+  host: configObj.POSTGRES_HOST,
+  port: +configObj.POSTGRES_PORT,
+  username: configObj.POSTGRES_USER,
+  password: configObj.POSTGRES_PASSWORD,
+  database: configObj.POSTGRES_DB,
   entities: [__dirname + '/../**/entities/*.entity{.ts,.js}'],
   migrations: [__dirname + '/../migrations/**/*{.ts,.js}'],
   synchronize: false,

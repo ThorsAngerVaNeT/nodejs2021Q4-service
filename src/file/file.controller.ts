@@ -28,7 +28,7 @@ export class FileController {
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
-        destination: './src/files',
+        destination: './uploads',
         filename: (req, file, cb) => {
           cb(null, file.originalname);
         },
@@ -40,7 +40,9 @@ export class FileController {
     description: 'File to upload',
     type: FileUploadDto,
   })
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    // console.log(file);
+    // return file;
     // createWriteStream(join(__dirname, '../src/files', file));
     return 'File was uploaded';
   }
