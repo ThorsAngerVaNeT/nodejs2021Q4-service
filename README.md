@@ -4,6 +4,7 @@
 
 - Git - [Download & Install Git](https://git-scm.com/downloads).
 - Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+- Docker - [Download & Install Docker](https://docs.docker.com/get-docker/).
 
 ## Downloading
 
@@ -14,7 +15,7 @@ git clone https://github.com/ThorsAngerVaNeT/nodejs2021Q4-service
 ## Switch branch
 
 ```
-git checkout -q task7-docker
+git checkout -q task8-postgresql-typeorm
 ```
 
 ## Running application in Docker
@@ -45,7 +46,15 @@ To check networks you can use in terminal:
 docker network ls
 ```
 
+## Testing inside Docker
 
+After containers running open new terminal and enter:
+
+```
+docker exec -it vanet-trello_node_1 npm run test
+```
+
+You could also run test from you localhost, but you need install NPM modules first and then run testing as described in [Testing](#testing)
 
 ## Running application without Docker
 ### Installing NPM modules

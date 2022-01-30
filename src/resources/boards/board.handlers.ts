@@ -2,6 +2,7 @@ import { STATUS_CODES } from 'http';
 import { constants as httpConstants } from 'http2';
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { Board } from './board.model';
+import { Columns as Column } from '../columns/column.model';
 import boardsService from './board.service';
 
 interface boardParams {
@@ -59,7 +60,10 @@ const boardPost = async (
   res: FastifyReply
 ): Promise<void> => {
   const board = new Board(req.body);
-  await boardsService.create(board);
+  const columns = req.body.columns
+    .map((c) => new Column(c))
+    .sort((a, b) => a.order - b.order);
+  await boardsService.create(board, columns);
   res.code(httpConstants.HTTP_STATUS_CREATED);
   res.send(board);
 };

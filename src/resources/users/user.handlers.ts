@@ -39,7 +39,7 @@ const userGetById = async (
   const { userId } = req.params;
   const user = await usersService.getById(userId);
   if (user) {
-    res.send(user);
+    res.send(User.toResponse(user));
   } else {
     res.code(httpConstants.HTTP_STATUS_NOT_FOUND);
     res.send(STATUS_CODES[httpConstants.HTTP_STATUS_NOT_FOUND]);

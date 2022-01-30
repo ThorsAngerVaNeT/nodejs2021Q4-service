@@ -7,45 +7,50 @@
     "node": true
   },
   "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "eslint-plugin-tsdoc"
+  ],
   "parserOptions": {
-    "project": "./tsconfig.json",
-    "tsconfigRootDir": "./",
     "sourceType": "module",
     "ecmaVersion": 2021,
-    "createDefaultProgram": true,
     "ecmaFeatures": {
       "impliedStrict": true
     }
   },
   "settings": {
     "noInlineConfig": true,
+    "node": {
+      "tryExtensions": [".js", ".ts", ".d.ts"],
+      "moduleDirectory": ["node_modules", "src/"]
+    },
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".ts"]
+        "extensions": [".js", ".ts", ".d.ts"],
+        "moduleDirectory": ["node_modules", "src/"],
+        "typescript": {}
+      },
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "."
       }
-    },
-    "node": {
-      "resolvePaths": ["./"],
-      "tryExtensions": [".js", ".ts"]
     }
   },
-  "plugins": ["@typescript-eslint", "eslint-plugin-tsdoc"],
   "extends": [
-    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "eslint:recommended",
     "plugin:node/recommended",
     "airbnb-base",
-    "prettier",
-    "plugin:import/typescript"
+    "prettier"
   ],
   "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
     "import/extensions": "off",
     "linebreak-style": "off",
-    "import/no-unresolved": [0],
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
-    "tsdoc/syntax": "error",
-    "@typescript-eslint/no-explicit-any": "error"
+    "tsdoc/syntax": "error"
   }
 }
