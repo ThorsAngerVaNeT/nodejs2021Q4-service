@@ -57,7 +57,8 @@ export class UsersService {
     const isExist = !!(await this.findOne(id));
     if (!isExist) throw new NotFoundException('User not found.');
     const userByLogin = await this.findOneByLogin(updateUserDto.login);
-    if (userByLogin.id !== id) return;
+    if (userByLogin && userByLogin.id !== id)
+      throw new ConflictException('Login already exists.');
     updateUserDto.password = await bcrypt.hash(
       updateUserDto.password,
       +this.config.get('SALT_ROUNDS')

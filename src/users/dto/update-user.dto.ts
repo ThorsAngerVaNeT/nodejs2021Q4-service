@@ -1,5 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
+import { Expose } from 'class-transformer';
 import { IsUUID, IsOptional, IsNotEmpty } from 'class-validator';
 import { CreateUserDto } from './create-user.dto';
 
@@ -8,10 +9,10 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @ApiProperty({
     example: 'fec629cb-b440-419a-b479-b374127f477a',
   })
-  @IsOptional()
+  @IsNotEmpty()
   id: string;
 
-  @IsOptional()
+  @IsNotEmpty()
   @ApiProperty({
     example: 'TEST_USER',
   })
@@ -27,5 +28,6 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @ApiProperty({
     example: 'T35t_P@55w0rd',
   })
+  @Expose()
   password: string;
 }

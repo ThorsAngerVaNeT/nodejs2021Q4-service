@@ -28,6 +28,8 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserDto } from './dto/user.dto';
+import { plainToClass } from 'class-transformer';
+import { User } from './entities/user.entity';
 
 @ApiTags('Users')
 @ApiBearerAuth('token')
@@ -52,6 +54,7 @@ export class UsersController {
   }
 
   @Get()
+  @UseInterceptors(ClassSerializerInterceptor)
   @ApiOperation({ summary: 'Gets all users', description: 'Gets all users' })
   @ApiOkResponse({ description: 'Successful operation.', type: [UserDto] })
   async findAll() {
@@ -59,6 +62,7 @@ export class UsersController {
   }
 
   @Get(':id')
+  @UseInterceptors(ClassSerializerInterceptor)
   @ApiOperation({
     summary: 'Gets user by ID',
     description:
@@ -71,6 +75,7 @@ export class UsersController {
   }
 
   @Put(':id')
+  @UseInterceptors(ClassSerializerInterceptor)
   @ApiOperation({
     summary: 'Updates a user',
     description: 'Updates a user by ID',
@@ -80,9 +85,10 @@ export class UsersController {
   @ApiNotFoundResponse({ description: 'User not found.' })
   async update(
     @Param('id', ParseUUIDPipe) id: string,
-    @Body() updateUserDto: UpdateUserDto
+    @Body(new ValidationPipe({ transform: true })) updateUserDto: UpdateUserDto
   ) {
-    return await this.usersService.update(id, updateUserDto);
+    const user = await this.usersService.update(id, updateUserDto);
+    return plainToClass(User, user);
   }
 
   @Delete(':id')
