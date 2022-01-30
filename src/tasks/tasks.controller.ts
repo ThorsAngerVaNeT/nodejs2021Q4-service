@@ -18,6 +18,7 @@ import {
   ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 import { TasksService } from './tasks.service';
@@ -32,6 +33,10 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Post()
+  @ApiOperation({
+    summary: 'Create new task',
+    description: 'Creates a new task',
+  })
   @ApiCreatedResponse({
     description: 'The task has been created.',
     type: UpdateTaskDto,
@@ -45,6 +50,11 @@ export class TasksController {
   }
 
   @Get()
+  @ApiOperation({
+    summary: 'Get Tasks by boardId',
+    description:
+      'Gets tasks by the Board ID (e.g. "/board/2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd/tasks")',
+  })
   @ApiOkResponse({
     description: 'Successful operation.',
     type: [UpdateTaskDto],
@@ -54,6 +64,11 @@ export class TasksController {
   }
 
   @Get(':id')
+  @ApiOperation({
+    summary: 'Get Task by boardId and taskId',
+    description:
+      'Gets the Task by the Board\'s and task ID (e.g. "/board/2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd/tasks/0949f061-936e-4710-a48b-ab1af2d1c284")',
+  })
   @ApiOkResponse({
     description: 'Successful operation.',
     type: [UpdateTaskDto],
@@ -70,6 +85,10 @@ export class TasksController {
   }
 
   @Put(':id')
+  @ApiOperation({
+    summary: 'Updates Task',
+    description: 'Updates the Task by ID',
+  })
   @ApiOkResponse({
     description: 'The task has been updated.',
     type: [UpdateTaskDto],
@@ -90,6 +109,10 @@ export class TasksController {
 
   @Delete(':id')
   @HttpCode(204)
+  @ApiOperation({
+    summary: 'Delete Task',
+    description: 'Deletes Task by ID.',
+  })
   @ApiNoContentResponse({ description: 'The task has been deleted' })
   @ApiNotFoundResponse({ description: 'Task not found.' })
   async remove(

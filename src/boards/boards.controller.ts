@@ -19,6 +19,7 @@ import {
   ApiBadRequestResponse,
   ApiNotFoundResponse,
   ApiNoContentResponse,
+  ApiOperation,
 } from '@nestjs/swagger';
 import { BoardsService } from './boards.service';
 import { CreateBoardDto } from './dto/create-board.dto';
@@ -32,6 +33,10 @@ export class BoardsController {
   constructor(private readonly boardsService: BoardsService) {}
 
   @Post()
+  @ApiOperation({
+    summary: 'Create board',
+    description: 'Creates a new board',
+  })
   @ApiCreatedResponse({
     description: 'The board has been created.',
     type: UpdateBoardDto,
@@ -43,6 +48,10 @@ export class BoardsController {
   }
 
   @Get()
+  @ApiOperation({
+    summary: 'Get all boards',
+    description: 'Returns all boards',
+  })
   @ApiOkResponse({
     description: 'Successful operation.',
     type: [UpdateBoardDto],
@@ -52,6 +61,11 @@ export class BoardsController {
   }
 
   @Get(':id')
+  @ApiOperation({
+    summary: 'Gets board by id',
+    description:
+      'Gets the Board by ID (e.g. "/boards/b4752913-3cea-420d-bd43-db4141ad2807")',
+  })
   @ApiOkResponse({ description: 'Successful operation.', type: UpdateBoardDto })
   @ApiNotFoundResponse({ description: 'Board not found.' })
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
@@ -63,6 +77,10 @@ export class BoardsController {
   }
 
   @Put(':id')
+  @ApiOperation({
+    summary: 'Update board',
+    description: 'Updates a Board by ID',
+  })
   @ApiOkResponse({
     description: 'The board has been updated.',
     type: UpdateBoardDto,
@@ -82,6 +100,10 @@ export class BoardsController {
 
   @Delete(':id')
   @HttpCode(204)
+  @ApiOperation({
+    summary: 'Delete board',
+    description: "Deletes a Board by ID. It also deletes all board's tasks",
+  })
   @ApiNoContentResponse({ description: 'The board has been deleted' })
   @ApiNotFoundResponse({ description: 'Board not found.' })
   async remove(@Param('id', ParseUUIDPipe) id: string) {

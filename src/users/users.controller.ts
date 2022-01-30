@@ -10,6 +10,9 @@ import {
   NotFoundException,
   ConflictException,
   ParseUUIDPipe,
+  ClassSerializerInterceptor,
+  UseInterceptors,
+  ValidationPipe,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -20,6 +23,7 @@ import {
   ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
 import { UsersService } from './users.service';
@@ -35,25 +39,35 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
+  @UseInterceptors(ClassSerializerInterceptor)
+  @ApiOperation({ summary: 'Create user', description: 'Creates a new user' })
   @ApiCreatedResponse({
     description: 'The user has been created.',
     type: UserDto,
   })
   @ApiBadRequestResponse({ description: 'Bad request.' })
   @ApiConflictResponse({ description: 'Login already exists.' })
-  async create(@Body() createUserDto: CreateUserDto) {
+  async create(
+    @Body(new ValidationPipe({ transform: true })) createUserDto: CreateUserDto
+  ) {
     const user = await this.usersService.create(createUserDto);
     if (!user) throw new ConflictException('Login already exists.');
     return user;
   }
 
   @Get()
+  @ApiOperation({ summary: 'Gets all users', description: 'Gets all users' })
   @ApiOkResponse({ description: 'Successful operation.', type: [UserDto] })
   async findAll() {
     return this.usersService.findAll();
   }
 
   @Get(':id')
+  @ApiOperation({
+    summary: 'Gets user by ID',
+    description:
+      'Gets a user by ID e.g. "/users/fec629cb-b440-419a-b479-b374127f477a"',
+  })
   @ApiOkResponse({ description: 'Successful operation.', type: UserDto })
   @ApiNotFoundResponse({ description: 'User not found.' })
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
@@ -65,6 +79,10 @@ export class UsersController {
   }
 
   @Put(':id')
+  @ApiOperation({
+    summary: 'Updates a user',
+    description: 'Updates a user by ID',
+  })
   @ApiOkResponse({ description: 'The user has been updated.', type: UserDto })
   @ApiBadRequestResponse({ description: 'Bad request.' })
   @ApiNotFoundResponse({ description: 'User not found.' })
@@ -81,6 +99,10 @@ export class UsersController {
 
   @Delete(':id')
   @HttpCode(204)
+  @ApiOperation({
+    summary: 'Delete user',
+    description: "Deletes user by ID. It also unassignes all user's tasks",
+  })
   @ApiNoContentResponse({ description: 'The user has been deleted' })
   @ApiNotFoundResponse({ description: 'User not found.' })
   async remove(@Param('id', ParseUUIDPipe) id: string) {
