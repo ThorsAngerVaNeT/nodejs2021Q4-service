@@ -519,7 +519,6 @@ paths:
                   type: string
                   description: Password
               required:
-                - user
                 - login
       responses:
         200:

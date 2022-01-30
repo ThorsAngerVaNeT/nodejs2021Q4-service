@@ -9,7 +9,6 @@ import {
   FastifyPluginAsync,
 } from 'fastify';
 import inputValidation from 'openapi-validator-middleware';
-
 import fp from 'fastify-plugin';
 import { LOG_LEVEL } from './common/config';
 

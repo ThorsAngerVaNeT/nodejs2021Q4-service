@@ -49,11 +49,13 @@
     ]
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cross-env": "7.0.3",
     "dotenv": "10.0.0",
     "fastify": "^3.24.1",
     "fastify-plugin": "^3.0.0",
     "fastify-swagger": "^4.13.0",
+    "jsonwebtoken": "^8.5.1",
     "openapi-validator-middleware": "^3.2.4",
     "pg": "^8.7.1",
     "pino": "^7.6.0",
@@ -63,6 +65,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^16.11.12",
     "@types/uuid": "^8.3.3",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
