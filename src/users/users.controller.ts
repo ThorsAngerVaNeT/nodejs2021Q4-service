@@ -9,6 +9,7 @@ import {
   HttpCode,
   NotFoundException,
   ConflictException,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -48,14 +49,14 @@ export class UsersController {
 
   @Get()
   @ApiOkResponse({ description: 'Successful operation.', type: [UserDto] })
-  findAll() {
+  async findAll() {
     return this.usersService.findAll();
   }
 
   @Get(':id')
   @ApiOkResponse({ description: 'Successful operation.', type: UserDto })
   @ApiNotFoundResponse({ description: 'User not found.' })
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id', ParseUUIDPipe) id: string) {
     const user = await this.usersService.findOne(id);
     if (!user) {
       throw new NotFoundException('User not found.');
@@ -67,7 +68,10 @@ export class UsersController {
   @ApiOkResponse({ description: 'The user has been updated.', type: UserDto })
   @ApiBadRequestResponse({ description: 'Bad request.' })
   @ApiNotFoundResponse({ description: 'User not found.' })
-  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  async update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() updateUserDto: UpdateUserDto
+  ) {
     const user = await this.usersService.update(id, updateUserDto);
     if (!user) {
       throw new NotFoundException('User not found.');
@@ -79,7 +83,7 @@ export class UsersController {
   @HttpCode(204)
   @ApiNoContentResponse({ description: 'The user has been deleted' })
   @ApiNotFoundResponse({ description: 'User not found.' })
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id', ParseUUIDPipe) id: string) {
     const remove = await this.usersService.remove(id);
     if (!remove) {
       throw new NotFoundException('User not found.');

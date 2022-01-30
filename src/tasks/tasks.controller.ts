@@ -8,6 +8,7 @@ import {
   Delete,
   NotFoundException,
   HttpCode,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -36,8 +37,8 @@ export class TasksController {
     type: UpdateTaskDto,
   })
   @ApiBadRequestResponse({ description: 'Bad request.' })
-  create(
-    @Param('boardId') boardId: string,
+  async create(
+    @Param('boardId', ParseUUIDPipe) boardId: string,
     @Body() createTaskDto: CreateTaskDto
   ) {
     return this.tasksService.create({ ...createTaskDto, boardId });
@@ -48,7 +49,7 @@ export class TasksController {
     description: 'Successful operation.',
     type: [UpdateTaskDto],
   })
-  findAll(@Param('boardId') boardId: string) {
+  async findAll(@Param('boardId', ParseUUIDPipe) boardId: string) {
     return this.tasksService.findAll(boardId);
   }
 
@@ -57,7 +58,10 @@ export class TasksController {
     description: 'Successful operation.',
     type: [UpdateTaskDto],
   })
-  async findOne(@Param('boardId') boardId: string, @Param('id') id: string) {
+  async findOne(
+    @Param('boardId', ParseUUIDPipe) boardId: string,
+    @Param('id', ParseUUIDPipe) id: string
+  ) {
     const task = await this.tasksService.findOne(boardId, id);
     if (!task) {
       throw new NotFoundException('Task not found.');
@@ -73,8 +77,8 @@ export class TasksController {
   @ApiBadRequestResponse({ description: 'Bad request.' })
   @ApiNotFoundResponse({ description: 'Task not found.' })
   async update(
-    @Param('boardId') boardId: string,
-    @Param('id') id: string,
+    @Param('boardId', ParseUUIDPipe) boardId: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateTaskDto: UpdateTaskDto
   ) {
     const task = await this.tasksService.update(id, updateTaskDto);
@@ -88,7 +92,10 @@ export class TasksController {
   @HttpCode(204)
   @ApiNoContentResponse({ description: 'The task has been deleted' })
   @ApiNotFoundResponse({ description: 'Task not found.' })
-  async remove(@Param('boardId') boardId: string, @Param('id') id: string) {
+  async remove(
+    @Param('boardId', ParseUUIDPipe) boardId: string,
+    @Param('id', ParseUUIDPipe) id: string
+  ) {
     const remove = await this.tasksService.remove(id);
     if (!remove) {
       throw new NotFoundException('Task not found.');
