@@ -1,8 +1,4 @@
-import {
-  ConflictException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { Repository } from 'typeorm';
@@ -10,6 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { EntityNotFoundException } from '../exceptions/not-found.exception';
 
 @Injectable()
 export class UsersService {
@@ -39,7 +36,7 @@ export class UsersService {
 
   async findOne(id: string): Promise<User | undefined> {
     const user = await this.usersRepository.findOne(id);
-    if (!user) throw new NotFoundException('User not found.');
+    if (!user) throw new EntityNotFoundException('User', id);
     return user;
   }
 
@@ -55,7 +52,7 @@ export class UsersService {
     updateUserDto: UpdateUserDto
   ): Promise<User | undefined> {
     const isExist = !!(await this.findOne(id));
-    if (!isExist) throw new NotFoundException('User not found.');
+    if (!isExist) throw new EntityNotFoundException('User', id);
     const userByLogin = await this.findOneByLogin(updateUserDto.login);
     if (userByLogin && userByLogin.id !== id)
       throw new ConflictException('Login already exists.');
@@ -72,7 +69,7 @@ export class UsersService {
 
   async remove(id: string): Promise<void> {
     const isExist = !!(await this.findOne(id));
-    if (!isExist) throw new NotFoundException('User not found.');
+    if (!isExist) throw new EntityNotFoundException('User', id);
     await this.usersRepository.delete(id);
   }
 
