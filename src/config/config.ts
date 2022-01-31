@@ -1,4 +1,12 @@
-const LOG_LEVEL_ARRAY = ['error', 'warn', 'log', 'debug', 'verbose'];
+const LOG_LEVEL_ARRAY = [
+  'error',
+  'warn',
+  'info',
+  'http',
+  'verbose',
+  'debug',
+  'silly',
+];
 
 export default () => ({
   port: parseInt(process.env.PORT, 10) || 4000,
@@ -6,7 +14,7 @@ export default () => ({
   NODE_ENV: process.env.NODE_ENV,
   JWT_SECRET_KEY: process.env.JWT_SECRET_KEY || 'SECRET_KEY',
   AUTH_MODE: process.env.AUTH_MODE === 'true',
-  LOG_LEVEL: LOG_LEVEL_ARRAY[Number(process.env.LOG_LEVEL)] || 0,
+  LOG_LEVEL: LOG_LEVEL_ARRAY[Number(process.env.LOG_LEVEL) || 0],
   POSTGRES_HOST: process.env.POSTGRES_HOST || 'localhost',
   POSTGRES_PORT: process.env.POSTGRES_PORT || 5432,
   POSTGRES_USER: process.env.POSTGRES_USER || 'user',

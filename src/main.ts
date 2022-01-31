@@ -1,26 +1,30 @@
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { contentParser } from 'fastify-multer';
+import { WinstonModule } from 'nest-winston';
 import { AppModule } from './app.module';
+import { winstonOptions } from './config/winston';
 
 async function bootstrap() {
   const isFastify = process.env.USE_FASTIFY === 'true';
   const NestjsPlatform = isFastify ? 'Fastify' : 'Express';
 
   const fastifyAdapter = new FastifyAdapter();
+  const NestAppOpts = { logger: WinstonModule.createLogger(winstonOptions) };
 
   const app = isFastify
     ? await NestFactory.create<NestFastifyApplication>(
         AppModule,
-        fastifyAdapter
+        fastifyAdapter,
+        NestAppOpts
       )
-    : await NestFactory.create(AppModule);
+    : await NestFactory.create(AppModule, NestAppOpts);
 
   if (isFastify) {
     fastifyAdapter.register(contentParser);
