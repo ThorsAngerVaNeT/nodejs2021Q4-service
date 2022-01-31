@@ -1,0 +1,77 @@
+config:
+  target: 'http://localhost:4000'
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      name: Warm up
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 50
+      name: Ramp up load
+    # - duration: 600
+    #   arrivalRate: 50
+    #   name: Sustained load
+before:
+  flow:
+    - log: 'Getting token'
+    - post:
+        url: '/login'
+        json:
+          login: 'admin'
+          password: 'admin'
+        capture:
+          json: '$.token'
+          as: token
+        expect:
+          - statusCode: 200
+    - log: 'Got token {{ token }}'
+scenarios: 
+  - flow:
+    - log: 'Get All Users'
+    - get:
+        url: '/users'
+        headers:
+          Authorization: 'Bearer {{ token }}'
+      expect:
+        - statusCode: 200
+    - log: 'Create a new User'
+    - post:
+        url: '/users'
+        headers:
+          Authorization: 'Bearer {{ token }}'
+        json:
+          name: 'TEST_USER'
+          login: 'test_user{{$randomNumber(1,10000)}}{{$randomNumber(1,10000)}}'
+          password: 'T35t_P@55w0rd'
+        capture:
+          json: '$'
+          as: user
+        expect:
+          - statusCode: 201
+    - log: 'Get User by id {{ user.id }}'
+    - get:
+        url: '/users/{{ user.id }}'
+        headers:
+          Authorization: 'Bearer {{ token }}'
+        expect:
+          - statusCode: 200
+    - log: 'Update User by id {{ user.id }}'
+    - put:
+        url: '/users/{{ user.id }}'
+        headers:
+          Authorization: 'Bearer {{ token }}'
+        json:
+          id: '{{ user.id }}'
+          name: 'Autotest updated TEST_USER'
+          login: '{{ user.login }}'
+          password: 'T35t_P@55w0rd'
+        expect:
+          - statusCode: 200
+    - log: 'Delete user with id {{ user.id }}'
+    - delete:
+        url: '/users/{{ user.id }}'
+        headers:
+          Authorization: 'Bearer {{ token }}'
+        expect:
+          - statusCode: 204
+    - log: 'User with id {{ user.id }} was deleted'

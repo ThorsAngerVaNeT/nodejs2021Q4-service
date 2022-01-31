@@ -18,7 +18,9 @@
     "typeorm:cli": "ts-node ./node_modules/typeorm/cli -f ./src/config/ormconfig.ts",
     "mig:gen": "ts-node ./node_modules/typeorm/cli -f ./src/config/ormconfig.ts \"migration:generate\" \"-n\"",
     "mig:up": "ts-node ./node_modules/typeorm/cli -f ./src/config/ormconfig.ts \"migration:run\"",
-    "mig:down": "ts-node ./node_modules/typeorm/cli -f ./src/config/ormconfig.ts \"migration:revert\""
+    "mig:down": "ts-node ./node_modules/typeorm/cli -f ./src/config/ormconfig.ts \"migration:revert\"",
+    "art:dino": "artillery dino",
+    "art:run": "artillery run --output artillery-users-test.json artillery-users-test.yml && artillery report artillery-users-test.json"
   },
   "keywords": [
     "rs",
@@ -91,6 +93,7 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "artillery": "^2.0.0-11",
     "chai": "4.3.4",
     "debug": "4.3.2",
     "dirty-chai": "2.0.1",
