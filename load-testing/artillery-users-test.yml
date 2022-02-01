@@ -1,16 +1,21 @@
 config:
   target: 'http://localhost:4000'
+  http:
+    # Responses have to be sent within 10 seconds, or an `ETIMEDOUT` error gets raised.
+    timeout: 10
   phases:
-    - duration: 60
+    - duration: 30
       arrivalRate: 5
       name: Warm up
-    - duration: 120
+    - pause: 10
+    - duration: 60
       arrivalRate: 5
-      rampTo: 50
+      rampTo: 25
       name: Ramp up load
-    # - duration: 600
-    #   arrivalRate: 50
-    #   name: Sustained load
+    - pause: 10
+    - duration: 90
+      arrivalRate: 30
+      name: Sustained load
 before:
   flow:
     - log: 'Getting token'

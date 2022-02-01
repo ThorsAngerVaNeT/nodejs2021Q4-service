@@ -17,7 +17,7 @@ import { ColumnsModule } from './columns/columns.module';
 import { FileModule } from './file/file.module';
 import { TasksModule } from './tasks/tasks.module';
 import { UsersModule } from './users/users.module';
-import { HttpExceptionFilter } from './http-exception';
+import { HttpExceptionFilter } from './exceptions/http-exception';
 
 @Module({
   imports: [

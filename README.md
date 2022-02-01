@@ -116,3 +116,30 @@ npm run lint
 Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+
+
+# Express
+|                |                                  |                                                                      |
+|----------------|----------------------------------|----------------------------------------------------------------------|
+| Requests       | [total, rate]                    | 20400, 125/sec                                                       |
+| Session Length | [min, mean, 50, 90, 95, 99, max] | 3ms, 6429ms, 122.7ms, 5168ms, 5944.6ms                               |
+| Response Time  | [min, mean, 50, 90, 95, 99, max] | 266.4ms, 12175.8ms, 4492.8ms, 11734.2ms, 11971.2ms                   |
+| Success        | [ratio]                          | 100.00%                                                              |
+| Status Codes   | [code:count]                     | 200:12240, 201:4080, 204:4080                                        |
+
+[Express HTML report](load-testing/artillery-users-test_express.json.html)
+
+[Express CLI Text report](load-testing/Express.txt)
+
+# Fastify
+|                |                                  |                                                                      |
+|----------------|----------------------------------|----------------------------------------------------------------------|
+| Requests       | [total, rate]                    | 20224, 125/sec                                                       |
+| Session Length | [min, mean, 50, 90, 95, 99, max] | 3ms, 5482ms, 82.3ms, 4403.8ms, 5168ms                                |
+| Response Time  | [min, mean, 50, 90, 95, 99, max] | 273.5ms, 10770.1ms, 3605.5ms, 10201.2ms, 10617.5ms                   |
+| Success        | [ratio]                          | 100.00%                                                              |
+| Status Codes   | [code:count]                     | 200:12130, 201:4037, 204:4035                                        |
+
+[Fastify HTML report](load-testing/artillery-users-test_fastify.json.html)
+
+[Fastify CLI Text report](load-testing/Fastify.txt)
