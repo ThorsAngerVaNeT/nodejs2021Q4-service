@@ -23,7 +23,7 @@ async function bootstrap() {
     : await NestFactory.create(AppModule);
 
   if (isFastify) {
-    fastifyAdapter.register(contentParser);
+    await fastifyAdapter.register(contentParser);
   }
 
   app.useGlobalPipes(new ValidationPipe());

@@ -23,6 +23,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import FileUpload from '../decorators/file-upload.decorator';
 
 @ApiTags('File')
 @ApiBearerAuth('token')
@@ -31,16 +32,7 @@ export class FileController {
   constructor(private readonly fileService: FileService) {}
 
   @Post()
-  @UseInterceptors(
-    FileInterceptor('file', {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: (req, file, cb) => {
-          cb(null, file.originalname);
-        },
-      }),
-    })
-  )
+  @FileUpload()
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     description: 'File to upload',
@@ -48,7 +40,7 @@ export class FileController {
   })
   @ApiOkResponse({ description: 'File :fileName was uploaded' })
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
-    // console.log(file);
+    console.log(file);
     // return file;
     // createWriteStream(join(__dirname, '../src/files', file));
     return `File ${file.originalname} was uploaded`;
