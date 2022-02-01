@@ -1,8 +1,8 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsUUID, IsOptional, IsNotEmpty } from 'class-validator';
-import { UpdateColumnDto } from 'src/columns/dto/update-column.dto';
-import { ColumnEntity } from 'src/columns/entities/column.entity';
+import { UpdateColumnDto } from '../../columns/dto/update-column.dto';
+import { ColumnEntity } from '../../columns/entities/column.entity';
 import { CreateBoardDto } from './create-board.dto';
 
 export class UpdateBoardDto extends PartialType(CreateBoardDto) {
