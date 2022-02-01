@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -46,6 +46,7 @@ import { HttpExceptionFilter } from './http-exception';
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,
     },
+    Logger,
   ],
 })
 export class AppModule {

@@ -27,6 +27,8 @@ export const winstonOptions: WinstonModuleOptions = {
       ),
       filename: 'logs/error.log',
       level: 'error',
+      handleExceptions: true,
+      handleRejections: true,
     }),
   ],
 };
