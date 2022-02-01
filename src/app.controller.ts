@@ -5,6 +5,7 @@ import {
   Post,
   UseGuards,
   Body,
+  HttpCode,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import {
@@ -35,6 +36,7 @@ export class AppController {
 
   @Public()
   @UseGuards(AuthGuard('local'))
+  @HttpCode(200)
   @Post('login')
   @ApiOperation({
     summary: 'Login',
