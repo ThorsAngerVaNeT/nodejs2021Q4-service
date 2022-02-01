@@ -17,9 +17,9 @@ export class BoardsService {
   ) {}
 
   async create(createBoardDto: CreateBoardDto): Promise<Board> {
-    const board = createBoardDto;
-    board.columns = await this.columnsRepository.save(createBoardDto.columns);
-    return this.boardsRepository.save(createBoardDto);
+    const board = await this.boardsRepository.save(createBoardDto);
+    // board.columns = await this.columnsRepository.save(createBoardDto.columns);
+    return board;
   }
 
   findAll(): Promise<Board[]> {

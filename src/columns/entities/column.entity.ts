@@ -25,4 +25,7 @@ export class ColumnEntity {
     onUpdate: 'CASCADE',
   })
   board?: Board;
+
+  @Column('uuid', { nullable: true })
+  boardId: string;
 }
