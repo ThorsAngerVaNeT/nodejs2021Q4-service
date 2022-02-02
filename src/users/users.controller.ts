@@ -10,7 +10,6 @@ import {
   ParseUUIDPipe,
   ClassSerializerInterceptor,
   UseInterceptors,
-  ValidationPipe,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,

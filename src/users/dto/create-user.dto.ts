@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Exclude } from 'class-transformer';
 import { IsNotEmpty, IsUUID, IsOptional } from 'class-validator';
 
 export class CreateUserDto {

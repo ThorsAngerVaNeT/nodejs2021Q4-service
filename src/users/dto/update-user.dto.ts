@@ -1,6 +1,5 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
-import { Exclude } from 'class-transformer';
 import { IsUUID, IsNotEmpty } from 'class-validator';
 import { CreateUserDto } from './create-user.dto';
 
