@@ -47,10 +47,9 @@ export class UsersController {
   })
   @ApiBadRequestResponse({ description: 'Bad request.' })
   @ApiConflictResponse({ description: 'Login already exists.' })
-  async create(
-    @Body(new ValidationPipe({ transform: true })) createUserDto: CreateUserDto
-  ) {
-    return await this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    const user = await this.usersService.create(createUserDto);
+    return plainToClass(User, user);
   }
 
   @Get()
@@ -85,7 +84,7 @@ export class UsersController {
   @ApiNotFoundResponse({ description: 'User not found.' })
   async update(
     @Param('id', ParseUUIDPipe) id: string,
-    @Body(new ValidationPipe({ transform: true })) updateUserDto: UpdateUserDto
+    @Body() updateUserDto: UpdateUserDto
   ) {
     const user = await this.usersService.update(id, updateUserDto);
     return plainToClass(User, user);

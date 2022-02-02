@@ -1,8 +1,7 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsUUID, IsOptional, IsNotEmpty } from 'class-validator';
+import { IsUUID, IsOptional, IsNotEmpty, IsArray } from 'class-validator';
 import { UpdateColumnDto } from '../../columns/dto/update-column.dto';
-import { ColumnEntity } from '../../columns/entities/column.entity';
 import { CreateBoardDto } from './create-board.dto';
 
 export class UpdateBoardDto extends PartialType(CreateBoardDto) {
@@ -19,6 +18,7 @@ export class UpdateBoardDto extends PartialType(CreateBoardDto) {
   })
   title: string;
 
+  @IsArray()
   @ApiProperty({
     type: [UpdateColumnDto],
     example: [
@@ -34,5 +34,5 @@ export class UpdateBoardDto extends PartialType(CreateBoardDto) {
       },
     ],
   })
-  columns: ColumnEntity[];
+  columns: UpdateColumnDto[];
 }

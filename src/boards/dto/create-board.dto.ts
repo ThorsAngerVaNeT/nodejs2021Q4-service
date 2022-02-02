@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsUUID, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsUUID, IsOptional, IsArray } from 'class-validator';
 import { CreateColumnDto } from '../../columns/dto/create-column.dto';
-import { ColumnEntity } from '../../columns/entities/column.entity';
 
 export class CreateBoardDto {
   @IsUUID(4)
@@ -14,6 +13,7 @@ export class CreateBoardDto {
   })
   title: string;
 
+  @IsArray()
   @ApiProperty({
     type: [CreateColumnDto],
     example: [
@@ -21,5 +21,5 @@ export class CreateBoardDto {
       { title: 'Sprint', order: 2 },
     ],
   })
-  columns: ColumnEntity[];
+  columns: CreateColumnDto[];
 }

@@ -16,7 +16,7 @@ export class ColumnsService {
     private boardsRepository: Repository<Board>
   ) {}
 
-  async create(createColumnDto: CreateColumnDto) {
+  async create(createColumnDto: CreateColumnDto): Promise<ColumnEntity> {
     const isExist = !!(await this.boardsRepository.findOne(
       createColumnDto.boardId
     ));
@@ -25,11 +25,11 @@ export class ColumnsService {
     return this.columnsRepository.save(createColumnDto);
   }
 
-  async findAll(boardId: string) {
+  async findAll(boardId: string): Promise<ColumnEntity[]> {
     return this.columnsRepository.find({ where: { boardId } });
   }
 
-  async findOne(boardId: string, id: string) {
+  async findOne(boardId: string, id: string): Promise<ColumnEntity> {
     const column = await this.columnsRepository.findOne({
       where: { boardId, id },
     });
@@ -37,7 +37,10 @@ export class ColumnsService {
     return column;
   }
 
-  async update(id: string, updateColumnDto: UpdateColumnDto) {
+  async update(
+    id: string,
+    updateColumnDto: UpdateColumnDto
+  ): Promise<ColumnEntity> {
     const isExist = !!(await this.findOne(updateColumnDto.boardId, id));
     if (!isExist) throw new EntityNotFoundException('Column', id);
     return this.columnsRepository.save({ ...updateColumnDto, id });

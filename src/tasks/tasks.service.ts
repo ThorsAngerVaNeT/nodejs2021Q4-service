@@ -16,7 +16,7 @@ export class TasksService {
     private boardsRepository: Repository<Board>
   ) {}
 
-  async create(createTaskDto: CreateTaskDto) {
+  async create(createTaskDto: CreateTaskDto): Promise<Task> {
     const board = !!(await this.boardsRepository.findOne(
       createTaskDto.boardId
     ));
@@ -25,17 +25,17 @@ export class TasksService {
     return this.tasksRepository.save(createTaskDto);
   }
 
-  async findAll(boardId: string) {
+  async findAll(boardId: string): Promise<Task[]> {
     return this.tasksRepository.find({ where: { boardId } });
   }
 
-  async findOne(boardId: string, id: string) {
+  async findOne(boardId: string, id: string): Promise<Task> {
     const task = await this.tasksRepository.findOne({ where: { boardId, id } });
     if (!task) throw new EntityNotFoundException('Task', id);
     return task;
   }
 
-  async update(id: string, updateTaskDto: UpdateTaskDto) {
+  async update(id: string, updateTaskDto: UpdateTaskDto): Promise<Task> {
     const isExist = !!(await this.findOne(updateTaskDto.boardId, id));
     if (!isExist) throw new EntityNotFoundException('Task', id);
     return this.tasksRepository.save({ ...updateTaskDto, id });

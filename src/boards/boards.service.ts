@@ -21,7 +21,6 @@ export class BoardsService {
       createBoardDto.columns
     );
     const board = await this.boardsRepository.save(createBoardDto);
-    console.log(board);
     return this.findOne(board.id);
   }
 

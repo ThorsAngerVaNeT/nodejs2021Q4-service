@@ -28,6 +28,5 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @ApiProperty({
     example: 'T35t_P@55w0rd',
   })
-  @Exclude({ toPlainOnly: true })
   password: string;
 }

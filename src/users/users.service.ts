@@ -18,7 +18,7 @@ export class UsersService {
     this.config = config;
   }
 
-  async create(createUserDto: CreateUserDto): Promise<User | boolean> {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     const isExist = !!(await this.findOneByLogin(createUserDto.login));
     if (isExist) throw new ConflictException('Login already exists.');
     createUserDto.password = await bcrypt.hash(
@@ -34,23 +34,20 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  async findOne(id: string): Promise<User | undefined> {
+  async findOne(id: string): Promise<User> {
     const user = await this.usersRepository.findOne(id);
     if (!user) throw new EntityNotFoundException('User', id);
     return user;
   }
 
-  async findOneByLogin(login: string): Promise<User | undefined> {
+  async findOneByLogin(login: string): Promise<User> {
     return await this.usersRepository.findOne({
       where: { login },
       select: ['id', 'name', 'login', 'password'],
     });
   }
 
-  async update(
-    id: string,
-    updateUserDto: UpdateUserDto
-  ): Promise<User | undefined> {
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     const isExist = !!(await this.findOne(id));
     if (!isExist) throw new EntityNotFoundException('User', id);
     const userByLogin = await this.findOneByLogin(updateUserDto.login);
@@ -64,6 +61,7 @@ export class UsersService {
       ...updateUserDto,
       id,
     });
+    // delete user.password;
     return user;
   }
 
@@ -72,19 +70,4 @@ export class UsersService {
     if (!isExist) throw new EntityNotFoundException('User', id);
     await this.usersRepository.delete(id);
   }
-
-  /* async auth(
-    login: string,
-    password: string,
-  ): Promise<User | undefined | null> {
-    const user = await this.usersRepository.findOne({ login });
-    if (!user) {
-      return null;
-    }
-    const isPwdCorrect = await bcrypt.compare(password, user.password);
-
-    if (isPwdCorrect) return user;
-
-    return;
-  } */
 }
