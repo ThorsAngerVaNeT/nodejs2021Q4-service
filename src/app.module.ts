@@ -1,6 +1,6 @@
 import { Logger, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { WinstonModule } from 'nest-winston';
@@ -17,7 +17,6 @@ import { FileModule } from './file/file.module';
 import { TasksModule } from './tasks/tasks.module';
 import { UsersModule } from './users/users.module';
 import { LoggingInterceptor } from './interceptors/logging.interceptor';
-import { HttpExceptionFilter } from './exceptions/http-exception';
 
 @Module({
   imports: [
@@ -38,10 +37,6 @@ import { HttpExceptionFilter } from './exceptions/http-exception';
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
     },
-    /* {
-      provide: APP_FILTER,
-      useClass: HttpExceptionFilter,
-    }, */
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,

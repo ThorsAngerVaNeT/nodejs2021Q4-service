@@ -48,7 +48,8 @@ export class AppController {
   @ApiForbiddenResponse({ description: 'Incorrect login or password.' })
   async login(
     @Request() req: { user: User },
-    @Body() LoginUserDto: LoginUserDto
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    @Body() _LoginUserDto: LoginUserDto
   ) {
     return this.authService.login(req.user);
   }

@@ -7,9 +7,7 @@ import {
   NotFoundException,
   StreamableFile,
   Body,
-  HttpException,
 } from '@nestjs/common';
-import { FileService } from './file.service';
 import { FileUploadDto } from './dto/file-upload.dto';
 // import { CreateFileDto } from './dto/create-file.dto';
 // import { UpdateFileDto } from './dto/update-file.dto';
@@ -30,8 +28,6 @@ import { Public } from '../auth/public.decorator';
 @ApiBearerAuth('token')
 @Controller('file')
 export class FileController {
-  constructor(private readonly fileService: FileService) {}
-
   @Post()
   @FileUpload()
   @ApiOperation({
