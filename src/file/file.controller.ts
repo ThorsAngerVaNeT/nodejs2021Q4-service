@@ -4,16 +4,14 @@ import {
   Post,
   Param,
   UploadedFile,
-  UseInterceptors,
   NotFoundException,
   StreamableFile,
+  Body,
 } from '@nestjs/common';
 import { FileService } from './file.service';
 import { FileUploadDto } from './dto/file-upload.dto';
 // import { CreateFileDto } from './dto/create-file.dto';
 // import { UpdateFileDto } from './dto/update-file.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
 import { join } from 'path';
 import fs from 'fs';
 import {
@@ -39,10 +37,11 @@ export class FileController {
     type: FileUploadDto,
   })
   @ApiOkResponse({ description: 'File :fileName was uploaded' })
-  async uploadFile(@UploadedFile() file: Express.Multer.File) {
-    console.log(file);
-    // return file;
-    // createWriteStream(join(__dirname, '../src/files', file));
+  async uploadFile(
+    @Body() FileUploadDto: FileUploadDto,
+    @UploadedFile() file: Express.Multer.File
+  ) {
+    // console.log(file);
     return `File ${file.originalname} was uploaded`;
   }
 
