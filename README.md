@@ -15,7 +15,7 @@ git clone https://github.com/ThorsAngerVaNeT/nodejs2021Q4-service
 ## Switch branch
 
 ```
-git checkout -q task9-auth-jwt
+git checkout -q task10-nestjs
 ```
 
 ## Running application in Docker
@@ -117,8 +117,39 @@ Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 
+## Routes Description
+  * `Login`
+    * `POST /login` - login user, return JWT
+  * `User` (`/users` route)
+    * `GET /users` - get all users
+    * `GET /users/:userId` - get the user by id (ex. "/users/fec629cb-b440-419a-b479-b374127f477a")
+    * `POST /users` - create user
+    * `PUT /users/:userId` - update user
+    * `DELETE /users/:userId` - delete user
+  * `Board` (`/boards` route)
+    * `GET /boards` - get all boards
+    * `GET /boards/:boardId` - get the board by id
+    * `POST /boards` - create board
+    * `PUT /boards/:boardId` - update board
+    * `DELETE /boards/:boardId` - delete board
+  * `Task` (`/boards/:boardId/tasks` route)
+    * `GET /boards/:boardId/tasks` - get all tasks
+    * `GET /boards/:boardId/tasks/:taskId` - get the task by id
+    * `POST /boards/:boardId/tasks` - create task
+    * `PUT /boards/:boardId/tasks/:taskId` - update task
+    * `DELETE /boards/:boardId/tasks/:taskId` - delete task
+  * `Column` (`/boards/:boardId/columns` route)
+    * `GET /boards/:boardId/columns` - get all columns
+    * `GET /boards/:boardId/columns/:columnId` - get the column by id
+    * `POST /boards/:boardId/columns` - create column
+    * `PUT /boards/:boardId/columns/:columnId` - update column
+    * `DELETE /boards/:boardId/columns/:columnId` - delete column
+  * `File` (`/file` route)
+    * `POST /file` - send field `file` with file attached to upload to server
+    * `GET /file/:fileName` - download file by fileName
 
-# Express
+## Load Testing
+### Express
 |                |                                  |                                                                      |
 |----------------|----------------------------------|----------------------------------------------------------------------|
 | Requests       | [total, rate]                    | 20400, 125/sec                                                       |
@@ -131,7 +162,7 @@ For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 
 [Express CLI Text report](load-testing/Express.txt)
 
-# Fastify
+### Fastify
 |                |                                  |                                                                      |
 |----------------|----------------------------------|----------------------------------------------------------------------|
 | Requests       | [total, rate]                    | 20224, 125/sec                                                       |
