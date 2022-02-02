@@ -30,6 +30,7 @@ export class AppController {
   @Public()
   @ApiTags('')
   @Get()
+  @ApiOkResponse({ description: `Show 'Hello World'!` })
   getHello(): string {
     return this.appService.getHello();
   }

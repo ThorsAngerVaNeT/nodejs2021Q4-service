@@ -50,6 +50,7 @@ async function bootstrap() {
       },
       'token'
     )
+    .addServer(`http://localhost:${configService.get('port')}`)
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, document);

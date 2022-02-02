@@ -22,7 +22,6 @@ export class ColumnsService {
     ));
     if (!isExist)
       throw new EntityNotFoundException('Column', createColumnDto.boardId);
-    console.log(createColumnDto);
     return this.columnsRepository.save(createColumnDto);
   }
 
