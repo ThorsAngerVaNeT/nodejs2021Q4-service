@@ -26,19 +26,27 @@ export class ColumnsService {
     return this.columnsRepository.save(createColumnDto);
   }
 
-  findAll() {
-    return `This action returns all columns`;
+  async findAll(boardId: string) {
+    return this.columnsRepository.find({ where: { boardId } });
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} column`;
+  async findOne(boardId: string, id: string) {
+    const column = await this.columnsRepository.findOne({
+      where: { boardId, id },
+    });
+    if (!column) throw new EntityNotFoundException('Column', id);
+    return column;
   }
 
-  update(id: string, updateColumnDto: UpdateColumnDto) {
-    return `This action updates a #${id} column`;
+  async update(id: string, updateColumnDto: UpdateColumnDto) {
+    const isExist = !!(await this.findOne(updateColumnDto.boardId, id));
+    if (!isExist) throw new EntityNotFoundException('Column', id);
+    return this.columnsRepository.save({ ...updateColumnDto, id });
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} column`;
+  async remove(id: string): Promise<void> {
+    const isExist = !!(await this.columnsRepository.findOne(id));
+    if (!isExist) throw new EntityNotFoundException('Column', id);
+    await this.columnsRepository.delete(id);
   }
 }

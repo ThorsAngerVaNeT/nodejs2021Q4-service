@@ -59,7 +59,7 @@ export class ColumnsController {
     type: [UpdateColumnDto],
   })
   async findAll(@Param('boardId', ParseUUIDPipe) boardId: string) {
-    return this.columnsService.findAll();
+    return this.columnsService.findAll(boardId);
   }
 
   @Get(':id')
@@ -76,7 +76,7 @@ export class ColumnsController {
     @Param('boardId', ParseUUIDPipe) boardId: string,
     @Param('id', ParseUUIDPipe) id: string
   ) {
-    return this.columnsService.findOne(id);
+    return this.columnsService.findOne(boardId, id);
   }
 
   @Put(':id')

@@ -17,9 +17,12 @@ export class BoardsService {
   ) {}
 
   async create(createBoardDto: CreateBoardDto): Promise<Board> {
+    createBoardDto.columns = await this.columnsRepository.save(
+      createBoardDto.columns
+    );
     const board = await this.boardsRepository.save(createBoardDto);
-    // board.columns = await this.columnsRepository.save(createBoardDto.columns);
-    return board;
+    console.log(board);
+    return this.findOne(board.id);
   }
 
   findAll(): Promise<Board[]> {
