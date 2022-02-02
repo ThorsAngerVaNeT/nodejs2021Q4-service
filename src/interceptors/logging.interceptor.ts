@@ -11,6 +11,12 @@ import { Request, Response } from 'express';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
+/**
+ * Interceptor that logs input/output requests
+ * Original: https://github.com/algoan/nestjs-components/tree/master/packages/logging-interceptor
+ * Modified: by https://github.com/ThorsAngerVaNeT
+ * Date: 2022-02-02
+ */
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
   private readonly ctxPrefix: string = LoggingInterceptor.name;
