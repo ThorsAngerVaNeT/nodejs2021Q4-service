@@ -58,7 +58,7 @@ export class FileController {
     summary: 'Download file',
     description: 'Download file by fileName from server',
   })
-  @ApiOkResponse({ description: `File con` })
+  @ApiOkResponse({ description: `File content` })
   getFile(@Param('fileName') fileName: string) {
     try {
       const path = join(__dirname, '../../uploads', fileName);
