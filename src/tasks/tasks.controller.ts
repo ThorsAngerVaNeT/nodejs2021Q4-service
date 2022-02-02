@@ -95,7 +95,7 @@ export class TasksController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateTaskDto: UpdateTaskDto
   ) {
-    return await this.tasksService.update(id, updateTaskDto);
+    return await this.tasksService.update(boardId, id, updateTaskDto);
   }
 
   @Delete(':id')
@@ -110,6 +110,6 @@ export class TasksController {
     @Param('boardId', ParseUUIDPipe) boardId: string,
     @Param('id', ParseUUIDPipe) id: string
   ) {
-    return await this.tasksService.remove(id);
+    return await this.tasksService.remove(boardId, id);
   }
 }

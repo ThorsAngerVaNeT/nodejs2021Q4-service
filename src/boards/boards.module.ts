@@ -6,10 +6,7 @@ import { Board } from './entities/board.entity';
 import { ColumnEntity } from '../columns/entities/column.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Board]),
-    TypeOrmModule.forFeature([ColumnEntity]),
-  ],
+  imports: [TypeOrmModule.forFeature([Board, ColumnEntity])],
   controllers: [BoardsController],
   providers: [BoardsService],
   exports: [BoardsService],
