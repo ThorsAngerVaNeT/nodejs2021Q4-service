@@ -12,7 +12,7 @@ import { FileUploadDto } from './dto/file-upload.dto';
 // import { CreateFileDto } from './dto/create-file.dto';
 // import { UpdateFileDto } from './dto/update-file.dto';
 import { join } from 'path';
-import * as fs from 'fs';
+import fs from 'fs';
 import {
   ApiBearerAuth,
   ApiBody,
