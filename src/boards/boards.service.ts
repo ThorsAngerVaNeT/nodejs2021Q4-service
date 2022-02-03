@@ -52,7 +52,7 @@ export class BoardsService {
       title: updateBoardDto.title,
       columns,
     });
-    return board;
+    return this.findOne(board.id);
   }
 
   async remove(id: string): Promise<void> {

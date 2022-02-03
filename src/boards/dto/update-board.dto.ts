@@ -1,24 +1,27 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsUUID, IsOptional, IsNotEmpty, IsArray } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsUUID, IsNotEmpty, ValidateNested, IsString } from 'class-validator';
 import { UpdateColumnDto } from '../../columns/dto/update-column.dto';
 import { CreateBoardDto } from './create-board.dto';
 
 export class UpdateBoardDto extends PartialType(CreateBoardDto) {
   @IsUUID(4)
-  @IsOptional()
+  @IsNotEmpty()
   @ApiProperty({
     example: 'b4752913-3cea-420d-bd43-db4141ad2807',
   })
   id: string;
 
   @IsNotEmpty()
+  @IsString()
   @ApiProperty({
     example: 'Autotest board',
   })
   title: string;
 
-  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => UpdateColumnDto)
   @ApiProperty({
     type: [UpdateColumnDto],
     example: [

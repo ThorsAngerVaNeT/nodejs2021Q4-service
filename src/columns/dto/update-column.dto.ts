@@ -1,23 +1,23 @@
-import { PartialType } from '@nestjs/mapped-types';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsUUID, IsOptional, IsNotEmpty } from 'class-validator';
-import { CreateColumnDto } from './create-column.dto';
+import { IsUUID, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class UpdateColumnDto extends PartialType(CreateColumnDto) {
+export class UpdateColumnDto {
   @IsUUID(4)
-  @IsOptional()
+  @IsNotEmpty()
   @ApiProperty({
     example: '02f9c173-bfd9-4079-ac04-f8a0a8bd266f',
   })
   id: string;
 
   @IsNotEmpty()
+  @IsString()
   @ApiProperty({
     example: 'Backlog',
   })
   title: string;
 
   @IsNotEmpty()
+  @IsNumber()
   @ApiProperty({
     example: 1,
   })

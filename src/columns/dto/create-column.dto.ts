@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsUUID, IsOptional, IsNotEmpty } from 'class-validator';
+import {
+  IsUUID,
+  IsOptional,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 
 export class CreateColumnDto {
   @IsUUID(4)
@@ -7,19 +13,21 @@ export class CreateColumnDto {
   id: string;
 
   @IsNotEmpty()
+  @IsString()
   @ApiProperty({
     example: 'Backlog',
   })
   title: string;
 
   @IsNotEmpty()
+  @IsNumber()
   @ApiProperty({
     example: 1,
   })
   order: number;
 
   @IsUUID(4)
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty({
     example: '2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd',
   })

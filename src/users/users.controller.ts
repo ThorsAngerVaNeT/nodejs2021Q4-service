@@ -48,7 +48,7 @@ export class UsersController {
   @ApiConflictResponse({ description: 'Login already exists.' })
   async create(@Body() createUserDto: CreateUserDto) {
     const user = await this.usersService.create(createUserDto);
-    return plainToClass(User, user);
+    return user;
   }
 
   @Get()
