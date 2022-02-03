@@ -117,6 +117,10 @@ Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 
+## Postman Collection
+
+You can import [collection](Trello-API.postman_collection.json) to Postman for easier testing and checking API. Token and entities' ids have been put at collection variables after you logging and creating entities to automate request data filling.
+
 ## Routes Description
   * `Login`
     * `POST /login` - login user, return JWT
