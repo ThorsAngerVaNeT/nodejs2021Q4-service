@@ -45,8 +45,7 @@ export class BoardsService {
   }
 
   async update(id: string, updateBoardDto: UpdateBoardDto): Promise<Board> {
-    const isExist = !!(await this.findOne(id));
-    if (!isExist) throw new EntityNotFoundException('Board', id);
+    await this.findOne(id);
     const columns = await this.columnsRepository.save(updateBoardDto.columns);
     const board = await this.boardsRepository.save({
       id,
@@ -57,8 +56,7 @@ export class BoardsService {
   }
 
   async remove(id: string): Promise<void> {
-    const isExist = !!(await this.findOne(id));
-    if (!isExist) throw new EntityNotFoundException('Board', id);
+    await this.findOne(id);
     await this.boardsRepository.delete(id);
   }
 }

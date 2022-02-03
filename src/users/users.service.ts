@@ -19,8 +19,7 @@ export class UsersService {
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const isExist = !!(await this.findOneByLogin(createUserDto.login));
-    if (isExist) throw new ConflictException('Login already exists.');
+    await this.isLoginExist(createUserDto.login);
     createUserDto.password = await bcrypt.hash(
       createUserDto.password,
       +this.config.get('SALT_ROUNDS')
@@ -47,12 +46,16 @@ export class UsersService {
     });
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
-    const isExist = !!(await this.findOne(id));
-    if (!isExist) throw new EntityNotFoundException('User', id);
-    const userByLogin = await this.findOneByLogin(updateUserDto.login);
-    if (userByLogin && userByLogin.id !== id)
+  async isLoginExist(login: string, id: string = null) {
+    const user = await this.findOneByLogin(login);
+    if (user && user.id !== id)
       throw new ConflictException('Login already exists.');
+    return !!user;
+  }
+
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
+    await this.findOne(id);
+    await this.isLoginExist(updateUserDto.login, id);
     updateUserDto.password = await bcrypt.hash(
       updateUserDto.password,
       +this.config.get('SALT_ROUNDS')
@@ -66,8 +69,7 @@ export class UsersService {
   }
 
   async remove(id: string): Promise<void> {
-    const isExist = !!(await this.findOne(id));
-    if (!isExist) throw new EntityNotFoundException('User', id);
+    await this.findOne(id);
     await this.usersRepository.delete(id);
   }
 }

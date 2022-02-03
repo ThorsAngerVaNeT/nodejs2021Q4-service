@@ -3,12 +3,17 @@ import { TasksService } from './tasks.service';
 import { TasksController } from './tasks.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from './entities/task.entity';
-import { Board } from '../boards/entities/board.entity';
-import { User } from '../users/entities/user.entity';
-import { ColumnEntity } from '../columns/entities/column.entity';
+import { BoardsModule } from '../boards/boards.module';
+import { ColumnsModule } from '../columns/columns.module';
+import { UsersModule } from '../users/users.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Task, Board, User, ColumnEntity])],
+  imports: [
+    TypeOrmModule.forFeature([Task]),
+    BoardsModule,
+    ColumnsModule,
+    UsersModule,
+  ],
   controllers: [TasksController],
   providers: [TasksService],
 })

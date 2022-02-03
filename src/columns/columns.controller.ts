@@ -95,7 +95,7 @@ export class ColumnsController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateColumnDto: UpdateColumnDto
   ) {
-    return this.columnsService.update(id, updateColumnDto);
+    return this.columnsService.update(id, { ...updateColumnDto, boardId });
   }
 
   @Delete(':id')
@@ -110,6 +110,6 @@ export class ColumnsController {
     @Param('boardId', ParseUUIDPipe) boardId: string,
     @Param('id', ParseUUIDPipe) id: string
   ) {
-    return this.columnsService.remove(id);
+    return this.columnsService.remove(boardId, id);
   }
 }
