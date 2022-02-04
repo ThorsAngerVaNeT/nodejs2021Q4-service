@@ -2,7 +2,6 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
@@ -20,12 +19,8 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     await this.isLoginExist(createUserDto.login);
-    createUserDto.password = await bcrypt.hash(
-      createUserDto.password,
-      +this.config.get('SALT_ROUNDS')
-    );
-    const user = await this.usersRepository.save(createUserDto);
-    // delete user.password;
+    const user = this.usersRepository.create(createUserDto);
+    await this.usersRepository.save(user);
     return user;
   }
 
@@ -40,10 +35,7 @@ export class UsersService {
   }
 
   async findOneByLogin(login: string): Promise<User> {
-    return await this.usersRepository.findOne({
-      where: { login },
-      select: ['id', 'name', 'login', 'password'],
-    });
+    return await this.usersRepository.findOne({ where: { login } });
   }
 
   async isLoginExist(login: string, id: string = null) {
@@ -56,15 +48,11 @@ export class UsersService {
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     await this.findOne(id);
     await this.isLoginExist(updateUserDto.login, id);
-    updateUserDto.password = await bcrypt.hash(
-      updateUserDto.password,
-      +this.config.get('SALT_ROUNDS')
-    );
-    const user = await this.usersRepository.save({
+    const user = this.usersRepository.create({
       ...updateUserDto,
       id,
     });
-    // delete user.password;
+    await this.usersRepository.update(id, user);
     return user;
   }
 
