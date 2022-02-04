@@ -9,7 +9,7 @@ import { ColumnEntity } from '../../columns/entities/column.entity';
 import { Board } from '../../boards/entities/board.entity';
 import { User } from '../../users/entities/user.entity';
 
-@Entity()
+@Entity({ orderBy: { order: 'ASC' } })
 export class Task {
   @PrimaryGeneratedColumn('uuid')
   readonly id: string;
