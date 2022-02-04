@@ -18,7 +18,20 @@ export class ColumnsService {
 
   async create(createColumnDto: CreateColumnDto): Promise<ColumnEntity> {
     await this.boardsService.findOne(createColumnDto.boardId);
+    await this.reOrder(createColumnDto.boardId, createColumnDto.order);
     return this.columnsRepository.save(createColumnDto);
+  }
+
+  async reOrder(boardId: string, order: number) {
+    return await this.columnsRepository
+      .createQueryBuilder()
+      .update(ColumnEntity)
+      .set({ order: () => '"order" + 1' })
+      .where('boardId = :boardId AND order >= :order', {
+        boardId: boardId,
+        order: order,
+      })
+      .execute();
   }
 
   async findAll(boardId: string): Promise<ColumnEntity[]> {
@@ -38,6 +51,7 @@ export class ColumnsService {
     updateColumnDto: UpdateColumnDto
   ): Promise<ColumnEntity> {
     await this.findOne(updateColumnDto.boardId, id);
+    await this.reOrder(updateColumnDto.boardId, updateColumnDto.order);
     return this.columnsRepository.save({ ...updateColumnDto, id });
   }
 

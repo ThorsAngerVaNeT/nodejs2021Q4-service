@@ -31,7 +31,28 @@ export class TasksService {
         createTaskDto.boardId,
         createTaskDto.columnId
       );
+    await this.reOrder(
+      createTaskDto.boardId,
+      createTaskDto.columnId,
+      createTaskDto.order
+    );
     return this.tasksRepository.save(createTaskDto);
+  }
+
+  async reOrder(boardId: string, columnId: string, order: number) {
+    return await this.tasksRepository
+      .createQueryBuilder()
+      .update(Task)
+      .set({ order: () => '"order" + 1' })
+      .where(
+        'boardId = :boardId and columnId = :columnId AND order >= :order',
+        {
+          boardId: boardId,
+          columnId: columnId,
+          order: order,
+        }
+      )
+      .execute();
   }
 
   async findAll(boardId: string): Promise<Task[]> {
@@ -58,6 +79,11 @@ export class TasksService {
         updateTaskDto.boardId,
         updateTaskDto.columnId
       );
+    await this.reOrder(
+      updateTaskDto.boardId,
+      updateTaskDto.columnId,
+      updateTaskDto.order
+    );
     return this.tasksRepository.save({ ...updateTaskDto, id });
   }
 
