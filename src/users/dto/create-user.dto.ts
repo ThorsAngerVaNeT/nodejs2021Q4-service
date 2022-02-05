@@ -9,10 +9,6 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
-  @IsUUID(4)
-  @IsOptional()
-  id: string;
-
   @IsOptional()
   @IsString()
   @ApiProperty({

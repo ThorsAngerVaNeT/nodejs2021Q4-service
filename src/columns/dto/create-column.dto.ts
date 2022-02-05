@@ -8,10 +8,6 @@ import {
 } from 'class-validator';
 
 export class CreateColumnDto {
-  @IsUUID(4)
-  @IsOptional()
-  id: string;
-
   @IsNotEmpty()
   @IsString()
   @ApiProperty({

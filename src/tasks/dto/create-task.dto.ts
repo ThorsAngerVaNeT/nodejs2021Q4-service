@@ -1,10 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsUUID, IsOptional, IsInt } from 'class-validator';
 export class CreateTaskDto {
-  @IsUUID(4)
-  @IsOptional()
-  id: string;
-
   @IsNotEmpty()
   @ApiProperty({
     example: 'Autotest task',

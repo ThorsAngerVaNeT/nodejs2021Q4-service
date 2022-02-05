@@ -10,10 +10,6 @@ import {
 import { CreateColumnDto } from '../../columns/dto/create-column.dto';
 
 export class CreateBoardDto {
-  @IsUUID(4)
-  @IsOptional()
-  id: string;
-
   @IsNotEmpty()
   @IsString()
   @ApiProperty({
@@ -21,7 +17,6 @@ export class CreateBoardDto {
   })
   title: string;
 
-  // @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreateColumnDto)
   @ApiProperty({
