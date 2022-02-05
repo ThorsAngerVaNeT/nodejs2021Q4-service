@@ -1,12 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import {
-  IsNotEmpty,
-  IsUUID,
-  IsOptional,
-  ValidateNested,
-  IsString,
-} from 'class-validator';
+import { IsNotEmpty, ValidateNested, IsString } from 'class-validator';
 import { CreateColumnDto } from '../../columns/dto/create-column.dto';
 
 export class CreateBoardDto {
