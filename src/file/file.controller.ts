@@ -12,7 +12,7 @@ import { FileUploadDto } from './dto/file-upload.dto';
 // import { CreateFileDto } from './dto/create-file.dto';
 // import { UpdateFileDto } from './dto/update-file.dto';
 import { join } from 'path';
-import fs from 'fs';
+import { createReadStream } from 'fs';
 import {
   ApiBearerAuth,
   ApiBody,
@@ -23,6 +23,7 @@ import {
 } from '@nestjs/swagger';
 import FileUpload from '../decorators/file-upload.decorator';
 import { Public } from '../auth/public.decorator';
+import { ParseFile } from './file-validation.pipe';
 
 @ApiTags('File')
 @ApiBearerAuth('token')
@@ -39,13 +40,11 @@ export class FileController {
     description: 'File to upload',
     type: FileUploadDto,
   })
-  @ApiOkResponse({ description: 'File :fileName was uploaded' })
-  async uploadFile(
-    @Body() FileUploadDto: FileUploadDto,
-    @UploadedFile() file: Express.Multer.File
-  ) {
-    // console.log(file);
-    return `File ${file.originalname} was uploaded`;
+  @ApiOkResponse({
+    description: 'File was uploaded. Filename to download file is :fileName',
+  })
+  async uploadFile(@UploadedFile(ParseFile) file: Express.Multer.File) {
+    return `File was uploaded. Filename to download file is ${file.filename}`;
   }
 
   @Public()
@@ -58,7 +57,7 @@ export class FileController {
   getFile(@Param('fileName') fileName: string) {
     try {
       const path = join(__dirname, '../../uploads', fileName);
-      const file = fs.createReadStream(path);
+      const file = createReadStream(path);
       return new StreamableFile(file);
     } catch {
       throw new NotFoundException('File is not found!');

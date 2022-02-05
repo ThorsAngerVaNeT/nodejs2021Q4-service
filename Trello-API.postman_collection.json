@@ -3760,12 +3760,7 @@
 							]
 						},
 						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "multipart/form-data"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -3790,7 +3785,7 @@
 					},
 					"response": [
 						{
-							"name": "File :fileName was uploaded",
+							"name": "File was uploaded. Filename to download file is :fileName",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
