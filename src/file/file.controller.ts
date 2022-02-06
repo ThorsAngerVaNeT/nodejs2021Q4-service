@@ -6,11 +6,8 @@ import {
   UploadedFile,
   NotFoundException,
   StreamableFile,
-  Body,
 } from '@nestjs/common';
 import { FileUploadDto } from './dto/file-upload.dto';
-// import { CreateFileDto } from './dto/create-file.dto';
-// import { UpdateFileDto } from './dto/update-file.dto';
 import { join } from 'path';
 import { createReadStream } from 'fs';
 import {
