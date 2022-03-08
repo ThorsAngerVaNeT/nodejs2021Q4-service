@@ -15,7 +15,7 @@ git clone https://github.com/ThorsAngerVaNeT/nodejs2021Q4-service
 ## Switch branch
 
 ```
-git checkout -q task9-auth-jwt
+git checkout -q task10-nestjs
 ```
 
 ## Running application in Docker
@@ -116,3 +116,65 @@ npm run lint
 Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+
+## Postman Collection
+
+You can import [collection](Trello-API.postman_collection.json) to Postman for easier testing and checking API. Token and entities' ids have been put at collection variables after you logging and creating entities to automate request data filling.
+
+## Routes Description
+  * `Login`
+    * `POST /login` - login user, return JWT
+  * `User` (`/users` route)
+    * `GET /users` - get all users
+    * `GET /users/:userId` - get the user by id (ex. "/users/fec629cb-b440-419a-b479-b374127f477a")
+    * `POST /users` - create user
+    * `PUT /users/:userId` - update user
+    * `DELETE /users/:userId` - delete user
+  * `Board` (`/boards` route)
+    * `GET /boards` - get all boards
+    * `GET /boards/:boardId` - get the board by id
+    * `POST /boards` - create board
+    * `PUT /boards/:boardId` - update board
+    * `DELETE /boards/:boardId` - delete board
+  * `Task` (`/boards/:boardId/tasks` route)
+    * `GET /boards/:boardId/tasks` - get all tasks
+    * `GET /boards/:boardId/tasks/:taskId` - get the task by id
+    * `POST /boards/:boardId/tasks` - create task
+    * `PUT /boards/:boardId/tasks/:taskId` - update task
+    * `DELETE /boards/:boardId/tasks/:taskId` - delete task
+  * `Column` (`/boards/:boardId/columns` route)
+    * `GET /boards/:boardId/columns` - get all columns
+    * `GET /boards/:boardId/columns/:columnId` - get the column by id
+    * `POST /boards/:boardId/columns` - create column
+    * `PUT /boards/:boardId/columns/:columnId` - update column
+    * `DELETE /boards/:boardId/columns/:columnId` - delete column
+  * `File` (`/file` route)
+    * `POST /file` - send field `file` with file attached to upload to server
+    * `GET /file/:fileName` - download file by fileName
+
+## Load Testing
+### Express
+|                |                                  |                                                                      |
+|----------------|----------------------------------|----------------------------------------------------------------------|
+| Requests       | [total, rate]                    | 20400, 125/sec                                                       |
+| Session Length | [min, mean, 50, 90, 95, 99, max] | 3ms, 6429ms, 122.7ms, 5168ms, 5944.6ms                               |
+| Response Time  | [min, mean, 50, 90, 95, 99, max] | 266.4ms, 12175.8ms, 4492.8ms, 11734.2ms, 11971.2ms                   |
+| Success        | [ratio]                          | 100.00%                                                              |
+| Status Codes   | [code:count]                     | 200:12240, 201:4080, 204:4080                                        |
+
+[Express HTML report](load-testing/artillery-users-test_express.json.html)
+
+[Express CLI Text report](load-testing/Express.txt)
+
+### Fastify
+|                |                                  |                                                                      |
+|----------------|----------------------------------|----------------------------------------------------------------------|
+| Requests       | [total, rate]                    | 20224, 125/sec                                                       |
+| Session Length | [min, mean, 50, 90, 95, 99, max] | 3ms, 5482ms, 82.3ms, 4403.8ms, 5168ms                                |
+| Response Time  | [min, mean, 50, 90, 95, 99, max] | 273.5ms, 10770.1ms, 3605.5ms, 10201.2ms, 10617.5ms                   |
+| Success        | [ratio]                          | 100.00%                                                              |
+| Status Codes   | [code:count]                     | 200:12130, 201:4037, 204:4035                                        |
+
+[Fastify HTML report](load-testing/artillery-users-test_fastify.json.html)
+
+[Fastify CLI Text report](load-testing/Fastify.txt)

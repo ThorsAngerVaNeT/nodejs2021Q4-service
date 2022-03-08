@@ -1,0 +1,9 @@
+DONE 1) LOGGING
+DONE 2) Error Handling
+DONE 3) Fastify Upload
+DONE 4) Express vs Fastify artillery test
+have some??5) Exception filters?
+6) Columns Ednpoints
+??7) Service for File endpoint?
+DONE 8) добавить volume для upload File
+9) Есть документация на эндпоинты (минималистичная в Readme.md)

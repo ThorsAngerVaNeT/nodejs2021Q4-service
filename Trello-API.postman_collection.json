@@ -1,0 +1,4135 @@
+{
+	"info": {
+		"_postman_id": "2682edff-160d-422b-9948-bd48cec0a329",
+		"name": "Trello API",
+		"description": "Trello API description",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "Gets user by ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{userId}}",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Gets a user by ID e.g. \"/users/fec629cb-b440-419a-b479-b374127f477a\""
+							},
+							"response": [
+								{
+									"name": "Successful operation.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"id\": \"fec629cb-b440-419a-b479-b374127f477a\",\n \"name\": \"TEST_USER\",\n \"login\": \"test_user\"\n}"
+								},
+								{
+									"name": "Access token is missing or invalid.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "User not found.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Updates a user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"{{userId}}\",\n    \"name\": \"TEST_USER_UPDATE\",\n    \"login\": \"test_user\",\n    \"password\": \"T35t_P@55w0rd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{userId}}",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Updates a user by ID"
+							},
+							"response": [
+								{
+									"name": "The user has been updated.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"fec629cb-b440-419a-b479-b374127f477a\",\n    \"name\": \"TEST_USER\",\n    \"login\": \"test_user\",\n    \"password\": \"T35t_P@55w0rd\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"id\": \"fec629cb-b440-419a-b479-b374127f477a\",\n \"name\": \"TEST_USER\",\n \"login\": \"test_user\"\n}"
+								},
+								{
+									"name": "Bad request.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"fec629cb-b440-419a-b479-b374127f477a\",\n    \"name\": \"TEST_USER\",\n    \"login\": \"test_user\",\n    \"password\": \"T35t_P@55w0rd\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Access token is missing or invalid.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"fec629cb-b440-419a-b479-b374127f477a\",\n    \"name\": \"TEST_USER\",\n    \"login\": \"test_user\",\n    \"password\": \"T35t_P@55w0rd\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "User not found.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"fec629cb-b440-419a-b479-b374127f477a\",\n    \"name\": \"TEST_USER\",\n    \"login\": \"test_user\",\n    \"password\": \"T35t_P@55w0rd\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Delete user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{userId}}",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Deletes user by ID. It also unassignes all user's tasks"
+							},
+							"response": [
+								{
+									"name": "The user has been deleted",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Access token is missing or invalid.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "User not found.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"userId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TEST_USER\",\n    \"login\": \"test_user\",\n    \"password\": \"T35t_P@55w0rd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Creates a new user"
+					},
+					"response": [
+						{
+							"name": "The user has been created.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"TEST_USER\",\n    \"login\": \"test_user\",\n    \"password\": \"T35t_P@55w0rd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": \"fec629cb-b440-419a-b479-b374127f477a\",\n \"name\": \"TEST_USER\",\n \"login\": \"test_user\"\n}"
+						},
+						{
+							"name": "Bad request.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"TEST_USER\",\n    \"login\": \"test_user\",\n    \"password\": \"T35t_P@55w0rd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Access token is missing or invalid.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"TEST_USER\",\n    \"login\": \"test_user\",\n    \"password\": \"T35t_P@55w0rd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Login already exists.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"TEST_USER\",\n    \"login\": \"test_user\",\n    \"password\": \"T35t_P@55w0rd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Gets all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Gets all users"
+					},
+					"response": [
+						{
+							"name": "Successful operation.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"id\": \"fec629cb-b440-419a-b479-b374127f477a\",\n  \"name\": \"TEST_USER\",\n  \"login\": \"test_user\"\n },\n {\n  \"id\": \"fec629cb-b440-419a-b479-b374127f477a\",\n  \"name\": \"TEST_USER\",\n  \"login\": \"test_user\"\n }\n]"
+						},
+						{
+							"name": "Access token is missing or invalid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "boards",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "Gets board by id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/boards/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"boards",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{boardId}}",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Gets the Board by ID (e.g. \"/boards/b4752913-3cea-420d-bd43-db4141ad2807\")"
+							},
+							"response": [
+								{
+									"name": "Successful operation.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/boards/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"id\": \"b4752913-3cea-420d-bd43-db4141ad2807\",\n \"title\": \"Autotest board\",\n \"columns\": [\n  {\n   \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n   \"title\": \"Backlog\",\n   \"order\": 1,\n   \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n  },\n  {\n   \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n   \"title\": \"Backlog\",\n   \"order\": 1,\n   \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n  }\n ]\n}"
+								},
+								{
+									"name": "Access token is missing or invalid.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/boards/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Board not found.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/boards/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Update board",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"{{boardId}}\",\n    \"title\": \"Autotest update board\",\n    \"columns\": [\n        {\n            \"id\": \"{{columnId1}}\",\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"{{boardId}}\"\n        },\n        {\n            \"id\": \"{{columnId2}}\",\n            \"title\": \"Spring\",\n            \"order\": 2,\n            \"boardId\": \"{{boardId}}\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/boards/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"boards",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{boardId}}",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Updates a Board by ID"
+							},
+							"response": [
+								{
+									"name": "The board has been updated.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"b4752913-3cea-420d-bd43-db4141ad2807\",\n    \"title\": \"Autotest board\",\n    \"columns\": [\n        {\n            \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        },\n        {\n            \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/boards/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"id\": \"b4752913-3cea-420d-bd43-db4141ad2807\",\n \"title\": \"Autotest board\",\n \"columns\": [\n  {\n   \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n   \"title\": \"Backlog\",\n   \"order\": 1,\n   \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n  },\n  {\n   \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n   \"title\": \"Backlog\",\n   \"order\": 1,\n   \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n  }\n ]\n}"
+								},
+								{
+									"name": "Bad request.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"b4752913-3cea-420d-bd43-db4141ad2807\",\n    \"title\": \"Autotest board\",\n    \"columns\": [\n        {\n            \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        },\n        {\n            \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/boards/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Access token is missing or invalid.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"b4752913-3cea-420d-bd43-db4141ad2807\",\n    \"title\": \"Autotest board\",\n    \"columns\": [\n        {\n            \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        },\n        {\n            \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/boards/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Board not found.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"b4752913-3cea-420d-bd43-db4141ad2807\",\n    \"title\": \"Autotest board\",\n    \"columns\": [\n        {\n            \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        },\n        {\n            \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/boards/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Delete board",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/boards/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"boards",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{boardId}}",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Deletes a Board by ID. It also deletes all board's tasks"
+							},
+							"response": [
+								{
+									"name": "The board has been deleted",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/boards/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Access token is missing or invalid.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/boards/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Board not found.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/boards/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "tempor reprehenderit quis",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "{board Id}",
+					"item": [
+						{
+							"name": "columns",
+							"item": [
+								{
+									"name": "{id}",
+									"item": [
+										{
+											"name": "Get Column by boardId and columnId",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/columns/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"columns",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "{{boardId}}",
+															"description": "(Required) "
+														},
+														{
+															"key": "id",
+															"value": "{{columnId}}",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Gets the Column by the Board's and column ID (e.g. \"/board/2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd/columns/6a147549-cbeb-452d-a027-baf919ca3d64\")"
+											},
+											"response": [
+												{
+													"name": "Successful operation.",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/columns/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"columns",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "[\n {\n  \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n  \"title\": \"Backlog\",\n  \"order\": 1,\n  \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n },\n {\n  \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n  \"title\": \"Backlog\",\n  \"order\": 1,\n  \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n }\n]"
+												},
+												{
+													"name": "Access token is missing or invalid.",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/columns/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"columns",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "Forbidden",
+													"code": 403,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										},
+										{
+											"name": "Updates Column",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"id\": \"{{columnId}}\",\n    \"title\": \"Update test column\",\n    \"order\": 2,\n    \"boardId\": \"{{boardId}}\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/columns/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"columns",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "{{boardId}}",
+															"description": "(Required) "
+														},
+														{
+															"key": "id",
+															"value": "{{columnId}}",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Updates the Column by ID"
+											},
+											"response": [
+												{
+													"name": "The column has been updated.",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n    \"title\": \"Backlog\",\n    \"order\": 1,\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/columns/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"columns",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "[\n {\n  \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n  \"title\": \"Backlog\",\n  \"order\": 1,\n  \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n },\n {\n  \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n  \"title\": \"Backlog\",\n  \"order\": 1,\n  \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n }\n]"
+												},
+												{
+													"name": "Bad request.",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n    \"title\": \"Backlog\",\n    \"order\": 1,\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/columns/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"columns",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Access token is missing or invalid.",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n    \"title\": \"Backlog\",\n    \"order\": 1,\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/columns/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"columns",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "Forbidden",
+													"code": 403,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Task not found.",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n    \"title\": \"Backlog\",\n    \"order\": 1,\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/columns/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"columns",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										},
+										{
+											"name": "Delete Column",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/columns/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"columns",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "{{boardId}}",
+															"description": "(Required) "
+														},
+														{
+															"key": "id",
+															"value": "{{columnId}}",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Deletes Column by ID."
+											},
+											"response": [
+												{
+													"name": "Successful operation.",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/columns/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"columns",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "The column has been deleted",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/columns/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"columns",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "No Content",
+													"code": 204,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Access token is missing or invalid.",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/columns/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"columns",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "Forbidden",
+													"code": 403,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Column not found.",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/columns/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"columns",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Create new column",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);\r",
+													"pm.collectionVariables.set(\"columnId\", jsonData.id);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"Test new column\",\n    \"order\": 2,\n    \"boardId\": \"{{boardId}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/boards/:boardId/columns",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":boardId",
+												"columns"
+											],
+											"variable": [
+												{
+													"key": "boardId",
+													"value": "{{boardId}}",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Creates a new column"
+									},
+									"response": [
+										{
+											"name": "Successful operation.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"title\": \"Backlog\",\n    \"order\": 1,\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/columns",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"columns"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "tempor reprehenderit quis",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The column has been created.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"title\": \"Backlog\",\n    \"order\": 1,\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/columns",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"columns"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "tempor reprehenderit quis",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n \"title\": \"Backlog\",\n \"order\": 1,\n \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n}"
+										},
+										{
+											"name": "Access token is missing or invalid.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"title\": \"Backlog\",\n    \"order\": 1,\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/columns",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"columns"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "tempor reprehenderit quis",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "Get Columns by boardId",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/boards/:boardId/columns",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":boardId",
+												"columns"
+											],
+											"variable": [
+												{
+													"key": "boardId",
+													"value": "{{boardId}}",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Gets columns by the Board ID (e.g. \"/board/2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd/columns\")"
+									},
+									"response": [
+										{
+											"name": "Successful operation.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/columns",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"columns"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "tempor reprehenderit quis",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n {\n  \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n  \"title\": \"Backlog\",\n  \"order\": 1,\n  \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n },\n {\n  \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n  \"title\": \"Backlog\",\n  \"order\": 1,\n  \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n }\n]"
+										},
+										{
+											"name": "Access token is missing or invalid.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/columns",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"columns"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "tempor reprehenderit quis",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "tasks",
+							"item": [
+								{
+									"name": "{id}",
+									"item": [
+										{
+											"name": "Get Task by boardId and taskId",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/tasks/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"tasks",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "{{boardId}}",
+															"description": "(Required) "
+														},
+														{
+															"key": "id",
+															"value": "{{taskId}}",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Gets the Task by the Board's and task ID (e.g. \"/board/2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd/tasks/0949f061-936e-4710-a48b-ab1af2d1c284\")"
+											},
+											"response": [
+												{
+													"name": "Successful operation.",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/tasks/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"tasks",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "[\n {\n  \"id\": \"0949f061-936e-4710-a48b-ab1af2d1c284\",\n  \"title\": \"Autotest task\",\n  \"order\": 0,\n  \"description\": \"Lorem ipsum\",\n  \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n  \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n  \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n },\n {\n  \"id\": \"0949f061-936e-4710-a48b-ab1af2d1c284\",\n  \"title\": \"Autotest task\",\n  \"order\": 0,\n  \"description\": \"Lorem ipsum\",\n  \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n  \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n  \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n }\n]"
+												},
+												{
+													"name": "Access token is missing or invalid.",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/tasks/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"tasks",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "Forbidden",
+													"code": 403,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										},
+										{
+											"name": "Updates Task",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"id\": \"{{taskId}}\",\n    \"title\": \"Autotest update task\",\n    \"order\": 0,\n    \"description\": \"Lorem ipsum\",\n    \"userId\": null,\n    \"boardId\": \"{{boardId}}\",\n    \"columnId\": null\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/tasks/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"tasks",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "{{boardId}}",
+															"description": "(Required) "
+														},
+														{
+															"key": "id",
+															"value": "{{taskId}}",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Updates the Task by ID"
+											},
+											"response": [
+												{
+													"name": "The task has been updated.",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"id\": \"0949f061-936e-4710-a48b-ab1af2d1c284\",\n    \"title\": \"Autotest task\",\n    \"order\": 0,\n    \"description\": \"Lorem ipsum\",\n    \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n    \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/tasks/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"tasks",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "[\n {\n  \"id\": \"0949f061-936e-4710-a48b-ab1af2d1c284\",\n  \"title\": \"Autotest task\",\n  \"order\": 0,\n  \"description\": \"Lorem ipsum\",\n  \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n  \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n  \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n },\n {\n  \"id\": \"0949f061-936e-4710-a48b-ab1af2d1c284\",\n  \"title\": \"Autotest task\",\n  \"order\": 0,\n  \"description\": \"Lorem ipsum\",\n  \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n  \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n  \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n }\n]"
+												},
+												{
+													"name": "Bad request.",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"id\": \"0949f061-936e-4710-a48b-ab1af2d1c284\",\n    \"title\": \"Autotest task\",\n    \"order\": 0,\n    \"description\": \"Lorem ipsum\",\n    \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n    \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/tasks/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"tasks",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Access token is missing or invalid.",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"id\": \"0949f061-936e-4710-a48b-ab1af2d1c284\",\n    \"title\": \"Autotest task\",\n    \"order\": 0,\n    \"description\": \"Lorem ipsum\",\n    \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n    \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/tasks/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"tasks",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "Forbidden",
+													"code": 403,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Task not found.",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"id\": \"0949f061-936e-4710-a48b-ab1af2d1c284\",\n    \"title\": \"Autotest task\",\n    \"order\": 0,\n    \"description\": \"Lorem ipsum\",\n    \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n    \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/tasks/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"tasks",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										},
+										{
+											"name": "Delete Task",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/tasks/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"tasks",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "{{boardId}}",
+															"description": "(Required) "
+														},
+														{
+															"key": "id",
+															"value": "{{taskId}}",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Deletes Task by ID."
+											},
+											"response": [
+												{
+													"name": "The task has been deleted",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/tasks/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"tasks",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "No Content",
+													"code": 204,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Access token is missing or invalid.",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/tasks/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"tasks",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "Forbidden",
+													"code": 403,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Task not found.",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/boards/:boardId/tasks/:id",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"boards",
+																":boardId",
+																"tasks",
+																":id"
+															],
+															"variable": [
+																{
+																	"key": "boardId",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																},
+																{
+																	"key": "id",
+																	"value": "tempor reprehenderit quis",
+																	"description": "(Required) "
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "text/plain"
+														}
+													],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Create new task",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);\r",
+													"pm.collectionVariables.set(\"taskId\", jsonData.id);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"Autotest task\",\n    \"order\": 0,\n    \"description\": \"Lorem ipsum\",\n    \"userId\": null,\n    \"boardId\": \"{{boardId}}\",\n    \"columnId\": null\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/boards/:boardId/tasks",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":boardId",
+												"tasks"
+											],
+											"variable": [
+												{
+													"key": "boardId",
+													"value": "{{boardId}}",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Creates a new task"
+									},
+									"response": [
+										{
+											"name": "The task has been created.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"title\": \"Autotest task\",\n    \"order\": 0,\n    \"description\": \"Lorem ipsum\",\n    \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n    \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/tasks",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"tasks"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "tempor reprehenderit quis",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"id\": \"0949f061-936e-4710-a48b-ab1af2d1c284\",\n \"title\": \"Autotest task\",\n \"order\": 0,\n \"description\": \"Lorem ipsum\",\n \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n}"
+										},
+										{
+											"name": "Bad request.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"title\": \"Autotest task\",\n    \"order\": 0,\n    \"description\": \"Lorem ipsum\",\n    \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n    \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/tasks",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"tasks"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "tempor reprehenderit quis",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Access token is missing or invalid.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"title\": \"Autotest task\",\n    \"order\": 0,\n    \"description\": \"Lorem ipsum\",\n    \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n    \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/tasks",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"tasks"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "tempor reprehenderit quis",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "Get Tasks by boardId",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/boards/:boardId/tasks",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"boards",
+												":boardId",
+												"tasks"
+											],
+											"variable": [
+												{
+													"key": "boardId",
+													"value": "{{boardId}}",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Gets tasks by the Board ID (e.g. \"/board/2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd/tasks\")"
+									},
+									"response": [
+										{
+											"name": "Successful operation.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/tasks",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"tasks"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "tempor reprehenderit quis",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n {\n  \"id\": \"0949f061-936e-4710-a48b-ab1af2d1c284\",\n  \"title\": \"Autotest task\",\n  \"order\": 0,\n  \"description\": \"Lorem ipsum\",\n  \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n  \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n  \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n },\n {\n  \"id\": \"0949f061-936e-4710-a48b-ab1af2d1c284\",\n  \"title\": \"Autotest task\",\n  \"order\": 0,\n  \"description\": \"Lorem ipsum\",\n  \"userId\": \"5bfab79b-7add-4399-a817-cb82175d754d\",\n  \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\",\n  \"columnId\": \"323f4e35-9361-444e-ad09-381c713919b3\"\n }\n]"
+										},
+										{
+											"name": "Access token is missing or invalid.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/boards/:boardId/tasks",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"boards",
+														":boardId",
+														"tasks"
+													],
+													"variable": [
+														{
+															"key": "boardId",
+															"value": "tempor reprehenderit quis",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Create board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"boardId\", jsonData.id);\r",
+									"pm.collectionVariables.set(\"columnId1\", jsonData.columns[0].id);\r",
+									"pm.collectionVariables.set(\"columnId2\", jsonData.columns[1].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Autotest board\",\n    \"columns\": [\n        {\n            \"title\": \"Backlog\",\n            \"order\": 1\n        },\n        {\n            \"title\": \"Sprint\",\n            \"order\": 2\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/boards",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"boards"
+							]
+						},
+						"description": "Creates a new board"
+					},
+					"response": [
+						{
+							"name": "The board has been created.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Autotest board\",\n    \"columns\": [\n        {\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        },\n        {\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/boards",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"boards"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": \"b4752913-3cea-420d-bd43-db4141ad2807\",\n \"title\": \"Autotest board\",\n \"columns\": [\n  {\n   \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n   \"title\": \"Backlog\",\n   \"order\": 1,\n   \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n  },\n  {\n   \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n   \"title\": \"Backlog\",\n   \"order\": 1,\n   \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n  }\n ]\n}"
+						},
+						{
+							"name": "Bad request.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Autotest board\",\n    \"columns\": [\n        {\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        },\n        {\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/boards",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"boards"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Access token is missing or invalid.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Autotest board\",\n    \"columns\": [\n        {\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        },\n        {\n            \"title\": \"Backlog\",\n            \"order\": 1,\n            \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/boards",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"boards"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Get all boards",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/boards",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"boards"
+							]
+						},
+						"description": "Returns all boards"
+					},
+					"response": [
+						{
+							"name": "Successful operation.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/boards",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"boards"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"id\": \"b4752913-3cea-420d-bd43-db4141ad2807\",\n  \"title\": \"Autotest board\",\n  \"columns\": [\n   {\n    \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n    \"title\": \"Backlog\",\n    \"order\": 1,\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n   },\n   {\n    \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n    \"title\": \"Backlog\",\n    \"order\": 1,\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n   }\n  ]\n },\n {\n  \"id\": \"b4752913-3cea-420d-bd43-db4141ad2807\",\n  \"title\": \"Autotest board\",\n  \"columns\": [\n   {\n    \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n    \"title\": \"Backlog\",\n    \"order\": 1,\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n   },\n   {\n    \"id\": \"02f9c173-bfd9-4079-ac04-f8a0a8bd266f\",\n    \"title\": \"Backlog\",\n    \"order\": 1,\n    \"boardId\": \"2a6989d7-19ca-45e8-a8fb-b5ee7d9071fd\"\n   }\n  ]\n }\n]"
+						},
+						{
+							"name": "Access token is missing or invalid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/boards",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"boards"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "file",
+			"item": [
+				{
+					"name": "File upload",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"description": "(Required) ",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/file",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file"
+							]
+						},
+						"description": "Uploads file to server"
+					},
+					"response": [
+						{
+							"name": "File was uploaded. Filename to download file is :fileName",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"description": "(Required) ",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/file",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "File download",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/file/:fileName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"file",
+								":fileName"
+							],
+							"variable": [
+								{
+									"key": "fileName",
+									"value": "tempor reprehenderit quis",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Download file by fileName from server"
+					},
+					"response": [
+						{
+							"name": "File stream",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/file/:fileName",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"file",
+										":fileName"
+									],
+									"variable": [
+										{
+											"key": "fileName",
+											"value": "tempor reprehenderit quis",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "App Controller get Hello",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Show 'Hello World'!",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"token\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"login\": \"admin\",\n    \"password\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"login"
+					]
+				},
+				"description": "Logins a user and returns a JWT-token."
+			},
+			"response": [
+				{
+					"name": "Successful login.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"admin\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Incorrect login or password.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"admin\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:4000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "boardId",
+			"value": ""
+		},
+		{
+			"key": "columnId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"key": "taskId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "columnId1",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "columnId2",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
