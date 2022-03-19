@@ -12,12 +12,6 @@
 git clone https://github.com/ThorsAngerVaNeT/nodejs2021Q4-service
 ```
 
-## Switch branch
-
-```
-git checkout -q task10-nestjs
-```
-
 ## Running application in Docker
 
 Run command to build images for application and PostgreSQL, and to create and run containers.
