@@ -156,8 +156,6 @@ You can import [collection](Trello-API.postman_collection.json) to Postman for e
 | Success        | [ratio]                          | 100.00%                                                              |
 | Status Codes   | [code:count]                     | 200:12240, 201:4080, 204:4080                                        |
 
-[Express HTML report](load-testing/artillery-users-test_express.json.html)
-
 [Express CLI Text report](load-testing/Express.txt)
 
 ### Fastify
@@ -168,7 +166,5 @@ You can import [collection](Trello-API.postman_collection.json) to Postman for e
 | Response Time  | [min, mean, 50, 90, 95, 99, max] | 273.5ms, 10770.1ms, 3605.5ms, 10201.2ms, 10617.5ms                   |
 | Success        | [ratio]                          | 100.00%                                                              |
 | Status Codes   | [code:count]                     | 200:12130, 201:4037, 204:4035                                        |
-
-[Fastify HTML report](load-testing/artillery-users-test_fastify.json.html)
 
 [Fastify CLI Text report](load-testing/Fastify.txt)
